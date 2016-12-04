@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Mixins
+   by Sven Reifschneider
+
+   Usage:
+   @include mixin-name(wert);
+   ========================================================================== */
+
+// Der Border-Radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+// Sauberer Text
+// rendering: optimizeLegibility
+@mixin text-rendering($type) {
+    -webkit-text-rendering: $type;
+    -moz-text-rendering: $type;
+    -ms-text-rendering: $type;
+    -o-text-rendering: $type;
+    text-rendering: $type;
+}
+
+// font-smoothing: antialiased
+@mixin font-smoothing($type) {
+    -webkit-font-smoothing: $type;
+    -moz-font-smoothing: $type;
+    -ms-font-smoothing: $type;
+    -o-font-smoothing: $type;
+    font-smoothing: $type;
+}

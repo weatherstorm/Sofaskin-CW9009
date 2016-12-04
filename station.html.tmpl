@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head itemscope itemtype="http://schema.org/Website">
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Refresh" content="180">
+        <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+	#if $Extras.has_key('web_url')
+	<link rel="canonical" href="$Extras.web_url/station.html" itemprop="url"/>
+	#end if
+        
+        <title itemprop="name">$station.location ($Extras.cwop) Station Information</title>
+        
+        <!-- Open Graph -->
+        <meta property="og:site_name" content="$station.location ($Extras.cwop) Station Information" />
+	<meta property="og:title" content="Station Information"/>
+	#if $Extras.has_key('web_url')
+	<meta property="og:url" content="$Extras.web_url/station.html"/>
+	#end if
+        <meta property="og:description" content="Station Information for $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+	<meta property="og:type" content="website" />
+
+        <!-- Icons -->
+        <link rel="icon" href="favicon.ico" type="image/png">
+	<link rel="apple-touch-icon" href="touch-icon.png"/>
+        
+        <!-- Styles -->
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+        
+        <!-- Skripte -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        
+  </head>
+
+  <body>
+    	<header>
+            <div class="container-fix" >
+                <div class="h-left" >
+                <h1><i class="fa fa-cloud" ></i> $station.location </h1>
+                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.location" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+                <h2>Station Information</h2>
+                <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+                </div>
+                
+                <div class="h-right" >
+                    <table>
+                        <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
+                        <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
+                        <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
+                        <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
+			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" >$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" >$Extras.wunderground</a></td></tr>
+		    </table>
+                </div>
+
+                <nav>
+                    <ul class="topnav" id="myTopnav">
+			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars" ></i></a></li>
+                        <li><a href="/" >Current</a></li>
+                        <li><a href="week.html" >Week</a></li>
+                        <li><a href="month.html" >Month</a></li>
+                        <li><a href="year.html" >Year</a></li>
+			<li class="active"><a href="station.html" >Station</a></li>
+			<li><a href="summary.html" >Summaries</a></li>
+                        <li><a href="RSS/weewx_rss.xml" ><i class="fa fa-rss" ></i> </a></li>
+                    </ul>
+                </nav>
+            </div>
+	</header>
+    
+    <!-- Main container -->  
+     <div class="main" >
+        <div class="container" >
+            
+	   <div class="left" >
+
+		<div class="card" >
+                    <h1><i class="fa fa-info-circle" ></i> Station Information</h1>
+		    The station is a <a href="http://www.lacrossetechnology.com/2316/">La Crosse WS-2316</a> located about 3 miles north-northwest of 
+                    Meridian, Idaho in the Kelly Creek Subdivision. The station has been running since November 7, 2007. A <a href="https://www.raspberrypi.org/" target="_blank" >Raspberry Pi 2 Model B<!-- Raspberry Pi icon by Icons8 --> <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"></a> running 
+                    <a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a> processes the data which is sent to <a href="http://www.wxqa.com/" target="_blank" >CWOP</a> and <a href="http://www.wunderground.com/" target="_blank" >Weather Underground</a> in addition 
+                    to this web site. Data is sent every 10 minutes.
+		    <br><br>
+		    Latitude: $station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] 
+		    <br>
+		    Longitude: $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2]
+		    <br>
+		    Elevation: $station.altitude		    
+		    <br>
+		    <table class="tablespacer">
+		    	<tr><td colspan="3"><br>Data is also available from:</td></tr>
+			<tr><td><center><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" ><img src="icons/cwop.png" title="CWOP" alt="cwop" /><br>$Extras.cwop</a></center></td>
+			    #if $Extras.has_key('wunderground')
+			    <td><center><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" ><img src="icons/wu.png" title="Weather Underground" alt="$Extras.wunderground" /><br>$Extras.wunderground</a></center></td>
+			    #end if
+			    #if $Extras.has_key('mwest')
+			    <td><center><a href="http://mesowest.utah.edu/cgi-bin/droman/meso_base_dyn.cgi?stn=$Extras.mwest&unit=0&timetype=LOCAL" ><img src="icons/mesowest.png" height="84" width="84" title=Mesowest" alt="$Extras.mwest" /><br>$Extras.mwest</a></center></td>
+   			    #end if
+			    #if $Extras.has_key('crahs') 
+			    <td><center><a href="" ><img src="icons/CoCoRaHS.png" height="84" width="84" title="CoCoRaHS" alt="CoCoRaHS" /><br>$Extras.crahs</a></center></td>
+			    #end if
+			</tr>
+		    </table>
+		</div>
+
+		<div class="card" >
+                    <h1><i class="fa fa-code"></i> Site Code</h1>
+		    This web site uses Sofaskin for WeeWx, designed by Sven at <a href="http://neoground.com/projects/weewx/">Neoground</a>. Sofaskin is a 
+                    custom skin model from Google's Material Design that uses <a href="getbootstrap.com">Bootstrap</a> to display the weather data. 
+                    I made a variety of functional changes to the 
+		    original Sofaskin code which is available on <a href="">GitHub</a>. My Sofaskin-CW9009 skin 
+		    needs an additional python script (historygenerator.py) which was adapted from another 
+		    skin, <a href="http://www.dajda.net/about.html">Dajda.net</a>, to generate the history tables.
+		    The code for the web page skins and python script is available from the web sites below. 
+			<br><br>
+			Sofaskin from Neoground: 
+			<br>
+			<i class="fa fa-info-circle"> </i><a href="http://neoground.com/projects/weewx/"> http://neoground.com/projects/weewx/</a> 
+			<br><br>
+			Sofaskin-CW9009: 
+			<br><i class="fa fa-github"> </i> I will added the code to GitHub before January 2017!
+			<br><br> 
+			Dajda Skin (historygenerator.py): 
+			<br>
+			<i class="fa fa-info-circle"></i> <a href="http://www.dajda.net/about.html">http://www.dajda.net/about.html</a> 
+			<br>
+			<i class="fa fa-github"></i> <a href="http://github.com/brewster76/fuzzy-archer">http://github.com/brewster76/fuzzy-archer</a> 
+			<br><br>
+
+			Questions? Send them to <a href=mailto:josh@cw9009.x10host.com>josh@cw9009.x10host.com</a>
+			<br>
+			
+		</div>
+
+
+		<div class="card" >
+                    <h1><i class="fa fa-server m-rot"></i> Status</h1>
+			
+		    <table>
+                        <tr><td><b>WeeWX uptime:</b></td><td>$station.uptime</td></tr>
+                        <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
+		    </table>
+		</div>
+		
+	   </div>
+
+	   <div class="right" >
+
+		<div class="card" >
+                    <h1><i class="fa fa-history m-gruen" ></i> Station History</h1>
+			<table class="tablespacer">
+				<tr><td>01/23/2016</td></tr>
+				<tr><td>Moved temperature/humidity sensor to the front of the house (north facing) under eaves.</td></tr>	
+			</table>
+			<table class="tablespacer">
+				<tr><td><br>12/31/2015</td></tr>
+				<tr><td>Changed hardware from PC to Raspberry Pi 2 Model B. Changed software from HeavyWeather to WeeWX 3.3.1. </td></tr>
+		  	</table> 
+
+			<table class="tablespacer">	
+				<tr><td><br>09/18/2009</td></tr>
+				<tr><td>Attached the wind sensor to the west side of the roof. The sensor is about a foot above the roof. Temperatures sensor was attached under the northwest corner eaves.</td></tr>
+                    	</table>
+			<img src="photo/IMG_0925.JPG" alt="photo" class="space small" />
+
+			<table class="tablespacer">
+				<tr><td><br>08/24/2008</td></tr>
+				<tr><td>Moved station to the southwest corner of the property. Sensors about 5 feet above ground. Wind obstruction from trees and house. Temperature sensor partially shielded. </td></tr>
+		    	</table>	
+			<img src="photo/IMG_5374.jpg" alt="photo" class="space small" />
+
+			<table class="tablespacer">
+				<tr><td><br>11/07/2007</td></tr>
+				<tr><td>Station established in the backyard (south facing) next to the fence.</td></tr>
+			</table>
+			<img src="photo/IMG_4957.jpg" alt="photo" class="space small" />
+				
+		</div>
+                
+	   </div>
+
+        </div>
+        </div>
+        
+        <footer>
+            <div class="container-fix">
+	    <center>
+		#if $Extras.has_key('you')
+            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+            	#end if
+		&sdot;
+	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+	   	<br>
+	    	Design by <a href="http://blauesledersofa.de">blaues Ledersofa</a>
+	    	&sdot; 
+            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and 
+            	<!-- Raspberry Pi icon by Icons8 --> <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"> <a href="https://www.raspberrypi.org/" target="_blank"> Raspberry Pi 2 Model B</a>.
+	    </center>
+	    </div>
+        </footer>
+
+        #if $Extras.has_key('googleAnalyticsId')
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+            ga('create', '$Extras.googleAnalyticsId', 'auto');
+            ga('send', 'pageview');
+        </script>
+        #end if
+
+<!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+
+    </body>
+</html>
+

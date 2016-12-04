@@ -1,0 +1,69 @@
+#########################################################
+#        _____        __          _    _                #
+#       /  ___|      / _|        | |  (_)               #
+#       \ `--.  ___ | |_ __ _ ___| | ___ _ __           #
+#        `--. \/ _ \|  _/ _` / __| |/ / | '_ \          #
+#       /\__/ / (_) | || (_| \__ \   <| | | | |         #
+#       \____/ \___/|_| \__,_|___/_|\_\_|_| |_|         #
+#                                                       #
+#-------------------------------------------------------#
+#                                                       #
+# Sofaskin is a free weewx skin.                        #
+# The main goal was to build a beautiful and modern     #
+# layout inspired by Google's material design.          #
+# It is fully responsive and looks great on all         #
+# kind of devices.                                      #
+#                                                       #
+# Successfully tested on weewx 3.0 / 3.0.1.             #
+# Almanac Python extension recommended.                 #
+# Feel free to change the layout however you want.      #
+# Under css/scss you'll find all the Sass-files to      #
+# change colors etc. Or change them in the main.css.    #
+#                                                       #
+# Sofaskin is licensed under the MIT License.           #
+#                                                       #
+# Made by Sven Reifschneider <hello@blauesledersofa.de> #
+# blaues Ledersofa Photography and Web Development      #
+#                                                       #
+#-------------------------------------------------------#
+#                                                       #
+# Version 1.1                                           #
+# Dec 2014 - Feb 2015                                   #
+# bls-sofaskin-v1.1                                     #
+#                                                       #
+#-------------------------------------------------------#
+#                                                       #
+# Made with love, coffee and pizza                      #
+# Designed in Frankfurt, Germany                        #
+#                                                       #
+#-------------------------------------------------------#
+#                                                       #
+# The MIT License (MIT)                                 #
+#                                                       #
+# Copyright (c) 2014 Sven Reifschneider                 #
+#                                                       #
+# Permission is hereby granted, free of charge, to any  #
+# person obtaining a copy of this software and          #
+# associated documentation files (the "Software"), to   #
+# deal in the Software without restriction, including   #
+# without limitation the rights to use, copy, modify,   #
+# merge, publish, distribute, sublicense, and/or sell   #
+# copies of the Software, and to permit persons to whom #
+# the Software is furnished to do so, subject to the    #
+# following conditions:                                 #
+#                                                       #
+# The above copyright notice and this permission notice #
+# shall be included in all copies or substantial        #
+# portions of the Software.                             #
+#                                                       #
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF #
+# ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT       #
+# LIMITED TO THE WARRANTIES OF MERCHANTABILITY,         #
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. #
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS    #
+# BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,  #
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,  #
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE        #
+# SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.#
+#                                                       #
+#########################################################

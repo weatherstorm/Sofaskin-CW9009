@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head itemscope itemtype="http://schema.org/Website">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Refresh" content="180">
+        <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="profile" href="http://gmpg.org/xfn/11" itemprop="url"/>
+	#if $Extras.has_key('web_url')
+	<link rel="canonical" href="$Extras.web_url/year.html"/>
+	#end if
+        
+        <title itemprop="name">$station.location ($Extras.cwop) Yearly Weather Summary</title>
+        
+        <!-- Open Graph -->
+        <meta property="og:site_name" content="$station.location ($Extras.cwop) Yearly Weather Summary" />
+	<meta property="og:title" content="Yearly Weather Summary"/>
+	#if $Extras.has_key('web_url')
+	<meta property="og:url" content="$Extras.web_url/year.html"/>
+	#end if
+        <meta property="og:description" content="Yearly Weather Summary for $station.location ($Extras.cwop)- weather web site powered by WeeWX" />
+	<meta property="og:type" content="website" />
+
+        <!-- Icons -->
+        <link rel="icon" href="favicon.ico" type="image/png">
+	<link rel="apple-touch-icon" href="touch-icon.png"/>
+        
+        <!-- Styles -->
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+        
+        <!-- Skripte -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        
+    </head>
+    <body>
+        <header>
+            <div class="container-fix" >
+                <div class="h-left" >
+                <h1><i class="fa fa-cloud" ></i> $station.location </h1>
+                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.location" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+                <h2>Yearly Weather Summary</h2>
+                <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+                </div>
+                
+                <div class="h-right" >
+                    <table>
+                        <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
+                        <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
+                        <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
+                        <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
+			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" >$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" >$Extras.wunderground</a></td></tr>
+                    </table>
+                </div>
+
+                <nav>
+                    <ul class="topnav" id="myTopnav">
+			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars" ></i></a></li>
+                        <li><a href="/" >Current</a></li>
+                        <li><a href="week.html" >Week</a></li>
+                        <li><a href="month.html" >Month</a></li>
+                        <li class="active" ><a href="year.html" >Year</a></li>
+			<li><a href="station.html" >Station</a></li>
+			<li><a href="summary.html" >Summaries</a></li>
+                        <li><a href="RSS/weewx_rss.xml" ><i class="fa fa-rss" ></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <div class="main" >
+        <div class="container" >
+            
+            <div class="left" >
+                
+                <div class="card" >
+                    <h1><i class="fa fa-calendar-o m-rot" ></i> Calendar Year</h1>
+                    <table class="tablespacer">
+                        <tr><td>High Temperature</td><td>$year.outTemp.max</td><td>$year.outTemp.maxtime</td></tr>
+                        <tr><td>Low Temperature</td><td>$year.outTemp.min</td><td>$year.outTemp.mintime</td></tr>
+                        <tr><td>High Heat Index</td><td>$year.heatindex.max</td><td>$year.heatindex.maxtime</td></tr>
+                        <tr><td>Low Wind Chill</td><td>$year.windchill.min</td><td>$year.windchill.mintime</td></tr>
+                        <tr><td>High Dewpoint</td><td>$year.dewpoint.max</td><td>$year.dewpoint.maxtime</td></tr>
+                        <tr><td>Low Dewpoint</td><td>$year.dewpoint.min</td><td>$year.dewpoint.mintime</td></tr>
+                        <tr><td>High Humidity</td><td>$year.outHumidity.max</td><td>$year.outHumidity.maxtime</td></tr>
+                        <tr><td>Low Humidity</td><td>$year.outHumidity.min</td><td>$year.outHumidity.mintime</td></tr>
+                        <tr><td>High Barometer</td><td>$year.barometer.max</td><td>$year.barometer.maxtime</td></tr>
+                        <tr><td>Low Barometer</td><td>$year.barometer.min</td><td>$year.barometer.mintime</td></tr>
+                        <tr><td>High Wind Speed</td><td>$year.wind.max $year.wind.gustdir</td><td>$year.wind.maxtime</td></tr>
+                        <tr><td>Average Wind</td><td>$year.wind.avg</td><td></td></tr>
+                        <tr><td>RMS Wind</td><td>$year.wind.rms</td><td></td></tr>
+                        <tr><td>Vector Average Speed</td><td>$year.wind.vecavg</td><td></td></tr>
+                        <tr><td>Vector Average Direction</td><td>$year.wind.vecdir</td><td></td></tr>
+                        <tr><td>High Inside Temperature</td><td>$year.inTemp.max</td><td>$year.inTemp.maxtime</td></tr>
+                        <tr><td>Low Inside Temperature</td><td>$year.inTemp.min</td><td>$year.inTemp.mintime</td></tr>
+                        #if $year.extraTemp1.has_data
+                        <tr><td>High Pond Temp</td><td>$year.extraTemp1.max</td><td>$year.extraTemp1.maxtime</td></tr>
+                        <tr><td>Low Pond Temp</td><td>$year.extraTemp1.min</td><td>$year.extraTemp1.mintime</td></tr>
+                        #end if
+                        #if $year.UV.has_data
+                        <tr><td>High UV</td><td>$year.UV.max</td><td>$year.UV.maxtime</td></tr>
+                        <tr><td>Low UV</td><td>$year.UV.min</td><td>$year.UV.mintime</td></tr>
+                        #end if
+                        #if $year.ET.has_data and $year.ET.sum.raw >0.0
+                        <tr><td>High ET</td><td>$year.ET.max</td><td>$year.ET.maxtime</td></tr>
+                        <tr><td>Low ET</td><td>$year.ET.min</td><td>$year.ET.mintime</td></tr>
+                        #end if
+                        #if $year.radiation.has_data
+                        <tr><td>High Radiation</td><td>$year.radiation.max</td><td>$year.radiation.maxtime</td></tr>
+                        <tr><td>Low Radiation</td><td>$year.radiation.min</td><td>$year.radiation.mintime</td></tr>
+                        #end if
+                    </table>
+                </div>
+
+                <div class="card" >
+                    <h1><i class="fa fa-cloud m-blau" ></i> Rain Year (1-$station.rain_year_str start)</h1>
+                    <table class="tablespacer">
+                        <tr><td>Rain Year Total</td><td>$rainyear.rain.sum</td><td></td></tr>
+                        <tr><td>High Rain Rate</td><td>$rainyear.rainRate.max</td><td>$rainyear.rainRate.maxtime</td></tr>
+                    </table>
+                </div>
+
+            </div>
+            
+            <div class="right" >
+
+                <div class="card cc graphs" >
+                    <h1><i class="fa fa-line-chart m-gruen" ></i> Yearly Statistics and Plots</h1>
+                    
+                    <img src="yeartempdew.png" alt="temperatures" />
+                    <img src="yearhilow.png" alt="Daily highs and lows for the year" title="Daily highs and lows for the year"/>
+                    <img src="yearrain.png" alt="rain" />
+                    <img src="yearwind.png" alt="wind" />
+                    <img src="yearwinddir.png" alt="Hi Wind" /> 
+                    <img src="yearwindvec.png" alt="Wind Vector" />
+		    <img src="yeartempchill.png" alt="heatchill" />
+		    <img src="yearbarometer.png" alt="barometer"/>
+		    <img src="yearinside.png" alt="Inside" />
+		    <img src="yearinhumid.png" alt="Inside Humidity" />
+                    #if $year.UV.has_data
+                    <img src="yearuv.png" alt="UV Index" />
+                    #end if
+                    #if $year.radiation.has_data
+                    <img src="yearradiation.png" alt="Radiation" />
+                    #end if
+                    #if $year.UV.has_data
+                    <img src="yearuv.png" alt="UV Index" />
+                    #end if
+                    #if $year.rxCheckPercent.has_data
+                    <img src="yearrx.png" alt="year rx percent"/>
+                    #end if
+                    #if $year.extraTemp1.has_data
+                    <img src="yearpond.png" alt="Pond Temperatures" />
+                    #end if
+                </div>
+                
+            </div>
+        </div>
+        </div>
+        
+        <footer>
+            <div class="container-fix">
+	    <center>
+		#if $Extras.has_key('you')
+            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+            	#end if
+		&sdot;
+	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+	   	<br>
+	    	Design by <a href="http://blauesledersofa.de">blaues Ledersofa</a>
+	    	&sdot; 
+            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and 
+            	<!-- Raspberry Pi icon by Icons8 --> <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"> <a href="https://www.raspberrypi.org/" target="_blank"> Raspberry Pi 2 Model B</a>.
+	    </center>
+	    </div>
+        </footer>
+
+        #if $Extras.has_key('googleAnalyticsId')
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+            ga('create', '$Extras.googleAnalyticsId', 'auto');
+            ga('send', 'pageview');
+        </script>
+        #end if
+
+<!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
+<script>
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+</script>
+
+    </body>
+</html>
