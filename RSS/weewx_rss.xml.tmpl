@@ -23,7 +23,7 @@
            Barometer: $current.barometer; 
            Wind: $current.windSpeed from $current.windDir; 
            Rain rate: $current.rainRate; 
-           Inside temperature: $current.inTemp
+           Garage temperature: $current.inTemp
          </description>
          <pubDate>$current.dateTime.format("%a, %d %b %Y %H:%M:%S %Z")</pubDate>
 	     <geo:lat>$station.latitude_f</geo:lat>
@@ -32,7 +32,7 @@
            <p>
              Time:                $current.dateTime<br/>
              Outside Temperature: $current.outTemp<br/>
-             Inside Temperature:  $current.inTemp<br/>
+             Garage Temperature:  $current.inTemp<br/>
              Wind Chill:          $current.windchill<br/>
              Heat Index:          $current.heatindex<br/>
              Dewpoint:            $current.dewpoint<br/>
@@ -50,8 +50,8 @@
          <description>
 	        Min outside temperature: $day.outTemp.min at $day.outTemp.mintime;
          	Max outside temperature: $day.outTemp.max at $day.outTemp.maxtime;
-	        Min inside temperature:  $day.inTemp.min at $day.inTemp.mintime;
-	        Max inside temperature:  $day.inTemp.max at $day.inTemp.maxtime;
+	        Min garage temperature:  $day.inTemp.min at $day.inTemp.mintime;
+	        Max garage temperature:  $day.inTemp.max at $day.inTemp.maxtime;
 	        Min barometer:           $day.barometer.min at $day.barometer.mintime;
 	        Max barometer:           $day.barometer.max at $day.barometer.maxtime;
             Max wind :               $day.wind.max from $day.wind.gustdir at $day.wind.maxtime;
@@ -65,8 +65,8 @@
              Day:                     $day.dateTime.format("%d %b %Y")<br/>
 	         Min Outside Temperature: $day.outTemp.min at $day.outTemp.mintime<br/>
 	         Max Outside Temperature: $day.outTemp.max at $day.outTemp.maxtime<br/>
-	         Min Inside Temperature:  $day.inTemp.min at $day.inTemp.mintime<br/>
-	         Max Inside Temperature:  $day.inTemp.max at $day.inTemp.maxtime<br/>
+	         Min Garage Temperature:  $day.inTemp.min at $day.inTemp.mintime<br/>
+	         Max Garage Temperature:  $day.inTemp.max at $day.inTemp.maxtime<br/>
 	         Min Barometer:           $day.barometer.min at $day.barometer.mintime<br/>
 	         Max Barometer:           $day.barometer.max at $day.barometer.maxtime<br/>
              Max Wind :               $day.wind.max from $day.wind.gustdir at $day.wind.maxtime<br/>
@@ -81,8 +81,8 @@
          <description>
 	        Min outside temperature: $month.outTemp.min at $month.outTemp.mintime;
          	Max outside temperature: $month.outTemp.max at $month.outTemp.maxtime;
-	        Min inside temperature:  $month.inTemp.min at $month.inTemp.mintime;
-	        Max inside temperature:  $month.inTemp.max at $month.inTemp.maxtime;
+	        Min garage temperature:  $month.inTemp.min at $month.inTemp.mintime;
+	        Max garage temperature:  $month.inTemp.max at $month.inTemp.maxtime;
 	        Min barometer:           $month.barometer.min at $month.barometer.mintime;
 	        Max barometer:           $month.barometer.max at $month.barometer.maxtime;
             Max wind :               $month.wind.max from $month.wind.gustdir at $month.wind.maxtime;
@@ -94,8 +94,8 @@
              Month:                   $month.dateTime.format("%B %Y")<br/>
 	         Max Outside Temperature: $month.outTemp.max at $month.outTemp.maxtime<br/>
 	         Min Outside Temperature: $month.outTemp.min at $month.outTemp.mintime<br/>
-	         Max Inside Temperature:  $month.inTemp.max at $month.inTemp.maxtime<br/>
-	         Min Inside Temperature:  $month.inTemp.min at $month.inTemp.mintime<br/>
+	         Max Garage Temperature:  $month.inTemp.max at $month.inTemp.maxtime<br/>
+	         Min Garage Temperature:  $month.inTemp.min at $month.inTemp.mintime<br/>
 	         Min Barometer:           $month.barometer.min at $month.barometer.mintime<br/>
 	         Max Barometer:           $month.barometer.max at $month.barometer.maxtime<br/>
              Max Wind :               $month.wind.max from $month.wind.gustdir at $month.wind.maxtime<br/>
@@ -110,8 +110,8 @@
          <description>
 	        Min outside temperature: $year.outTemp.min at $year.outTemp.mintime;
          	Max outside temperature: $year.outTemp.max at $year.outTemp.maxtime;
-	        Min inside temperature:  $year.inTemp.min at $year.inTemp.mintime;
-	        Max inside temperature:  $year.inTemp.max at $year.inTemp.maxtime;
+	        Min garage temperature:  $year.inTemp.min at $year.inTemp.mintime;
+	        Max garage temperature:  $year.inTemp.max at $year.inTemp.maxtime;
 	        Min barometer:           $year.barometer.min at $year.barometer.mintime;
 	        Max barometer:           $year.barometer.max at $year.barometer.maxtime;
             Max wind :               $year.wind.max from $year.wind.gustdir at $year.wind.maxtime;
@@ -123,8 +123,8 @@
              Year:                    $year.dateTime.format("%Y")<br/>
 	         Max Outside Temperature: $year.outTemp.max at $year.outTemp.maxtime<br/>
 	         Min Outside Temperature: $year.outTemp.min at $year.outTemp.mintime<br/>
-	         Max Inside Temperature:  $year.inTemp.max at $year.inTemp.maxtime<br/>
-	         Min Inside Temperature:  $year.inTemp.min at $year.inTemp.mintime<br/>
+	         Max Garage Temperature:  $year.inTemp.max at $year.inTemp.maxtime<br/>
+	         Min Garage Temperature:  $year.inTemp.min at $year.inTemp.mintime<br/>
 	         Min Barometer:           $year.barometer.min at $year.barometer.mintime<br/>
 	         Max Barometer:           $year.barometer.max at $year.barometer.maxtime<br/>
              Max Wind :               $year.wind.max from $year.wind.gustdir at $year.wind.maxtime<br/>
