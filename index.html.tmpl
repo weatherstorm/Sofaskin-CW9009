@@ -302,6 +302,56 @@
 		</div>
                 #end if
 
+		<div class="card">
+                    <h1><i class="fa fa-battery-full m-rot" ></i> Sensor Status</h1>
+
+
+                    <table>
+                        <tr><td>Temp:</td><td>
+            #if $day.outTemp.has_data
+                #if $current.outTempBatteryStatus.raw
+			<i class="fa fa-battery-full m-rot" ></i> OK
+                #else
+			<i class="fa fa-battery-empty m-rot" ></i> Low
+                #end if
+            #else
+                Missing
+            #end if
+			</td></tr>
+                        <tr><td>Rain:</td><td>
+            #if $day.rain.has_data
+                #if $current.rainBatteryStatus.raw
+			<i class="fa fa-battery-full m-rot" ></i> OK
+                #else
+			<i class="fa fa-battery-empty m-rot" ></i> Low
+                #end if
+            #else
+                Missing
+            #end if
+			</td></tr>
+                        <tr><td>Wind:</td><td>
+            #if $day.wind.has_data
+                #if $current.windBatteryStatus.raw
+			<i class="fa fa-battery-full m-rot" ></i> OK
+                #else
+			<i class="fa fa-battery-empty m-rot" ></i> Low
+                #end if
+            #else
+                Missing
+            #end if
+			</td></tr>
+#if $day.UV.has_data
+                        <tr><td>UV:</td><td>
+            #if $day.UV.has_data
+			<i class="fa fa-battery-full m-rot" ></i> OK
+            #else
+                Missing
+            #end if
+			</td></tr>
+#end if
+                    </table>
+		</div>
+
             </div>
             
             <div class="right" >
