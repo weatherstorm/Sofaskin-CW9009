@@ -95,8 +95,8 @@
                         <tr><td>RMS Wind</td><td>$month.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$month.wind.vecavg</td><td></td></tr>
                         <tr><td>Vector Average Direction</td><td>$month.wind.vecdir</td><td></td></tr>
-                        <tr><td>High Inside Temperature</td><td>$month.inTemp.max</td><td>$month.inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$month.inTemp.min</td><td>$month.inTemp.mintime</td></tr>
+                        <tr><td>High Garage Temperature</td><td>$month.inTemp.max</td><td>$month.inTemp.maxtime</td></tr>
+                        <tr><td>Low Garage Temperature</td><td>$month.inTemp.min</td><td>$month.inTemp.mintime</td></tr>
                         #if $month.extraTemp1.has_data
                         <tr><td>High Pond Temp</td><td>$month.extraTemp1.max</td><td>$month.extraTemp1.maxtime</td></tr>
                         <tr><td>Low Pond Temp</td><td>$month.extraTemp1.min</td><td>$month.extraTemp1.mintime</td></tr>
@@ -136,8 +136,8 @@
                         <tr><td>RMS Wind</td><td>$year.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$year.wind.vecavg</td><td></td></tr>
                         <tr><td>Vector Average Direction</td><td>$year.wind.vecdir</td><td></td></tr>
-                        <tr><td>High Inside Temperature</td><td>$year.inTemp.max</td><td>$year.inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$year.inTemp.min</td><td>$year.inTemp.mintime</td></tr>
+                        <tr><td>High Garage Temperature</td><td>$year.inTemp.max</td><td>$year.inTemp.maxtime</td></tr>
+                        <tr><td>Low Garage Temperature</td><td>$year.inTemp.min</td><td>$year.inTemp.mintime</td></tr>
                         #if $year.extraTemp1.has_data
                         <tr><td>High Pond Temp</td><td>$year.extraTemp1.max</td><td>$year.extraTemp1.maxtime</td></tr>
                         <tr><td>Low Pond Temp</td><td>$year.extraTemp1.min</td><td>$year.extraTemp1.mintime</td></tr>
@@ -171,8 +171,8 @@
                     <img src="monthwindvec.png" alt="Wind Vector" />
 		    <img src="monthtempchill.png" alt="heatchill" />
 		    <img src="monthbarometer.png" alt="barometer"/>
-		    <img src="monthinside.png" alt="Inside" />
-		    <img src="monthinhumid.png" alt="Inside Humidity" />
+		    <img src="monthinside.png" alt="Garage" />
+		    <img src="monthinhumid.png" alt="Garage Humidity" />
                     #if $month.UV.has_data
                     <img src="monthuv.png" alt="UV Index" />
                     #end if

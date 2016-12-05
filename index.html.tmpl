@@ -95,8 +95,8 @@
 			<tr><td>Wind Gust</td><td>$current.windGust $current.windGustDir.ordinal_compass ($current.windGustDir)</td></tr>
 			#end if
 			<tr><td>Rain Rate</td><td>$current.rainRate</td></tr>
-                        <tr><td>Inside Temperature</td><td>$current.inTemp</td></tr>
-			<tr><td>Inside Humidity</td><td>$current.inHumidity</td></tr>
+                        <tr><td>Garage Temperature</td><td>$current.inTemp</td></tr>
+			<tr><td>Garage Humidity</td><td>$current.inHumidity</td></tr>
                         #if $day.extraTemp1.has_data
                         <tr><td>Pond Temperature</td><td>$current.extraTemp1</td></tr>
                         #end if
@@ -132,10 +132,10 @@
                         <tr><td>RMS Wind</td><td>$day.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$day.wind.vecavg</td><td></td></tr>
                         <tr><td>Vector Average Direction</td><td>$day.wind.vecdir</td><td></td></tr>
-                        <tr><td>High Inside Temperature</td><td>$day.inTemp.max</td><td>$day.inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$day.inTemp.min</td><td>$day.inTemp.mintime</td></tr>
-                        <tr><td>High Inside Humidity</td><td>$day.inHumidity.max</td><td>$day.inHumidity.maxtime</td></tr>
-                        <tr><td>Low Inside Humidity</td><td>$day.inHumidity.min</td><td>$day.inHumidity.mintime</td></tr>
+                        <tr><td>High Garage Temperature</td><td>$day.inTemp.max</td><td>$day.inTemp.maxtime</td></tr>
+                        <tr><td>Low Garage Temperature</td><td>$day.inTemp.min</td><td>$day.inTemp.mintime</td></tr>
+                        <tr><td>High Garage Humidity</td><td>$day.inHumidity.max</td><td>$day.inHumidity.maxtime</td></tr>
+                        <tr><td>Low Garage Humidity</td><td>$day.inHumidity.min</td><td>$day.inHumidity.mintime</td></tr>
 			#if $day.extraTemp1.has_data
                         <tr><td>High Pond Temp</td><td>$day.extraTemp1.max</td><td>$day.extraTemp1.maxtime</td></tr>
                         <tr><td>Low Pond Temp</td><td>$day.extraTemp1.min</td><td>$day.extraTemp1.mintime</td></tr>
@@ -198,10 +198,10 @@
                         <tr><td>Rain</td><td>$days_ago($days_ago=$n).rain.sum</td><td></td></tr>
 			<tr><td>High Rain Rate</td><td>$days_ago($days_ago=$n).rainRate.max</td><td>$days_ago($days_ago=$n).rainRate.maxtime</td></tr>
 			<tr><td>High Wind</td><td>$days_ago($days_ago=$n).wind.max $day.wind.gustdir</td><td>$days_ago($days_ago=$n).wind.maxtime</td></tr>
-                        <tr><td>High Inside Temperature</td><td>$days_ago($days_ago=$n).inTemp.max</td><td>$days_ago($days_ago=$n).inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$days_ago($days_ago=$n).inTemp.min</td><td>$days_ago($days_ago=$n).inTemp.mintime</td></tr>
-                        <tr><td>High Inside Humidity</td><td>$days_ago($days_ago=$n).inHumidity.max</td><td>$days_ago($days_ago=$n).inHumidity.maxtime</td></tr>
-                        <tr><td>Low Inside Humidity</td><td>$days_ago($days_ago=$n).inHumidity.min</td><td>$days_ago($days_ago=$n).inHumidity.mintime</td></tr>
+                        <tr><td>High Garage Temperature</td><td>$days_ago($days_ago=$n).inTemp.max</td><td>$days_ago($days_ago=$n).inTemp.maxtime</td></tr>
+                        <tr><td>Low Garage Temperature</td><td>$days_ago($days_ago=$n).inTemp.min</td><td>$days_ago($days_ago=$n).inTemp.mintime</td></tr>
+                        <tr><td>High Garage Humidity</td><td>$days_ago($days_ago=$n).inHumidity.max</td><td>$days_ago($days_ago=$n).inHumidity.maxtime</td></tr>
+                        <tr><td>Low Garage Humidity</td><td>$days_ago($days_ago=$n).inHumidity.min</td><td>$days_ago($days_ago=$n).inHumidity.mintime</td></tr>
 			#if $day.extraTemp1.has_data
                         <tr><td>High Pond Temp</td><td>$days_ago($days_ago=$n).extraTemp1.max</td><td>$days_ago($days_ago=$n).extraTemp1.maxtime</td></tr>
                         <tr><td>Low Pond Temp</td><td>$days_ago($days_ago=$n).extraTemp1.min</td><td>$days_ago($days_ago=$n).extraTemp1.mintime</td></tr>
@@ -429,8 +429,8 @@
 		    <img src="daywindvec.png" alt="Wind Vector" />
                     <img src="daytempchill.png" alt="heatchill" />
 		    <img src="daybarometer.png" alt="barometer"/>
-                    <img src="dayinside.png" alt="Inside" />
-		    <img src="dayinhumid.png" alt="Inside Humidity" />
+                    <img src="dayinside.png" alt="Garage" />
+		    <img src="dayinhumid.png" alt="Garage Humidity" />
                     #if $day.radiation.has_data
                     <img src="dayradiation.png" alt="Radiation" />
                     #end if
