@@ -10,9 +10,9 @@
 	#if $Extras.has_key('web_url')
 	<link rel="canonical" href="$Extras.web_url" itemprop="url"/>
 	#end if
-        
+
         <title itemprop="name">$station.location Current Weather Conditions</title>
-        
+
         <!-- Open Graph -->
         <meta property="og:site_name" content="$station.location Weather Station" />
 	<meta property="og:title" content="Home"/>
@@ -25,26 +25,31 @@
         <!-- Icons -->
         <link rel="icon" href="favicon.ico" type="image/png">
 	<link rel="apple-touch-icon" href="touch-icon.png"/>
-        
+
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
-        
+
         <!-- Skripte -->
         <script src="js/modernizr-2.6.2.min.js"></script>
-        
+        <script src="js/checkdiff.js"></script>
+
     </head>
     <body>
         <header>
             <div class="container-fix" >
                 <div class="h-left" >
-                <h1><i class="fa fa-cloud" ></i> $station.location </h1>
-                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude_f,$station.longitude_f" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
-                <h2>Current Weather Conditions</h2>
-                <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+                  <h1><i class="fa fa-cloud" ></i> $station.location </h1>
+                  <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude_f,$station.longitude_f" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+                  <h2>Current Weather Conditions</h2>
+                  <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+		                <p id="freshweather"></p>
+                    <script type="text/javascript">
+                      window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
+                      </script>
                 </div>
-                
+
                 <div class="h-right" >
                     <table>
                         <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
@@ -68,12 +73,12 @@
                 </nav>
             </div>
 	</header>
-        
+
         <div class="main" >
         <div class="container" >
-            
+
             <div class="left" >
-                
+
                 <div class="card" >
 		    #if $current.rainRate.raw == 0.0
                     <h1><i class="fa fa-sun-o m-orange" ></i> Current Conditions</h1>
@@ -154,7 +159,7 @@
                         #end if
                     </table>
                 </div>
-	
+
 		<div class="card" >
 		    <!--Leap Year Code --!>
 		    #set $yr = int($day.dateTime.format("%Y"))%4
@@ -183,9 +188,9 @@
 		    #else
 		    	#set $n = 365
 		    #end if
-		    
+
 		    <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)")</h1>
-		   
+
                     <table class="tablespacer">
                         <tr><td>High Temperature</td><td>$days_ago($days_ago=$n).outTemp.max</td><td>$days_ago($days_ago=$n).outTemp.maxtime</td></tr>
                         <tr><td>Low Temperature</td><td>$days_ago($days_ago=$n).outTemp.min</td><td>$days_ago($days_ago=$n).outTemp.mintime</td></tr>
@@ -222,7 +227,7 @@
                 </div>
 
                 #if $Extras.has_key('radar_img')
-                <div class="card" >                    
+                <div class="card" >
                     #if $Extras.has_key('radar_url')
                     <a href="$Extras.radar_url" target="_blank">
                     #end if
@@ -230,12 +235,12 @@
                     #if $Extras.has_key('radar_url')
                     </a>
                     #end if
-                    
+
                     <h3>
                         #if $Extras.has_key('radar_gif')
-                        
+
                         <a id="btn1" class="cpointer" >Image / Animation</a>
-                        <script>    
+                        <script>
                             function changeRadar() {
                                 if(document.getElementById("radar").src == "$Extras.radar_img") {
                                     document.getElementById("radar").src = "$Extras.radar_gif";
@@ -243,24 +248,24 @@
                                     document.getElementById("radar").src = "$Extras.radar_img";
                                 }
                             }
-                            
+
                             var el = document.getElementById('btn1');
                             el.onclick = changeRadar;
                         </script>
                         #end if
-                    
+
                         #if $Extras.has_key('radar_url_alt')
                         #if $Extras.has_key('radar_url_alt_text')
                         | <a href="$Extras.radar_url_alt" target="_blank" >$Extras.radar_url_alt_text</a>
-                        #else 
+                        #else
                         | <a href="$Extras.radar_url_alt" target="_blank" >Second Radar</a>
                         #end if
                         #end if
                     </h3>
-                    
+
                 </div>
                 #end if
-                
+
                 #if $Extras.has_key('lightning_map')
                 <div class="card" >
                     #if $Extras.has_key('lightning_url')
@@ -283,22 +288,22 @@
 			<br>
 				#if $Extras.has_key('camera2')
 				<a id="btn2" class="cpointer" >$Extras.cameratitle | $Extras.cameratitle2</a>
-                       		<script>    
+                       		<script>
                             	function changeCamera() {
                                 	if(document.getElementById("camera").src == "$Extras.camera") {
                                 	    document.getElementById("camera").src = "$Extras.camera2";
-					  
+
                                 	} else {
                                 	    document.getElementById("camera").src = "$Extras.camera";
-					    
+
                                		}
                             	}
-                            
+
                             	var el = document.getElementById('btn2');
                             	el.onclick = changeCamera;
                         	</script>
 				#end if
-			</center>	
+			</center>
 		</div>
                 #end if
 
@@ -353,7 +358,7 @@
 		</div>
 
             </div>
-            
+
             <div class="right" >
 
                 <div class="card" >
@@ -418,10 +423,10 @@
                     </table>
                     #end if
                 </div>
-                
+
                 <div class="card cc graphs" >
                     <h1><i class="fa fa-line-chart m-gruen" ></i> Graphs</h1>
-                    
+
                     <img src="daytempdew.png" alt="temperatures" />
                     <img src="dayrain.png" alt="rain" />
                     <img src="daywind.png" alt="wind" />
@@ -444,28 +449,28 @@
                     <img src="daypond.png" alt="Pond Temperatures" />
                     #end if
                 </div>
-                
+
             </div>
         </div>
         </div>
-        
+
         <footer>
             <div class="container-fix">
 	    <center>
 		#if $Extras.has_key('you')
-            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a>
             	#end if
 		&sdot;
-	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y")
 	   	<br>
 	    	Design by <a href="http://www.cw9009.x10host.com/">Josh Smith</a>
-	    	&sdot; 
+	    	&sdot;
 	    	Original Design by <a href="http://blauesledersofa.de">blaues Ledersofa</a>
-	    	&sdot; 
+	    	&sdot;
 		Icons by <a href="http://fontawesome.io/">Font Awsome</a> and <a href="https://icons8.com/">Icons8</a>
 		<br>
 		<!--
-            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and 
+            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and
             	<img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"> <a href="https://www.raspberrypi.org/" target="_blank"> Raspberry Pi 2 Model B</a>.
 		-->
 	    </center>
@@ -479,7 +484,7 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
+
             ga('create', '$Extras.googleAnalyticsId', 'auto');
             ga('send', 'pageview');
         </script>
