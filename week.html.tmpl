@@ -33,6 +33,7 @@
         
         <!-- Skripte -->
         <script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/checkdiff.js"></script>
         
     </head>
     <body>
@@ -43,9 +44,13 @@
                 <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.location" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
                 <h2>Weekly Weather Summary</h2>
                 <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+		<p id="freshweather" class="m-orange"></p>
+                <script type="text/javascript">
+                      window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
+                </script>
                 </div>
                 
-                <div class="h-right" >
+                <div class="h-right">
                     <table>
                         <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
                         <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
@@ -236,8 +241,8 @@
             </div>
         </div>
         </div>
-        
-       <footer>
+ 
+	<footer>
             <div class="container-fix">
 	    <center>
 		#if $Extras.has_key('you')
@@ -248,8 +253,9 @@
 	   	<br>
 	    	Design by <a href="http://blauesledersofa.de">blaues Ledersofa</a>
 	    	&sdot; 
-            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and 
-            	<!-- Raspberry Pi icon by Icons8 --> <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"> <a href="https://www.raspberrypi.org/" target="_blank"> Raspberry Pi 2 Model B</a>.
+            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
+            	&sdot; 
+		Icons from <i class="fa fa-font-awesome" aria-hidden="true"></i><a href="http://fontawesome.io" target="_blank"> Font Awesome</a>
 	    </center>
 	    </div>
         </footer>
