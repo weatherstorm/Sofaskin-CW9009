@@ -96,8 +96,14 @@
                         <tr><td>Humidity</td><td>$current.outHumidity</td></tr>
                         <tr><td>Barometer</td><td>$current.barometer</td></tr>
                         <tr><td>Barometer Trend ($trend.time_delta.hour.format("%.0f"))</td><td>$trend.barometer</td></tr>
-                        <tr><td>Wind</td><td>$current.windSpeed $current.windDir.ordinal_compass ($current.windDir)</td></tr>
-                        #if $current.windGust.has_data
+			#if $current.windSpeed.raw == 0.0
+                        <tr><td>Wind</td><td>$current.windSpeed </td></tr>
+			#else
+			<tr><td>Wind</td><td>$current.windSpeed $current.windDir.ordinal_compass ($current.windDir)</td></tr>
+			#end if
+                        #if $current.windGust.raw == 0.0
+			<tr><td>Wind Gust</td><td>$current.windGust </td></tr>
+			#else
 			<tr><td>Wind Gust</td><td>$current.windGust $current.windGustDir.ordinal_compass ($current.windGustDir)</td></tr>
 			#end if
 			<tr><td>Rain Rate</td><td>$current.rainRate</td></tr>
