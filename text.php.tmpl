@@ -100,21 +100,19 @@ if (\$count == 4){
     <!-- Main container -->  
      <div class="main" >
         <div class="container" >
-	    <div class="card" id="tablefix">
+	    <div class="center">
+	    	<div class="card">
 
 <?php
 
-    		if(file_exists(\$report)){
-			echo "<p>";
-			echo "<PRE>";
-      			echo file_get_contents(\$report);
-			echo "</PRE>";
-			echo "</p>";
-    		}
+    			if(file_exists(\$report)){
+				echo "<pre class=\"noaareport\">;
+      				echo file_get_contents(\$report);
+				echo "</pre>";
+    			}
 ?>  
-
+		</div>
             </div>   
-
         </div>
     </div>
         
