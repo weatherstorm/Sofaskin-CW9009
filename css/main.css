@@ -323,7 +323,7 @@ legend {
   border: 0;
   /* 1 */
   padding: 0;
-  white-space: normal;
+  /*white-space: normal;*/
   /* 2 */
   *margin-left: -7px;
   /* 3 */ }
@@ -802,6 +802,10 @@ ul.topnav li.icon {
       margin: 0 !important; }
     .container .right {
       width: 100% !important; }
+    /*added center tag container for the text.php page. */
+    .container .center {
+      width: 100% !important;
+      margin: 0 !important; }
 
   .container-fix {
     width: 100%; }
@@ -818,6 +822,20 @@ ul.topnav li.icon {
 
   .card {
     margin: 1em 0; }
+   
+/*card width for summaries page history tables*/
+  #tablefix.card {
+    width: 100%;
+    font-size: 0.7em; }
+
+/*Makes small font size for NOAA Monthly Reports table*/
+  div.noaatable {
+     font-size: 0.5em; }
+
+/*Makes small font size for NOAA Monthly Reports in text.php*/
+  pre.noaareport {
+     font-size: 0.4em; 
+     font-family: monospace; }
 
   header {
     width: 100%;
