@@ -10,9 +10,9 @@
 	#if $Extras.has_key('web_url')
 	<link rel="canonical" href="$Extras.web_url/year.html"/>
 	#end if
-        
+
         <title itemprop="name">$station.location Yearly Weather Summary</title>
-        
+
         <!-- Open Graph -->
         <meta property="og:site_name" content="$station.location Yearly Weather Summary" />
 	<meta property="og:title" content="Yearly Weather Summary"/>
@@ -25,15 +25,16 @@
         <!-- Icons -->
         <link rel="icon" href="favicon.ico" type="image/png">
 	<link rel="apple-touch-icon" href="touch-icon.png"/>
-        
+
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
-        
+
         <!-- Skripte -->
         <script src="js/modernizr-2.6.2.min.js"></script>
-        
+        <script src="js/checkdiff.js"></script>
+
     </head>
     <body>
         <header>
@@ -43,8 +44,12 @@
                 <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude_f,$station.longitude_f" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
                 <h2>Yearly Weather Summary</h2>
                 <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+                <p id="freshweather" class="m-orange"></p>
+                <script type="text/javascript">
+                  window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
+                </script>
                 </div>
-                
+
                 <div class="h-right" >
                     <table>
                         <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
@@ -68,12 +73,12 @@
                 </nav>
             </div>
         </header>
-        
+
         <div class="main" >
         <div class="container" >
-            
+
             <div class="left" >
-                
+
                 <div class="card" >
                     <h1><i class="fa fa-calendar-o m-rot" ></i> Calendar Year</h1>
                     <table class="tablespacer">
@@ -122,17 +127,17 @@
                 </div>
 
             </div>
-            
+
             <div class="right" >
 
                 <div class="card cc graphs" >
                     <h1><i class="fa fa-line-chart m-gruen" ></i> Yearly Statistics and Plots</h1>
-                    
+
                     <img src="yeartempdew.png" alt="temperatures" />
                     <img src="yearhilow.png" alt="Daily highs and lows for the year" title="Daily highs and lows for the year"/>
                     <img src="yearrain.png" alt="rain" />
                     <img src="yearwind.png" alt="wind" />
-                    <img src="yearwinddir.png" alt="Hi Wind" /> 
+                    <img src="yearwinddir.png" alt="Hi Wind" />
                     <img src="yearwindvec.png" alt="Wind Vector" />
 		    <img src="yeartempchill.png" alt="heatchill" />
 		    <img src="yearbarometer.png" alt="barometer"/>
@@ -154,30 +159,28 @@
                     <img src="yearpond.png" alt="Pond Temperatures" />
                     #end if
                 </div>
-                
+
             </div>
         </div>
         </div>
-        
+
         <footer>
             <div class="container-fix">
 	    <center>
 		#if $Extras.has_key('you')
-            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a>
             	#end if
 		&sdot;
-	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y")
 	   	<br>
                 Design by <a href="http://www.cw9009.x10host.com/">Josh Smith</a>
                 &sdot;
                 Original Design by <a href="http://blauesledersofa.de">blaues Ledersofa</a>
                 &sdot;
-                Icons by <a href="http://fontawesome.io/">Font Awsome</a> and <a href="https://icons8.com/">Icons8</a>
+                Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a>
+                &sdot;
+                <i class="fa fa-font-awesome" aria-hidden="true"></i><a href="http://fontawesome.io" target="_blank"> Font Awesome</a>
                 <br>
-                <!--
-                Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> and
-                <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"> <a href="https://www.raspberrypi.org/" target="_blank"> Raspberry Pi 2 Model B</a>.
-                -->
 	    </center>
 	    </div>
         </footer>
@@ -189,7 +192,7 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
+
             ga('create', '$Extras.googleAnalyticsId', 'auto');
             ga('send', 'pageview');
         </script>
