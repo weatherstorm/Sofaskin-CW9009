@@ -58,7 +58,7 @@
                         <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
                         <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
                         <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
-			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" >$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" >$Extras.wunderground</a></td></tr>
+			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" target="_blank">$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" target="_blank">$Extras.wunderground</a></td></tr>
                     </table>
                 </div>
 
@@ -100,6 +100,8 @@
 			<tr><td>Min</td><td>$alltime.barometer.min</td><td>$alltime.barometer.mintime</td></tr>
 			<tr><td colspan="3"><br>Wind Speed</td></tr>
 			<tr><td>Max</td><td>$alltime.wind.max</td><td>$alltime.wind.maxtime</td></tr>
+			<tr><td colspan="3"><br>Wind Chill</td></tr>
+			<tr><td></td><td>$alltime.windchill.min</td><td>$alltime.windchill.mintime</td></tr>
             		<tr><td colspan="3"><br>House Temperatures</td></tr>
 			<tr><td>Max</td><td>$alltime.inTemp.max</td><td>$alltime.inTemp.maxtime</td></tr>
 			<tr><td>Min</td><td>$alltime.inTemp.min</td><td>$alltime.inTemp.mintime</td></tr>
@@ -109,9 +111,11 @@
                     </table>
                 </div>
 
-		<div class="card" id="tablefix">
+		<div class="card">
                     <h1><i class="fa fa-table m-grau" ></i> Number of Days with Observations</h1>
+			<div class="tablefix">
                     	$temp_count_table
+			</div>
                 </div>
 
 	   </div>
@@ -124,24 +128,32 @@
 			</div>
                 </div>
 
-		<div class="card" id="tablefix">
+		<div class="card">
                     <h1><i class="fa fa-thermometer-half" ></i> Average Temperature by Month</h1>
+			<div class="tablefix">
                     	$avg_temp_table
+			</div>
                 </div>
 		
-		<div class="card" id="tablefix">
+		<div class="card">
                     <h1><i class="fa fa-umbrella m-blau" ></i> Total Monthly Rainfall </h1>
+			<div class="tablefix">
                     	$rain_sum_table
+			</div>
                 </div>
 
-		<div class="card" id="tablefix">
+		<div class="card">
                     <h1><i class="fa fa-umbrella m-blau" ></i> Number of Days it Rained (>=0.02")</h1>
+			<div class="tablefix">
                     	$rain_table
+			</div>
                 </div>
 
-		<div class="card" id="tablefix">
+		<div class="card">
                     <h1><i class="fa fa-thermometer-half m-rot" ></i> Average House Temperature by Month</h1>
+			<div class="tablefix">
                     	$avg_htemp_table
+			</div>
                 </div>
 	   </div>
         </div>

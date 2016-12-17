@@ -85,7 +85,7 @@ if (\$count == 4){
                         <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
                         <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
                         <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
-			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" >$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" >$Extras.wunderground</a></td></tr>
+			<tr><td><b>Station IDs:</b></td><td><a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=$Extras.cwop&last=24" target="_blank">$Extras.cwop</a> | <a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=pws:$Extras.wunderground&MR=1" target="_blank">$Extras.wunderground</a></td></tr>
                     </table>
                 </div>
 
@@ -112,11 +112,9 @@ if (\$count == 4){
 <?php
 
     		if(file_exists(\$report)){
-			//echo "<p>";
 			echo "<pre class=\"noaareport\">";
       			echo file_get_contents(\$report);
 			echo "</pre>";
-			//echo "</p>";
     		}
 ?>  
                </div>

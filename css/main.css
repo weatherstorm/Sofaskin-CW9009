@@ -780,9 +780,9 @@ ul.topnav li.icon {
 
 @media (max-width: 1209px) and (min-width: 1010px) {
   .container {
-    width: 920px !important; }
+    width: 1020px !important; } /* fixed sizes from 920px to 1020px */
     .container .left {
-      width: 290px !important;
+      width: 390px !important;		/* fixed sizes from 290px to 390px */
       margin-right: 0.8em !important; }
     .container .right {
       width: 580px !important; }
@@ -792,7 +792,21 @@ ul.topnav li.icon {
     max-width: 100% !important; }
 
   img.small {
-    max-width: 100% !important; } }
+    max-width: 100% !important; }
+
+/*Makes small font size for history tables*/
+  div.tablefix {
+     font-size: 0.8em; }
+
+/*Makes small font size for NOAA Monthly Reports table*/
+  div.noaatable {
+     font-size: 0.8em; }
+/*Makes small font size for NOAA Monthly Reports in text.php*/
+  pre.noaareport {
+     font-size: 0.8em; 
+     font-family: monospace; }
+
+}
 
 @media (max-width: 1009px) {
   .container {
@@ -802,7 +816,6 @@ ul.topnav li.icon {
       margin: 0 !important; }
     .container .right {
       width: 100% !important; }
-    /*added center tag container for the text.php page. */
     .container .center {
       width: 100% !important;
       margin: 0 !important; }
@@ -822,11 +835,10 @@ ul.topnav li.icon {
 
   .card {
     margin: 1em 0; }
-   
-/*card width for summaries page history tables*/
-  #tablefix.card {
-    width: 100%;
-    font-size: 0.7em; }
+
+/*Makes small font size for history tables*/
+  div.tablefix {
+     font-size: 0.6em; }
 
 /*Makes small font size for NOAA Monthly Reports table*/
   div.noaatable {
