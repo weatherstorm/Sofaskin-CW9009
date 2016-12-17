@@ -8,14 +8,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11" />
 	#if $Extras.has_key('web_url')
-	<link rel="canonical" href="$Extras.web_url" itemprop="url"/>
+	<link rel="canonical" href="$Extras.web_url"/>
 	#end if
 
         <title itemprop="name">$station.location Current Weather Conditions</title>
 
         <!-- Open Graph -->
         <meta property="og:site_name" content="$station.location Weather Station" />
-	<meta property="og:title" content="Home"/>
+	<meta property="og:title" content="$station.location Current Weather Conditions"/>
 	#if $Extras.has_key('web_url')
 	<meta property="og:url" content="$Extras.web_url"/>
 	#end if
