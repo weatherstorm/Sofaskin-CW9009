@@ -4,22 +4,26 @@
     <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Refresh" content="180">
+	#if $Extras.has_key('cwop')
         <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        #else
+        <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+	#end if
+	<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11" />
 	#if $Extras.has_key('web_url')
 	<link rel="canonical" href="$Extras.web_url/station.html" itemprop="url"/>
 	#end if
         
-        <title itemprop="name">$station.location ($Extras.cwop) Station Information</title>
+	<title itemprop="name">$station.location Station Information</title>
         
         <!-- Open Graph -->
-        <meta property="og:site_name" content="$station.location ($Extras.cwop) Station Information" />
+	<meta property="og:site_name" content="$station.location Station Information" />
 	<meta property="og:title" content="Station Information"/>
 	#if $Extras.has_key('web_url')
 	<meta property="og:url" content="$Extras.web_url/station.html"/>
 	#end if
-        <meta property="og:description" content="Station Information for $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+	<meta property="og:description" content="Station Information for $station.location - weather web site powered by WeeWX" />
 	<meta property="og:type" content="website" />
 
         <!-- Icons -->
@@ -57,7 +61,9 @@
                         <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
                         <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
                         <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
+			#if $Extras.has_key('cwop') and $Extras.has_key('crahs')
 			<tr><td><b>Station IDs:</b></td><td><a href="$Extras.cwop_url" target="_blank">$Extras.cwop</a> | <a href="$Extras.crahs_url" target="_blank">$Extras.crahs</a></td></tr>
+			#end if
 		    </table>
                 </div>
 
@@ -84,64 +90,8 @@
 
 		<div class="card" >
                     <h1><i class="fa fa-info-circle" ></i> Station Information</h1>
-		    The station is a <a href="http://www.lacrossetechnology.com/2316/">La Crosse WS-2316</a> located about 3 miles north-northwest of 
-                    Meridian, Idaho in the Kelly Creek Subdivision. The station has been running since November 7, 2007. A <a href="https://www.raspberrypi.org/" target="_blank" >Raspberry Pi 2 Model B<!-- Raspberry Pi icon by Icons8 --> <img src="https://maxcdn.icons8.com/Color/PNG/24/Logos/raspberry_pi-24.png" title="Raspberry Pi" height="18" width="18"></a> running 
-                    <a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a> processes the data which is sent to <a href="http://www.wxqa.com/" target="_blank" >CWOP</a> and <a href="http://www.wunderground.com/" target="_blank" >Weather Underground</a> in addition 
-                    to this web site. Data is sent every 10 minutes.
-		    <br><br>
-		    Latitude: $station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] 
-		    <br>
-		    Longitude: $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2]
-		    <br>
-		    Elevation: $station.altitude		    
-		    <br>
-		    <table class="tablespacer">
-		    	<tr><td colspan="3"><br>Data is also available from:</td></tr>
-			<tr><td><center><a href="$Extras.cwop_url" target="_blank"><img src="icons/cwop.png" title="CWOP" alt="cwop" /><br>$Extras.cwop</a></center></td>
-			    #if $Extras.has_key('wunderground')
-			    <td><center><a href="$Extras.wu_url" target="_blank"><img src="icons/wu.png" title="Weather Underground" alt="$Extras.wunderground" /><br>$Extras.wunderground</a></center></td>
-			    #end if
-			    #if $Extras.has_key('mwest')
-			    <td><center><a href="$Extras.mwest_url" target="_blank"><img src="icons/mesowest.png" height="84" width="84" title=Mesowest" alt="$Extras.mwest" /><br>$Extras.mwest</a></center></td>
-   			    #end if
-			    #if $Extras.has_key('crahs') 
-			    <td><center><a href="$Extras.crahs_url" target="_blank"><img src="icons/CoCoRaHS.png" height="84" width="84" title="CoCoRaHS" alt="CoCoRaHS" /><br>$Extras.crahs</a></center></td>
-			    #end if
-			</tr>
-		    </table>
-		</div>
-
-		<div class="card" >
-                    <h1><i class="fa fa-code"></i> Site Code</h1>
-		    <p>
-		    This web site uses Sofaskin for WeeWx, designed by Sven at <a href="http://neoground.com/projects/weewx/">Neoground</a>. Sofaskin is a 
-                    custom skin model from Google's Material Design that uses <a href="http://getbootstrap.com">Bootstrap</a> to display the weather data. 
-                    I made a variety of functional changes to the 
-		    original Sofaskin code which is available on GitHub. My Sofaskin-CW9009 skin 
-		    needs an additional python script (historygenerator.py) which was adapted from another 
-		    skin, <a href="http://www.dajda.net/about.html">Dajda.net</a>, to generate the history tables.
-		    I have also incorporated some changes in this template by <a href="http://www.torkel.se/weather/index.html">Bjorn Torkelsson</a>. 
-		    The code for the web page skins and python script is available from the web sites below. 
-			<br><br>
-			Sofaskin template from Neoground: 
-			<br>
-			<i class="fa fa-info-circle"> </i><a href="http://neoground.com/projects/weewx/"> http://neoground.com/projects/weewx/</a> 
-			<br><br>
-			My Sofaskin-CW9009 template: 
-			<br><i class="fa fa-github"> </i> <a href="http://github.com/weatherstorm/Sofaskin-CW9009"> http://github.com/weatherstorm/Sofaskin-CW9009</a> 
-			<br><br>
-			Dajda template (historygenerator.py): 
-			<br>
-			<i class="fa fa-info-circle"></i> <a href="http://www.dajda.net/about.html">http://www.dajda.net/about.html</a> 
-			<br>
-			<i class="fa fa-github"></i> <a href="http://github.com/brewster76/fuzzy-archer">http://github.com/brewster76/fuzzy-archer</a> 
-			<br><br>
-
-			Questions? Send them to <a href=mailto:josh@cw9009.x10host.com>josh@cw9009.x10host.com</a>
-			<br>
-		    </p>
-		</div>
-
+		   		
+            </div>
 
 		<div class="card" >
                     <h1><i class="fa fa-server m-rot"></i> Status</h1>
@@ -158,37 +108,7 @@
 
 		<div class="card" >
                     <h1><i class="fa fa-history m-gruen" ></i> Station History</h1>
-			<table class="tablespacer">
-				<tr><td>12/26/2016</td></tr>
-				<tr><td>Joined CoCoRaHs network as site number ID-AD-36 and will begin reporting Rain and Snowfall. Temporarily place the 8 inch rain gauge in the center of the backyard. I will find a more permanent location in the spring.</td></tr>	
-			</table>
-			<table class="tablespacer">
-				<tr><td>01/23/2016</td></tr>
-				<tr><td>Moved temperature/humidity sensor to the front of the house (north facing) under eaves.</td></tr>	
-			</table>
-			<table class="tablespacer">
-				<tr><td><br>12/31/2015</td></tr>
-				<tr><td>Changed hardware from PC to Raspberry Pi 2 Model B. Changed software from HeavyWeather to WeeWX 3.3.1. </td></tr>
-		  	</table> 
-
-			<table class="tablespacer">	
-				<tr><td><br>09/18/2009</td></tr>
-				<tr><td>Attached the wind sensor to the west side of the roof. The sensor is about a foot above the roof. Temperatures sensor was attached under the northwest corner eaves.</td></tr>
-                    	</table>
-			<img src="photo/IMG_0925.JPG" alt="photo" class="space small" />
-
-			<table class="tablespacer">
-				<tr><td><br>08/24/2008</td></tr>
-				<tr><td>Moved station to the southwest corner of the property. Sensors about 5 feet above ground. Wind obstruction from trees and house. Temperature sensor partially shielded. </td></tr>
-		    	</table>	
-			<img src="photo/IMG_5374.jpg" alt="photo" class="space small" />
-
-			<table class="tablespacer">
-				<tr><td><br>11/07/2007</td></tr>
-				<tr><td>Station established in the backyard (south facing) next to the fence.</td></tr>
-			</table>
-			<img src="photo/IMG_4957.jpg" alt="photo" class="space small" />
-				
+							
 		</div>
                 
 	   </div>
