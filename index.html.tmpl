@@ -225,7 +225,14 @@
 				#end if
 			#end if
 		    #else
-		    	#set $n = 365
+			#set $yrNew = $yr - 1
+			#if $yrNew % 100 == 0
+				#if $yrNew % 400 == 0
+					#set $n = 366
+				#end if
+			#else
+		    		#set $n = 365
+			#end if
 		    #end if
 		    
 		    <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)")</h1>
