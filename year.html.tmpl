@@ -99,7 +99,7 @@
                         <tr><td>Low Humidity</td><td>$year.outHumidity.min</td><td>$year.outHumidity.mintime</td></tr>
                         <tr><td>High Barometer</td><td>$year.barometer.max</td><td>$year.barometer.maxtime</td></tr>
                         <tr><td>Low Barometer</td><td>$year.barometer.min</td><td>$year.barometer.mintime</td></tr>
-                        <tr><td>High Wind Speed</td><td>$year.wind.max $year.wind.gustdir</td><td>$year.wind.maxtime</td></tr>
+                        <tr><td>High Wind Speed</td><td>$year.wind.max <br>$year.wind.gustdir</td><td>$year.wind.maxtime</td></tr>
                         <tr><td>Average Wind</td><td>$year.wind.avg</td><td></td></tr>
                         <tr><td>RMS Wind</td><td>$year.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$year.wind.vecavg</td><td></td></tr>
@@ -148,6 +148,7 @@
                     <img src="yearwindvec.png" alt="Wind Vector" />
 		    <img src="yeartempchill.png" alt="heatchill" />
 		    <img src="yearbarometer.png" alt="barometer"/>
+		    <img src="yearouthumid.png" alt="Outside Humidity" />
 		    <img src="yearinside.png" alt="Inside" />
 		    <img src="yearinhumid.png" alt="Inside Humidity" />
                     #if $year.UV.has_data

@@ -102,7 +102,7 @@
                         <tr><td>Low Barometer</td><td>$month.barometer.min</td><td>$month.barometer.mintime</td></tr>
                         <tr><td>Rain Total</td><td>$month.rain.sum</td><td></td></tr>
                         <tr><td>High Rain Rate</td><td>$month.rainRate.max</td><td>$month.rainRate.maxtime</td></tr>
-                        <tr><td>High Wind Speed</td><td>$month.wind.max $month.wind.gustdir</td><td>$month.wind.maxtime</td></tr>
+                        <tr><td>High Wind Speed</td><td>$month.wind.max <br>$month.wind.gustdir</td><td>$month.wind.maxtime</td></tr>
                         <tr><td>Average Wind</td><td>$month.wind.avg</td><td></td></tr>
                         <tr><td>RMS Wind</td><td>$month.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$month.wind.vecavg</td><td></td></tr>
@@ -143,7 +143,7 @@
                         <tr><td>Low Barometer</td><td>$year.barometer.min</td><td>$year.barometer.mintime</td></tr>
                         <tr><td>Rain Total</td><td>$year.rain.sum</td><td></td></tr>
                         <tr><td>High Rain Rate</td><td>$year.rainRate.max</td><td>$year.rainRate.maxtime</td></tr>
-                        <tr><td>High Wind Speed</td><td>$year.wind.max $year.wind.gustdir</td><td>$year.wind.maxtime</td></tr>
+                        <tr><td>High Wind Speed</td><td>$year.wind.max <br>$year.wind.gustdir</td><td>$year.wind.maxtime</td></tr>
                         <tr><td>Average Wind</td><td>$year.wind.avg</td><td></td></tr>
                         <tr><td>RMS Wind</td><td>$year.wind.rms</td><td></td></tr>
                         <tr><td>Vector Average Speed</td><td>$year.wind.vecavg</td><td></td></tr>
@@ -183,6 +183,7 @@
                     <img src="monthwindvec.png" alt="Wind Vector" />
 		    <img src="monthtempchill.png" alt="heatchill" />
 		    <img src="monthbarometer.png" alt="barometer"/>
+		    <img src="monthouthumid.png" alt="Outside Humidity" />
 		    <img src="monthinside.png" alt="Inside" />
 		    <img src="monthinhumid.png" alt="Inside Humidity" />
                     #if $month.UV.has_data
