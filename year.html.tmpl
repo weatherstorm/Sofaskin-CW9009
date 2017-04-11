@@ -126,10 +126,51 @@
                 </div>
 
                 <div class="card" >
-                    <h1><i class="fa fa-cloud m-blau" ></i> Rain Year (1-$station.rain_year_str start)</h1>
+                    <h1><i class="fa fa-tint m-blau" ></i> Rain Year (1-$station.rain_year_str start)</h1>
                     <table class="tablespacer">
                         <tr><td>Rain Year Total</td><td>$rainyear.rain.sum</td><td></td></tr>
-                        <tr><td>High Rain Rate</td><td>$rainyear.rainRate.max</td><td>$rainyear.rainRate.maxtime</td></tr>
+                        <tr><td>High Rain Rate</td><td>$rainyear.rainRate.max</td><td>   $rainyear.rainRate.maxtime</td></tr>
+			<tr><td>$year($years_ago=1).dateTime.format("%Y") Rain Total</td><td>$year($years_ago=1).rain.sum</td><td></td></tr>
+                        <tr><td>$year($years_ago=1).dateTime.format("%Y") High Rain Rate</td><td>$year($years_ago=1).rainRate.max</td><td>   $year($years_ago=1).rainRate.maxtime</td></tr>
+                    </table>
+                </div>
+
+		<div class="card" >
+                    <h1><i class="fa fa-calendar-o m-rot" ></i> Last Calendar Year ($year($years_ago=1).dateTime.format("%Y"))</h1>
+                    <table class="tablespacer">
+                        <tr><td>High Temperature</td><td>$year($years_ago=1).outTemp.max</td><td>$year($years_ago=1).outTemp.maxtime</td></tr>
+                        <tr><td>Low Temperature</td><td>$year($years_ago=1).outTemp.min</td><td>$year($years_ago=1).outTemp.mintime</td></tr>
+                        <tr><td>High Heat Index</td><td>$year($years_ago=1).heatindex.max</td><td>$year($years_ago=1).heatindex.maxtime</td></tr>
+                        <tr><td>Low Wind Chill</td><td>$year($years_ago=1).windchill.min</td><td>$year($years_ago=1).windchill.mintime</td></tr>
+                        <tr><td>High Dewpoint</td><td>$year($years_ago=1).dewpoint.max</td><td>$year($years_ago=1).dewpoint.maxtime</td></tr>
+                        <tr><td>Low Dewpoint</td><td>$year($years_ago=1).dewpoint.min</td><td>$year($years_ago=1).dewpoint.mintime</td></tr>
+                        <tr><td>High Humidity</td><td>$year($years_ago=1).outHumidity.max</td><td>$year($years_ago=1).outHumidity.maxtime</td></tr>
+                        <tr><td>Low Humidity</td><td>$year($years_ago=1).outHumidity.min</td><td>$year($years_ago=1).outHumidity.mintime</td></tr>
+                        <tr><td>High Barometer</td><td>$year($years_ago=1).barometer.max</td><td>$year($years_ago=1).barometer.maxtime</td></tr>
+                        <tr><td>Low Barometer</td><td>$year($years_ago=1).barometer.min</td><td>$year($years_ago=1).barometer.mintime</td></tr>
+                        <tr><td>High Wind Speed</td><td>$year($years_ago=1).wind.max <br>$year($years_ago=1).wind.gustdir</td><td>$year($years_ago=1).wind.maxtime</td></tr>
+                        <tr><td>Average Wind</td><td>$year($years_ago=1).wind.avg</td><td></td></tr>
+                        <tr><td>RMS Wind</td><td>$year($years_ago=1).wind.rms</td><td></td></tr>
+                        <tr><td>Vector Average Speed</td><td>$year($years_ago=1).wind.vecavg</td><td></td></tr>
+                        <tr><td>Vector Average Direction</td><td>$year($years_ago=1).wind.vecdir</td><td></td></tr>
+                        <tr><td>High Inside Temperature</td><td>$year($years_ago=1).inTemp.max</td><td>$year($years_ago=1).inTemp.maxtime</td></tr>
+                        <tr><td>Low Inside Temperature</td><td>$year($years_ago=1).inTemp.min</td><td>$year($years_ago=1).inTemp.mintime</td></tr>
+                        #if $year($years_ago=1).extraTemp1.has_data
+                        <tr><td>High Pond Temp</td><td>$year($years_ago=1).extraTemp1.max</td><td>$year($years_ago=1).extraTemp1.maxtime</td></tr>
+                        <tr><td>Low Pond Temp</td><td>$year($years_ago=1).extraTemp1.min</td><td>$year($years_ago=1).extraTemp1.mintime</td></tr>
+                        #end if
+                        #if $year($years_ago=1).UV.has_data
+                        <tr><td>High UV</td><td>$year($years_ago=1).UV.max</td><td>$year($years_ago=1).UV.maxtime</td></tr>
+                        <tr><td>Low UV</td><td>$year($years_ago=1).UV.min</td><td>$year($years_ago=1).UV.mintime</td></tr>
+                        #end if
+                        #if $year($years_ago=1).ET.has_data and $year($years_ago=1).ET.sum.raw >0.0
+                        <tr><td>High ET</td><td>$year($years_ago=1).ET.max</td><td>$year($years_ago=1).ET.maxtime</td></tr>
+                        <tr><td>Low ET</td><td>$year($years_ago=1).ET.min</td><td>$year($years_ago=1).ET.mintime</td></tr>
+                        #end if
+                        #if $year($years_ago=1).radiation.has_data
+                        <tr><td>High Radiation</td><td>$year($years_ago=1).radiation.max</td><td>$year($years_ago=1).radiation.maxtime</td></tr>
+                        <tr><td>Low Radiation</td><td>$year($years_ago=1).radiation.min</td><td>$year($years_ago=1).radiation.mintime</td></tr>
+                        #end if
                     </table>
                 </div>
 
@@ -147,10 +188,9 @@
                     <img src="yearwinddir.png" alt="Hi Wind" /> 
                     <img src="yearwindvec.png" alt="Wind Vector" />
 		    <img src="yeartempchill.png" alt="heatchill" />
-		    <img src="yearouthumid.png" alt="Outside Humidity" />
 		    <img src="yearbarometer.png" alt="barometer"/>
 		    <img src="yearinside.png" alt="Inside" />
-		    <img src="yearinhumid.png" alt="Inside Humidity" />
+		    <img src="yearinhumid.png" alt="Inside/Outside Humidity" />
                     #if $year.UV.has_data
                     <img src="yearuv.png" alt="UV Index" />
                     #end if
