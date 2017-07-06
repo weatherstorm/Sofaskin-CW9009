@@ -225,17 +225,21 @@
 				#end if
 			#end if
 		    #else
-			#set $yrNew = $yr - 1
+			#set $yrNew = ($yr - 1)
 			#if $yrNew % 100 == 0
 				#if $yrNew % 400 == 0
-					#set $n = 366
+					#if $day.dateTime.format("%d-%b") < '01-Mar'
+						#set $n = 366
+					#else
+						#set $n = 365
+					#end if
 				#end if
 			#else
 		    		#set $n = 365
 			#end if
 		    #end if
 		    
-		    <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)")</h1>
+		    <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
 		   
                     <table class="tablespacer">
                         <tr><td>High Temperature</td><td>$days_ago($days_ago=$n).outTemp.max</td><td>$days_ago($days_ago=$n).outTemp.maxtime</td></tr>
