@@ -2,7 +2,7 @@
 <html class="no-js">
     <head itemscope itemtype="http://schema.org/Website">
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Refresh" content="180">
 	#if $Extras.has_key('cwop')
         <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
@@ -71,7 +71,7 @@
             <div class="container-fix" >
                 <div class="h-left" >
                 <h1><i class="fa fa-cloud" ></i> $station.location </h1>
-                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.location" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
                 <h2>Current Weather Conditions</h2>
                 <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
 		<p id="freshweather" class="m-orange"></p>
@@ -332,8 +332,8 @@
 		<!-- $Extras.cameratitle -->
 		<!-- $Extras.cameratitle2 -->
 		<div class="card" >
-                    <h1><i class="fa fa-camera" color=#999></i> Local Cameras</h1>
-			<center>
+                    <h1><i class="fa fa-camera" style="color:#999"></i> Local Cameras</h1>
+			<div style="text-align:center">
 			<img src="$Extras.camera" alt="camera" id="camera" />
 			<br>
 				#if $Extras.has_key('camera2')
@@ -353,7 +353,7 @@
                             	el.onclick = changeCamera;
                         	</script>
 				#end if
-			</center>	
+			</div>	
 		</div>
                 #end if
 
@@ -456,7 +456,7 @@
         
 	<footer>
             <div class="container-fix">
-	    <center>
+	      <div style="text-align:center">
 		#if $Extras.has_key('you')
             	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
             	#end if
@@ -468,7 +468,7 @@
             	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
             	&sdot; 
 		Icons from <i class="fa fa-font-awesome" aria-hidden="true"></i><a href="http://fontawesome.io" target="_blank"> Font Awesome</a>
-	    </center>
+	      </div>
 	    </div>
         </footer>
 

@@ -2,7 +2,7 @@
 <html lang="en">
   <head itemscope itemtype="http://schema.org/Website">
     <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Refresh" Content="180">
 	#if $Extras.has_key('cwop')
         <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11" />
 	#if $Extras.has_key('web_url')
-	<link rel="canonical" href="$Extras.web_url/summary.html" itemprop="url"/>
+	<link href="$Extras.web_url/summary.html" itemprop="url"/>
 	#end if
         
 	<title itemprop="name">$station.location Weather Summaries</title>
@@ -47,7 +47,7 @@
             <div class="container-fix" >
                 <div class="h-left" >
                 <h1><i class="fa fa-cloud" ></i> $station.location </h1>
-                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.location" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
                 <h2>Summaries and Records</h2>
                 <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
 		<p id="freshweather" class="m-orange"></p>
@@ -90,33 +90,33 @@
 		<div class="card" >
                     <h1><i class="fa fa-bolt m-orange" ></i> All Time Records (Since Nov. 2007)</h1>
                     <table class="tablespacer">
-			<tr><td colspan="3">Outside Temperatures</td></tr>
-			<tr><td>Max</td><td>$alltime.outTemp.max</td><td>$alltime.outTemp.maxtime</td></tr>
-			<tr><td>Min</td><td>$alltime.outTemp.min</td><td>$alltime.outTemp.mintime</td></tr>
+			<tr><td colspan="3"><b>Outside Temperatures</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.outTemp.max</td><td>$alltime.outTemp.maxtime</td></tr>
+			<tr><td>Lowest</td><td>$alltime.outTemp.min</td><td>$alltime.outTemp.mintime</td></tr>
 		    	<tr><td>Min Max</td><td>$alltime.outTemp.minmax</td><td>$alltime.outTemp.minmaxtime</td></tr>
 			<tr><td>Max Min</td><td>$alltime.outTemp.maxmin</td><td>$alltime.outTemp.maxmintime</td></tr>
-			<tr><td colspan="3"><br>Dewpoint</td></tr>
-			<tr><td>Max</td><td>$alltime.dewpoint.max</td><td>$alltime.dewpoint.maxtime</td></tr>
-			<tr><td>Min</td><td>$alltime.dewpoint.min</td><td>$alltime.dewpoint.mintime</td></tr>
-			<tr><td colspan="3"><br>Precipitation</td></tr>
-			<tr><td>Max</td><td>$alltime.rain.maxsum</td><td>$alltime.rain.maxsumtime.format("%m/%d/%Y")</td></tr>
-			<tr><td>Max Rain Rate</td><td>$alltime.rainRate.max</td><td>$alltime.rainRate.maxtime</td></tr>
-			<tr><td colspan="3"><br>Heat Index</td></tr>
-			<tr><td>Max</td><td>$alltime.heatindex.max</td><td>$alltime.heatindex.maxtime</td></tr>
-			<tr><td colspan="3"><br>Barometer</td></tr>
-			<tr><td>Max</td><td>$alltime.barometer.max</td><td>$alltime.barometer.maxtime</td></tr>
-			<tr><td>Min</td><td>$alltime.barometer.min</td><td>$alltime.barometer.mintime</td></tr>
-			<tr><td colspan="3"><br>Wind</td></tr>
-			<tr><td>Max Sustained</td><td>$alltime.windSpeed.max</td><td>$alltime.windSpeed.maxtime</td></tr>
-			<tr><td>Max Gust</td><td>$alltime.windGust.max</td><td>$alltime.windGust.maxtime</td></tr>
-			<tr><td colspan="3"><br>Wind Chill</td></tr>
-			<tr><td>Min</td><td>$alltime.windchill.min</td><td>$alltime.windchill.mintime</td></tr>
-            		<tr><td colspan="3"><br>House Temperatures</td></tr>
-			<tr><td>Max</td><td>$alltime.inTemp.max</td><td>$alltime.inTemp.maxtime</td></tr>
-			<tr><td>Min</td><td>$alltime.inTemp.min</td><td>$alltime.inTemp.mintime</td></tr>
-			<tr><td colspan="3"><br>House Humidity</td></tr>
-			<tr><td>Max</td><td>$alltime.inHumidity.max</td><td>$alltime.inHumidity.maxtime</td></tr>
-			<tr><td>Min</td><td>$alltime.inHumidity.min</td><td>$alltime.inHumidity.mintime</td></tr>
+			<tr><td colspan="3"><br><b>Dewpoint</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.dewpoint.max</td><td>$alltime.dewpoint.maxtime</td></tr>
+			<tr><td>Lowest</td><td>$alltime.dewpoint.min</td><td>$alltime.dewpoint.mintime</td></tr>
+			<tr><td colspan="3"><br><b>Precipitation</b></td></tr>
+			<tr><td>Highest Daily Rainfall</td><td>$alltime.rain.maxsum</td><td>$alltime.rain.maxsumtime.format("%m/%d/%Y")</td></tr>
+			<tr><td>Highest Rain Rate</td><td>$alltime.rainRate.max</td><td>$alltime.rainRate.maxtime</td></tr>
+			<tr><td colspan="3"><br><b>Heat Index</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.heatindex.max</td><td>$alltime.heatindex.maxtime</td></tr>
+			<tr><td colspan="3"><br><b>Barometer</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.barometer.max</td><td>$alltime.barometer.maxtime</td></tr>
+			<tr><td>Lowest</td><td>$alltime.barometer.min</td><td>$alltime.barometer.mintime</td></tr>
+			<tr><td colspan="3"><br><b>Wind</b></td></tr>
+			<tr><td>Highest Sustained</td><td>$alltime.windSpeed.max</td><td>$alltime.windSpeed.maxtime</td></tr>
+			<tr><td>Highest Gust</td><td>$alltime.windGust.max</td><td>$alltime.windGust.maxtime</td></tr>
+			<tr><td colspan="3"><br><b>Wind Chill</b></td></tr>
+			<tr><td>Lowest</td><td>$alltime.windchill.min</td><td>$alltime.windchill.mintime</td></tr>
+            		<tr><td colspan="3"><br><b>House Temperatures</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.inTemp.max</td><td>$alltime.inTemp.maxtime</td></tr>
+			<tr><td>Lowest</td><td>$alltime.inTemp.min</td><td>$alltime.inTemp.mintime</td></tr>
+			<tr><td colspan="3"><br><b>House Humidity</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.inHumidity.max</td><td>$alltime.inHumidity.maxtime</td></tr>
+			<tr><td>Lowest</td><td>$alltime.inHumidity.min</td><td>$alltime.inHumidity.mintime</td></tr>
                     </table>
                 </div>
 
@@ -170,7 +170,7 @@
         
         <footer>
             <div class="container-fix">
-	    <center>
+	      <div style="text-align:center">
 		#if $Extras.has_key('you')
             	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
             	#end if
@@ -182,7 +182,7 @@
             	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
             	&sdot; 
 		Icons from <i class="fa fa-font-awesome" aria-hidden="true"></i><a href="http://fontawesome.io" target="_blank"> Font Awesome</a>
-	    </center>
+	      </div>
 	    </div>
         </footer>
 
