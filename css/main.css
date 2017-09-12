@@ -893,7 +893,7 @@ ul.topnav.responsive {
   position: relative;
   }
   ul.topnav.responsive li.icon {
-    position: left;
+    left: 20px;
     right: 0;
     top: 0;
   }
@@ -913,8 +913,6 @@ ul.topnav.responsive {
     display: block;
     color: #fff; 
   }
- 
- ///////////////////////////////
 }
 
 
@@ -949,7 +947,7 @@ ul.topnav.responsive {
  */
 .visuallyhidden {
   border: 0;
-  clip: rect(0 0 0 0);
+  clip: rect(0, 0, 0, 0);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -1065,6 +1063,7 @@ ul.topnav.responsive {
 
   h2,
   h3 {
-    page-break-after: avoid; } }
+    page-break-after: avoid; } 
+}
 
-/*# sourceMappingURL=main.css.map */
+/* # sourceMappingURL=main.css.map */
