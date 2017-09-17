@@ -288,7 +288,8 @@ class MyXSearch(SearchList):
 
             htmlText += htmlLine
 
-        htmlText += (' ' * 8) + "</tr>\n"
+	#extra </tr> that's not needed
+        #htmlText += (' ' * 8) + "</tr>\n"
         htmlText += (' ' * 4) + "</tbody>\n"
         htmlText += "</table>\n"
 
@@ -305,9 +306,14 @@ class MyXSearch(SearchList):
         if value is not None:
             cellText = "<td"
 
+	    #changed background color code to HTML5
             for c in bgColours:
                 if (value >= int(c[0])) and (value <= int(c[1])):
-                    cellText += " bgcolor = \"%s\"" % c[2]
+                    cellText += " style=\"background-color: %s\"" % c[2]
+
+            #for c in bgColours:
+            #    if (value >= int(c[0])) and (value <= int(c[1])):
+            #        cellText += " bgcolor = \"%s\"" % c[2]
 
             formatted_value = format_string % value
             cellText += "> %s </td>" % formatted_value
