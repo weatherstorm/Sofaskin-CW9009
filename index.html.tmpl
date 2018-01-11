@@ -59,7 +59,8 @@
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/main.css">
+
+	<link rel="stylesheet" href="css/main.css">
         
         <!-- Skripte -->
         <script src="js/modernizr-2.6.2.min.js"></script>
@@ -75,7 +76,7 @@
                 <h2>Current Weather Conditions</h2>
                 <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
 		<p id="freshweather" class="m-orange"></p>
-		<script type="text/javascript">
+		<script>
                       window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
                 </script>
                 </div>
@@ -329,31 +330,57 @@
                 #end if
 
 		#if $Extras.has_key('camera')
-		<!-- $Extras.cameratitle -->
-		<!-- $Extras.cameratitle2 -->
+		<!--camera section-->
 		<div class="card" >
-                    <h1><i class="fa fa-camera" style="color:#999"></i> Local Cameras</h1>
-			<div style="text-align:center">
-			<img src="$Extras.camera" alt="camera" id="camera" />
-			<br>
-				#if $Extras.has_key('camera2')
-				<a id="btn2" class="cpointer" >$Extras.cameratitle | $Extras.cameratitle2</a>
-                       		<script>    
-                            	function changeCamera() {
-                                	if(document.getElementById("camera").src == "$Extras.camera") {
-                                	    document.getElementById("camera").src = "$Extras.camera2";
-					  
-                                	} else {
-                                	    document.getElementById("camera").src = "$Extras.camera";
-					    
-                               		}
-                            	}
-                            
-                            	var el = document.getElementById('btn2');
-                            	el.onclick = changeCamera;
-                        	</script>
-				#end if
-			</div>	
+                    <h1><i class="fa fa-camera" style="color:#999"></i> Local Cameras</h1>	
+			<div class="s-center s-content s-display-container" style="max-width:800px">
+			#set $b=0
+			#for $i in $Extras.camera
+                          <div class="mySlides"><b>$Extras.cameratitle[$b]</b><br>
+			  <img src="$i" alt="camera $b" style="width:100%">
+                          </div>
+                          #set $b=$b+1 
+			#end for
+			  
+  			<div class="s-center s-container s-section s-large s-text-white s-display-bottommiddle" style="width:100%">
+    			    <div class="s-left" onclick="plusDivs(-1)">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-left s-hover-text-gray"></i></div>
+			    <div class="s-right" onclick="plusDivs(1)"><i class="fa fa-chevron-right s-hover-text-gray"></i>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			    #set $a=1
+			    #for $j in $Extras.camera
+			     <span class="s-badge demo s-border s-transparent s-hover-white" onclick="currentDiv($a)"></span>
+			     #set $a=$a+1 
+			    #end for
+			    </div>
+			</div>
+
+			<script>
+			var slideIndex = 1;
+			showDivs(slideIndex);
+
+			function plusDivs(n) {
+			  showDivs(slideIndex += n);
+			}
+
+			function currentDiv(n) {
+			  showDivs(slideIndex = n);
+			}
+
+			function showDivs(n) {
+			  var i;
+			  var x = document.getElementsByClassName("mySlides");
+			  var dots = document.getElementsByClassName("demo");
+			  if (n > x.length) {slideIndex = 1}    
+			  if (n < 1) {slideIndex = x.length}
+			  for (i = 0; i < x.length; i++) {
+			     x[i].style.display = "none";  
+			  }
+			  for (i = 0; i < dots.length; i++) {
+			     dots[i].className = dots[i].className.replace(" s-white", "");
+			  }
+			  x[slideIndex-1].style.display = "block";  
+			  dots[slideIndex-1].className += " s-white";
+			}
+			</script>
 		</div>
                 #end if
 
