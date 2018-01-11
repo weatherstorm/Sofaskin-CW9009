@@ -758,6 +758,85 @@ table.tablespacer tr:not(:last-child) {
 .m-blau {
   color: #0ea5e6; }
 
+/*White*/
+.m-white{
+  color: #ffffff;
+  }
+
+
+/* ==========================================================================
+   Web Camera slide show CSS
+   ========================================================================== */
+
+.mySlides {
+    display: none; }
+
+.s-badge {
+    background-color: #000000;
+    color: #ffffff;
+    display: inline-block;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center; 
+    border-radius: 50%;
+    height:13px;
+    width:13px;
+    padding:0;
+    cursor:pointer; }
+
+.s-border {
+    border: 1px solid #ccc !important; }
+
+.s-transparent {
+    background-color: transparent !important; }
+
+.s-display-bottommiddle {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%,0%);
+    -ms-transform: translate(-50%,0%); }
+
+.s-large {
+    font-size: 18px !important; }
+
+.s-section {
+    margin-top: 16px !important;
+    margin-bottom: 16px !important; }
+
+.s-container {
+    padding: 0.01em 16px; }
+
+.s-center {
+    text-align: center !important; }
+
+.s-right {
+    float: right !important;
+    cursor:pointer; }
+
+.s-left {
+    float: left !important;
+    cursor:pointer; }
+
+.s-content {
+    max-width: 980px;
+    margin:auto; }
+
+.s-display-container {
+    position: relative; }
+
+.s-white, .s-hover-white:hover {
+     color: #000000 !important;
+     background-color: #ffffff !important; }
+
+.s-text-white, .s-hover-text-white:hover {
+    color: #ffffff !important; }
+
+.s-text-gray, .s-hover-text-gray:hover {
+    color: #d8d8d8 !important; }
+
+/* ==========================================================================*/
+
 /* Hide the list item that contains the link that should open and close the topnav on small screens */
 ul.topnav li.icon {
   display: none;}
