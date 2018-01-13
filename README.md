@@ -1,5 +1,5 @@
 # Sofaskin-CW9009
-CW9009 Meridian code modifications to Sofaskin web page for Weewx originally developed by Sven at http://neoground.com/projects/weewx. Please see the readme for dependency requirements to use this skin. 
+CW9009 Meridian code modifications to Sofaskin web page for Weewx originally developed by Sven at http://neoground.com/projects/weewx. Please see the readme for dependency requirements to use this skin. An Italian version of these directions are available at http://micae.it/2017/12/28/sofaskin-italiano/. 
 
 Sofaskin V1.1 is developed by Sven at Neoground: http://neoground.com/projects/weewx. This is a great template but I made some modifications to suit my needs. I also added some code from another template by <a href="http://www.dajda.net">dajda.net</a> to make the history and NOAA Tables. There is also code additions from <a href=http://www.torkel.se/weather/index.html> Björn Torkelsson</a>. A list of the changes are listed below along with instructions to setup the history tables. 
 
@@ -37,7 +37,60 @@ Example:<br>
 [[StandardReport]]
 skin = Sofaskin 
 
-Lastly, you need to put the historygenerator.py python script, in the /usr/share/weewx/user directory. The skin.conf already has the code to use the tables so you don’t need to mess with that unless you want to change the colors. You should update the variables in the skin.conf file to match your station information. More information on historygenerator.py and how to use the tables is available through the links below.
+You also need to put the historygenerator.py python script, in the /usr/share/weewx/user directory. The skin.conf already has the code to use the tables so you don’t need to mess with that unless you want to change the colors. More information on historygenerator.py and how to use the tables is available through the links below.
 https://github.com/brewster76/fuzzy-archer/blob/master/INSTALL
+
+IMPORTANT:
+You should update the variables in the EXTRA section of the skin.conf file to match your station information. Example section below:
+
+[Extras]
+    # Template Extras
+ 
+    # Website URL
+    # web_url = 
+
+    # Current radar image
+    #radar_img = 
+    # Current radar animation (starts on radar_img hover)
+    #radar_gif = 
+    # Hyperlink for radar
+    #radar_url = 
+
+    # Lightning map and hyperlink
+    #lightning_map = http://images.lightningmaps.org/blitzortung/america/index.php?map=usa&period=0.25
+    #lightning_url = http://www.lightningmaps.org/realtime 
+
+    # URL for another radar (for example full Europe, Frankfurt center)
+    #radar_url_alt = 
+    #radar_url_alt_text = 
+
+    # You. Only shows up in footer
+    #you = "Your Name"
+    #emailname = "Email"
+    #email = ""
+    
+    # Camera link
+    # camera and cameratitle are arrays of the camera links and camera names. 
+    #cameratitle = "Linder - McMillan", "Ten Mile - McMillan", "Chinden - Linder", "Chinden - Long Lake", "Chinden - Ten Mile"
+    #camera = http://www.achdidaho.org/ATIS/CCTV/CCTV_677.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_664.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_583.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_662.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_667.jpg  
+    
+    # Google Analytics ID
+    #googleAnalyticsId = 
+
+    #CWOP
+    #cwop = 
+    #cwop_url = 
+
+    #mesowest
+    #mwest = 
+    #mwest_url = 
+
+    #weather underground
+    #wunderground = 
+    #wu_url = 
+
+    #CoCoRaHS
+    #crahs = 
+    #crahs_url = 
 
 If you have problems, you can email me at josh@cw9009.x10host.com  
