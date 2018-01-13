@@ -71,8 +71,8 @@ You should update the variables in the EXTRA section of the skin.conf file to ma
     
     # Camera link
     # camera and cameratitle are arrays of the camera links and camera names. 
-    #cameratitle = "Linder - McMillan", "Ten Mile - McMillan", "Chinden - Linder", "Chinden - Long Lake", "Chinden - Ten Mile"
-    #camera = http://www.achdidaho.org/ATIS/CCTV/CCTV_677.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_664.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_583.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_662.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_667.jpg  
+    #cameratitle = "Linder - McMillan", "Ten Mile - McMillan"
+    #camera = http://www.achdidaho.org/ATIS/CCTV/CCTV_677.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_664.jpg
     
     # Google Analytics ID
     #googleAnalyticsId = 
