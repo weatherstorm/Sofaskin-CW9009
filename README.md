@@ -12,6 +12,7 @@ Sofaskin V1.1 is developed by Sven at Neoground: http://neoground.com/projects/w
 - Added code from the dajda.net to produce history tables.The historygenerator.py script must be added to WeeWx in order for the - tables to work.
 - Created a PHP page template to view the NOAA climate text files.
 - Add warning if the weather data is old (more than 30 min old). (Written by Björn Torkelsson) 
+- Replaced javascript code in the web camera section of index.html with CSS slideshow to allow for more than two web cameras
 
 <b>Responsive Menu:</b><br>
 I added a better responsive menu system that would use less vertical space on smaller screen sizes.
@@ -40,7 +41,7 @@ skin = Sofaskin
 You also need to put the historygenerator.py python script, in the /usr/share/weewx/user directory. The skin.conf already has the code to use the tables so you don’t need to mess with that unless you want to change the colors. More information on historygenerator.py and how to use the tables is available through the links below.
 https://github.com/brewster76/fuzzy-archer/blob/master/INSTALL
 
-IMPORTANT:
+<b>IMPORTANT:</b>
 You should update the variables in the EXTRA section of the skin.conf file to match your station information. Example section below:
 
 [Extras]
