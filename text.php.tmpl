@@ -13,7 +13,7 @@
       }
       
       //Get labels for meta and page titles
-      \$labels = split("[-.]", \$report);
+      \$labels = preg_split("/[\s-.]/", \$report);
       \$count = count(\$labels);
       
       if (\$count == 3){
