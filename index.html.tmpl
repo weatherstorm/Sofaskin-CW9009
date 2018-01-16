@@ -1,528 +1,854 @@
 <!DOCTYPE html>
 <html class="no-js">
-    <head itemscope itemtype="http://schema.org/Website">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="Refresh" content="180">
-	#if $Extras.has_key('cwop')
-        <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
-        #else
-        <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
-	#end if
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="profile" href="http://gmpg.org/xfn/11" />
-	#if $Extras.has_key('web_url')
-	<link rel="canonical" href="$Extras.web_url"/>
-	#end if
-        
-	<title>$station.location Current Weather Conditions</title>
-        
-        <!-- Open Graph -->
-	#if $Extras.has_key('cwop')
-        <meta property="og:site_name" content="$station.location Weather Station ($Extras.cwop)" />
-	<meta property="og:title" content="$station.location ($Extras.cwop) Current Weather Conditions"/>
-	#else
-	<meta property="og:site_name" content="$station.location Weather Station" />
-	<meta property="og:title" content="$station.location Current Weather Conditions"/>
-	#end if
-        #if $Extras.has_key('web_url')
-	<meta property="og:image" content="$Extras.web_url/daytempdew.png"/>
-	<meta property="og:url" content="$Extras.web_url"/>
-	#end if
-	#if $Extras.has_key('cwop')
-        <meta property="og:description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
-	#else
-	<meta property="og:description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
-	#end if
-	<meta property="og:type" content="website" />
-
-	<!--SM Markups -->
-	#if $Extras.has_key('cwop')
-	<meta itemprop="name" content="$station.location ($Extras.cwop) Current Weather Conditions"/>
-	#else
-	<meta itemprop="name" content="$station.location Current Weather Conditions"/>
-	#end if
-        #if $Extras.has_key('web_url')
-	<meta itemprop="image" content="$Extras.web_url/daytempdew.png"/>
-	<meta itemprop="url" content="$Extras.web_url"/>
-	#end if
-	#if $Extras.has_key('cwop')
-        <meta itemprop="description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
-	#else
-        <meta itemprop="description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
-	#end if
-
-        <!-- Icons -->
-        <link rel="icon" href="favicon.ico" type="image/png">
-	<link rel="apple-touch-icon" href="touch-icon.png"/>
-        
-        <!-- Styles -->
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<link rel="stylesheet" href="css/main.css">
-        
-        <!-- Skripte -->
-        <script src="js/modernizr-2.6.2.min.js"></script>
-	<script src="js/checkdiff.js"></script>
-        
-    </head>
-    <body>
-        <header>
-            <div class="container-fix" >
-                <div class="h-left" >
-                <h1><i class="fa fa-cloud" ></i> $station.location </h1>
-                <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
-                <h2>Current Weather Conditions</h2>
-                <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
-		<p id="freshweather" class="m-orange"></p>
-		<script>
-                      window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
-                </script>
-                </div>
-                
-                <div class="h-right" >
-                    <table>
-                        <tr><td><b>Station:</b></td><td>$station.hardware</td></tr>
-                        <tr><td><b>Software:</b></td><td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td></tr>
-                        <tr><td><b>Weewx uptime:</b></td><td>$station.uptime</td></tr>
-                        <tr><td><b>Server uptime:</b></td><td>$station.os_uptime</td></tr>
-			#if $Extras.has_key('cwop') and $Extras.has_key('crahs')
-			<tr><td><b>Station IDs:</b></td><td><a href="$Extras.cwop_url" target="_blank">$Extras.cwop</a> | <a href="$Extras.crahs_url" target="_blank">$Extras.crahs</a></td></tr>
-			#end if
-		    </table>
-                </div>
-
-                <nav>
-                    <ul class="topnav" id="myTopnav">
-			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars" ></i></a></li>
-                        <li class="active" ><a href="/" >Current</a></li>
-                        <li><a href="week.html" >Week</a></li>
-                        <li><a href="month.html" >Month</a></li>
-                        <li><a href="year.html" >Year</a></li>
-			<li><a href="summary.html" >Summaries</a></li>
-			<li><a href="station.html" >Station</a></li>
-			<li><a href="RSS/weewx_rss.xml" ><i class="fa fa-rss" ></i></a></li>
-                    </ul>
-                </nav>
-            </div>
-	</header>
-        
-        <div class="main" >
-        <div class="container" >
-            
-            <div class="left" >
-                
-                <div class="card" >
-		    #if $current.rainRate.raw == 0.0
-                    <h1><i class="fa fa-sun-o m-orange" ></i> Current Conditions</h1>
-		    #else if $current.rainRate.raw >= 0.01
-		    <h1><i class="fa fa-umbrella m-blau" ></i> Current Conditions</h1>
-		    #else
-		    <h1><i class="fa fa-sun-o m-orange" ></i> Current Conditions</h1>
-		    #end if
-                    <table class="tablespacer">
-                        <tr><td>Outside Temperature</td><td>$current.outTemp</td></tr>
-                        <tr><td>Wind Chill</td><td>$current.windchill</td></tr>
-                        <tr><td>Heat Index</td><td>$current.heatindex</td></tr>
-                        <tr><td>Dewpoint</td><td>$current.dewpoint</td></tr>
-                        <tr><td>Humidity</td><td>$current.outHumidity</td></tr>
-                        <tr><td>Barometer</td><td>$current.barometer</td></tr>
-                        <tr><td>Barometer Trend ($trend.time_delta.hour.format("%.0f"))</td><td>$trend.barometer</td></tr>
-			#if $current.windSpeed.raw == 0.0
-                        <tr><td>Wind</td><td>$current.windSpeed </td></tr>
-			#else
-			<tr><td>Wind</td><td>$current.windSpeed $current.windDir.ordinal_compass ($current.windDir)</td></tr>
-			#end if
-                        #if $current.windGust.raw == 0.0
-			<tr><td>Wind Gust</td><td>$current.windGust </td></tr>
-			#else
-			<tr><td>Wind Gust</td><td>$current.windGust $current.windGustDir.ordinal_compass ($current.windGustDir)</td></tr>
-			#end if
-			<tr><td>Rain Rate</td><td>$current.rainRate</td></tr>
-                        <tr><td>Inside Temperature</td><td>$current.inTemp</td></tr>
-			<tr><td>Inside Humidity</td><td>$current.inHumidity</td></tr>
-                        #if $day.extraTemp1.has_data
-                        <tr><td>Pond Temperature</td><td>$current.extraTemp1</td></tr>
-                        #end if
-                        #if $day.UV.has_data
-                        <tr><td>UV</td><td>$current.UV</td></tr>
-                        #end if
-                        #if $day.ET.has_data and $day.ET.sum.raw > 0.0
-                        <tr><td>ET</td><td>$current.ET</td></tr>
-                        #end if
-                        #if $day.radiation.has_data
-                        <tr><td>Solar Radiation</td><td>$current.radiation</td></tr>
-                        #end if
-                    </table>
-                </div>
-
-                <div class="card" >
-                    <h1><i class="fa fa-moon-o m-grau" ></i> Since Midnight</h1>
-                    <table class="tablespacer">
-                        <tr><td>High Temperature</td><td>$day.outTemp.max</td><td>$day.outTemp.maxtime</td></tr>
-                        <tr><td>Low Temperature</td><td>$day.outTemp.min</td><td>$day.outTemp.mintime</td></tr>
-                        <tr><td>High Heat Index</td><td>$day.heatindex.max</td><td>$day.heatindex.maxtime</td></tr>
-                        <tr><td>Low Wind Chill</td><td>$day.windchill.min</td><td>$day.windchill.mintime</td></tr>
-                        <tr><td>High Dewpoint</td><td>$day.dewpoint.max</td><td>$day.dewpoint.maxtime</td></tr>
-                        <tr><td>Low Dewpoint</td><td>$day.dewpoint.min</td><td>$day.dewpoint.mintime</td></tr>
-                        <tr><td>High Humidity</td><td>$day.outHumidity.max</td><td>$day.outHumidity.maxtime</td></tr>
-                        <tr><td>Low Humidity</td><td>$day.outHumidity.min</td><td>$day.outHumidity.mintime</td></tr>
-                        <tr><td>High Barometer</td><td>$day.barometer.max</td><td>$day.barometer.maxtime</td></tr>
-                        <tr><td>Low Barometer</td><td>$day.barometer.min</td><td>$day.barometer.mintime</td></tr>
-                        <tr><td>Today's Rain</td><td>$day.rain.sum</td><td></td></tr>
-                        <tr><td>High Rain Rate</td><td>$day.rainRate.max</td><td>$day.rainRate.maxtime</td></tr>
-                        <tr><td>High Wind</td><td>$day.wind.max $day.wind.gustdir</td><td>$day.wind.maxtime</td></tr>
-                        <tr><td>Average Wind</td><td>$day.wind.avg</td><td></td></tr>
-                        <tr><td>RMS Wind</td><td>$day.wind.rms</td><td></td></tr>
-                        <tr><td>Vector Average Speed</td><td>$day.wind.vecavg</td><td></td></tr>
-                        <tr><td>Vector Average Direction</td><td>$day.wind.vecdir</td><td></td></tr>
-                        <tr><td>High Inside Temperature</td><td>$day.inTemp.max</td><td>$day.inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$day.inTemp.min</td><td>$day.inTemp.mintime</td></tr>
-                        <tr><td>High Inside Humidity</td><td>$day.inHumidity.max</td><td>$day.inHumidity.maxtime</td></tr>
-                        <tr><td>Low Inside Humidity</td><td>$day.inHumidity.min</td><td>$day.inHumidity.mintime</td></tr>
-			#if $day.extraTemp1.has_data
-                        <tr><td>High Pond Temp</td><td>$day.extraTemp1.max</td><td>$day.extraTemp1.maxtime</td></tr>
-                        <tr><td>Low Pond Temp</td><td>$day.extraTemp1.min</td><td>$day.extraTemp1.mintime</td></tr>
-                        #end if
-                        #if $day.UV.has_data
-                        <tr><td>High UV</td><td>$day.UV.max</td><td>$day.UV.maxtime</td></tr>
-                        <tr><td>Low UV</td><td>$day.UV.min</td><td>$day.UV.mintime</td></tr>
-                        #end if
-                        #if $day.ET.has_data and $day.ET.sum.raw >0.0
-                        <tr><td>High ET</td><td>$day.ET.max</td><td>$day.ET.maxtime</td></tr>
-                        <tr><td>Low ET</td><td>$day.ET.min</td><td>$day.ET.mintime</td></tr>
-                        #end if
-                        #if $day.radiation.has_data
-                        <tr><td>High Radiation</td><td>$day.radiation.max</td><td>$day.radiation.maxtime</td></tr>
-                        <tr><td>Low Radiation</td><td>$day.radiation.min</td><td>$day.radiation.mintime</td></tr>
-                        #end if
-                    </table>
-                </div>
-	
-		<div class="card" >
-		    <!--Leap Year Code --!>
-		    #set $yr = int($day.dateTime.format("%Y"))%4
-		    #if $yr == 0
-			#if $yr % 100 == 0
-				#if $yr % 400 == 0
-		    		    #if $day.dateTime.format("%d-%b") == '29-Feb'
-				    	#set $n = 1461
-				    #else if $day.dateTime.format("%d-%b") >= '01-Mar'
-			            	#set $n = 366
-				    #else
-				    	#set $n = 365
-				    #end if
-				#else
-				    #set $n = 365
-				#end if
-			#else
-				#if $day.dateTime.format("%d-%b") == '29-Feb'
-					#set $n = 1461
-				#else if $day.dateTime.format("%d-%b") >= '01-Mar'
-			            	#set $n = 366
-				#else
-				    	#set $n = 365
-				#end if
-			#end if
-		    #else
-			#set $yrNew = ($yr - 1)
-			#if $yrNew % 100 == 0
-				#if $yrNew % 400 == 0
-					#if $day.dateTime.format("%d-%b") < '01-Mar'
-						#set $n = 366
-					#else
-						#set $n = 365
-					#end if
-				#end if
-			#else
-		    		#set $n = 365
-			#end if
-		    #end if
-		    
-		    <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
-		   
-                    <table class="tablespacer">
-                        <tr><td>High Temperature</td><td>$days_ago($days_ago=$n).outTemp.max</td><td>$days_ago($days_ago=$n).outTemp.maxtime</td></tr>
-                        <tr><td>Low Temperature</td><td>$days_ago($days_ago=$n).outTemp.min</td><td>$days_ago($days_ago=$n).outTemp.mintime</td></tr>
-                        <tr><td>High Dewpoint</td><td>$days_ago($days_ago=$n).dewpoint.max</td><td>$days_ago($days_ago=$n).dewpoint.maxtime</td></tr>
-                        <tr><td>Low Dewpoint</td><td>$days_ago($days_ago=$n).dewpoint.min</td><td>$days_ago($days_ago=$n).dewpoint.mintime</td></tr>
-                        <tr><td>High Humidity</td><td>$days_ago($days_ago=$n).outHumidity.max</td><td>$days_ago($days_ago=$n).outHumidity.maxtime</td></tr>
-                        <tr><td>Low Humidity</td><td>$days_ago($days_ago=$n).outHumidity.min</td><td>$days_ago($days_ago=$n).outHumidity.mintime</td></tr>
-                        <tr><td>High Barometer</td><td>$days_ago($days_ago=$n).barometer.max</td><td>$days_ago($days_ago=$n).barometer.maxtime</td></tr>
-                        <tr><td>Low Barometer</td><td>$days_ago($days_ago=$n).barometer.min</td><td>$days_ago($days_ago=$n).barometer.mintime</td></tr>
-                        <tr><td>Rain</td><td>$days_ago($days_ago=$n).rain.sum</td><td></td></tr>
-			<tr><td>High Rain Rate</td><td>$days_ago($days_ago=$n).rainRate.max</td><td>$days_ago($days_ago=$n).rainRate.maxtime</td></tr>
-			<tr><td>High Wind</td><td>$days_ago($days_ago=$n).wind.max $day.wind.gustdir</td><td>$days_ago($days_ago=$n).wind.maxtime</td></tr>
-                        <tr><td>High Inside Temperature</td><td>$days_ago($days_ago=$n).inTemp.max</td><td>$days_ago($days_ago=$n).inTemp.maxtime</td></tr>
-                        <tr><td>Low Inside Temperature</td><td>$days_ago($days_ago=$n).inTemp.min</td><td>$days_ago($days_ago=$n).inTemp.mintime</td></tr>
-                        <tr><td>High Inside Humidity</td><td>$days_ago($days_ago=$n).inHumidity.max</td><td>$days_ago($days_ago=$n).inHumidity.maxtime</td></tr>
-                        <tr><td>Low Inside Humidity</td><td>$days_ago($days_ago=$n).inHumidity.min</td><td>$days_ago($days_ago=$n).inHumidity.mintime</td></tr>
-			#if $day.extraTemp1.has_data
-                        <tr><td>High Pond Temp</td><td>$days_ago($days_ago=$n).extraTemp1.max</td><td>$days_ago($days_ago=$n).extraTemp1.maxtime</td></tr>
-                        <tr><td>Low Pond Temp</td><td>$days_ago($days_ago=$n).extraTemp1.min</td><td>$days_ago($days_ago=$n).extraTemp1.mintime</td></tr>
-                        #end if
-                        #if $days_ago($days_ago=$n).UV.has_data
-                        <tr><td>High UV</td><td>$days_ago($days_ago=$n).UV.max</td><td>$days_ago($days_ago=$n).UV.maxtime</td></tr>
-                        <tr><td>Low UV</td><td>$days_ago($days_ago=$n).UV.min</td><td>$days_ago($days_ago=$n).UV.mintime</td></tr>
-                        #end if
-                        #if $days_ago($days_ago=$n).ET.has_data and $days_ago($days_ago=$n).ET.sum.raw >0.0
-                        <tr><td>High ET</td><td>$days_ago($days_ago=$n).ET.max</td><td>$days_ago($days_ago=$n).ET.maxtime</td></tr>
-                        <tr><td>Low ET</td><td>$days_ago($days_ago=$n).ET.min</td><td>$days_ago($days_ago=$n).ET.mintime</td></tr>
-                        #end if
-                        #if $days_ago($days_ago=$n).radiation.has_data
-                        <tr><td>High Radiation</td><td>$days_ago($days_ago=$n).radiation.max</td><td>$days_ago($days_ago=$n).radiation.maxtime</td></tr>
-                        <tr><td>Low Radiation</td><td>$days_ago($days_ago=$n).radiation.min</td><td>$days_ago($days_ago=$n).radiation.mintime</td></tr>
-                        #end if
-                    </table>
-                </div>
-
-                #if $Extras.has_key('radar_img')
-                <div class="card" >                    
-                    #if $Extras.has_key('radar_url')
-                    <a href="$Extras.radar_url" target="_blank">
-                    #end if
-                    <img src="$Extras.radar_img" alt="Radar" id="radar" class="space small" />
-                    #if $Extras.has_key('radar_url')
-                    </a>
-                    #end if
-                    
-                    <h3>
-                        #if $Extras.has_key('radar_gif')
-                        
-                        <a id="btn1" class="cpointer" >Image / Animation</a>
-                        <script>    
-                            function changeRadar() {
-                                if(document.getElementById("radar").src == "$Extras.radar_img") {
-                                    document.getElementById("radar").src = "$Extras.radar_gif";
-                                } else {
-                                    document.getElementById("radar").src = "$Extras.radar_img";
-                                }
-                            }
-                            
-                            var el = document.getElementById('btn1');
-                            el.onclick = changeRadar;
-                        </script>
-                        #end if
-                    
-                        #if $Extras.has_key('radar_url_alt')
-                        #if $Extras.has_key('radar_url_alt_text')
-                        | <a href="$Extras.radar_url_alt" target="_blank" >$Extras.radar_url_alt_text</a>
-                        #else 
-                        | <a href="$Extras.radar_url_alt" target="_blank" >Second Radar</a>
-                        #end if
-                        #end if
-                    </h3>
-                    
-                </div>
-                #end if
-                
-                #if $Extras.has_key('lightning_map')
-                <div class="card" >
-                    #if $Extras.has_key('lightning_url')
-                    <a href="$Extras.lightning_url" target="_blank">
-                    #end if
-                    <img src="$Extras.lightning_map" alt="Lightning Map" class="space small" />
-                    #if $Extras.has_key('lightning_url')
-                    </a>
-                    #end if
-                </div>
-                #end if
-
-		#if $Extras.has_key('camera')
-		<!--camera section-->
-		<div class="card" >
-                    <h1><i class="fa fa-camera" style="color:#999"></i> Local Cameras</h1>	
-			<div class="s-center s-content s-display-container" style="max-width:800px">
-			#set $b=0
-			#for $i in $Extras.camera
-                          <div class="mySlides"><b>$Extras.cameratitle[$b]</b><br>
-			  <img src="$i" alt="camera $b" style="width:100%">
-                          </div>
-                          #set $b=$b+1 
-			#end for
-			  
-  			<div class="s-center s-container s-section s-large s-text-white s-display-bottommiddle" style="width:100%">
-    			    <div class="s-left" onclick="plusDivs(-1)">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-left s-hover-text-gray"></i></div>
-			    <div class="s-right" onclick="plusDivs(1)"><i class="fa fa-chevron-right s-hover-text-gray"></i>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-			    #set $a=1
-			    #for $j in $Extras.camera
-			     <span class="s-badge demo s-border s-transparent s-hover-white" onclick="currentDiv($a)"></span>
-			     #set $a=$a+1 
-			    #end for
-			    </div>
-			</div>
-
-			<script>
-			var slideIndex = 1;
-			showDivs(slideIndex);
-
-			function plusDivs(n) {
-			  showDivs(slideIndex += n);
-			}
-
-			function currentDiv(n) {
-			  showDivs(slideIndex = n);
-			}
-
-			function showDivs(n) {
-			  var i;
-			  var x = document.getElementsByClassName("mySlides");
-			  var dots = document.getElementsByClassName("demo");
-			  if (n > x.length) {slideIndex = 1}    
-			  if (n < 1) {slideIndex = x.length}
-			  for (i = 0; i < x.length; i++) {
-			     x[i].style.display = "none";  
-			  }
-			  for (i = 0; i < dots.length; i++) {
-			     dots[i].className = dots[i].className.replace(" s-white", "");
-			  }
-			  x[slideIndex-1].style.display = "block";  
-			  dots[slideIndex-1].className += " s-white";
-			}
-			</script>
-		</div>
-                #end if
-
-            </div>
-            
-            <div class="right" >
-
-                <div class="card" >
-                    <h1><i class="fa fa-star-o m-rot" ></i> Almanac</h1>
-                    #if $almanac.hasExtras
-                    ## Extended almanac information is available. Do the full set of tables.
-                    #set $sun_altitude = $almanac.sun.alt
-                    #if $sun_altitude < 0
-                    #set $sun_None="<i>(Always down)</i>"
-                    #else
-                    #set $sun_None="<i>(Always up)</i>"
-                    #end if
-                    <div class="haelfte" >
-                        <h3>Sun</h3>
-                        <table>
-                            <tr><td>Start civil twilight:</td><td>$almanac(horizon=-6).sun(use_center=1).rise</td></tr>
-                            <tr><td>Sunrise</td><td>$almanac.sun.rise.string($sun_None)</td></tr>
-                            <tr><td>Transit:</td><td>$almanac.sun.transit</td></tr>
-                            <tr><td>Sunset:</td><td>$almanac.sun.set.string($sun_None)</td></tr>
-                            <tr><td>End civil twilight:</td><td>$almanac(horizon=-6).sun(use_center=1).set</td></tr>
-                            <tr><td>Azimuth:</td><td>$("%.1f&deg;" % $almanac.sun.az)</td></tr>
-                            <tr><td>Altitude:</td><td>$("%.1f&deg;" % $sun_altitude)</td></tr>
-                            <tr><td>Right ascension:</td><td>$("%.1f&deg;" % $almanac.sun.ra)</td></tr>
-                            <tr><td>Declination:</td><td>$("%.1f&deg;" % $almanac.sun.dec)</td></tr>
-                            #if $almanac.next_equinox.raw < $almanac.next_solstice.raw
-                            ## The equinox is before the solstice. Display them in order.
-                            <tr><td>Equinox:</td><td>$almanac.next_equinox</td></tr>
-                            <tr><td>Solstice:</td><td>$almanac.next_solstice</td></tr>
-                            #else
-                            ## The solstice is before the equinox. Display them in order.
-                            <tr><td>Solstice:</td><td>$almanac.next_solstice</td></tr>
-                            <tr><td>Equinox:</td><td>$almanac.next_equinox</td></tr>
-                            #end if
-                        </table>
-                    </div>
-                    <div class="haelfte" >
-                        <h3>Moon</h3>
-                        <table>
-                            <tr><td>Rise:</td><td>$almanac.moon.rise</td></tr>
-                            <tr><td>Transit:</td><td>$almanac.moon.transit</td></tr>
-                            <tr><td>Set:</td><td>$almanac.moon.set</td></tr>
-                            <tr><td>Azimuth:</td><td>$("%.1f&deg;" % $almanac.moon.az)</td></tr>
-                            <tr><td>Altitude:</td><td>$("%.1f&deg;" % $almanac.moon.alt)</td></tr>
-                            <tr><td>Right ascension:</td><td>$("%.1f&deg;" % $almanac.moon.ra)</td></tr>
-                            <tr><td>Declination:</td><td>$("%.1f&deg;" % $almanac.moon.dec)</td></tr>
-                            #if $almanac.next_full_moon.raw < $almanac.next_new_moon.raw
-                            <tr><td>Full moon:</td><td>$almanac.next_full_moon</td></tr>
-                            <tr><td>New moon:</td><td>$almanac.next_new_moon</td></tr>
-                            #else
-                            <tr><td>New moon:</td><td>$almanac.next_new_moon</td></tr>
-                            <tr><td>Full moon:</td><td>$almanac.next_full_moon</td></tr>
-                            #end if
-                            <tr><td>Phase:</td><td>$almanac.moon_phase<br />($almanac.moon_fullness% full)</td></tr>
-                        </table>
-                    </div>
-                    #else
-                    ## No extended almanac information available. Fall back to a simple table.
-                    <table>
-                        <tr><td>Sunrise:</td><td>$almanac.sunrise</td></tr>
-                        <tr><td>Sunset:</td><td>$almanac.sunset</td></tr>
-                        <tr><td>Moon Phase:</td><td>$almanac.moon_phase<br/>($almanac.moon_fullness% full)</td></tr>
-                    </table>
-                    #end if
-                </div>
-                
-                <div class="card cc graphs" >
-                    <h1><i class="fa fa-line-chart m-gruen" ></i> Graphs</h1>
-                    
-                    <img src="daytempdew.png" alt="temperatures" />
-                    <img src="dayrain.png" alt="rain" />
-                    <img src="daywind.png" alt="wind" />
-                    <img src="daywinddir.png" alt="Hi Wind" />
-		    <img src="daywindvec.png" alt="Wind Vector" />
-                    <img src="daytempchill.png" alt="heatchill" />
-		    <img src="daybarometer.png" alt="barometer"/>
-                    <img src="dayinside.png" alt="Inside" />
-		    <img src="dayinhumid.png" alt="Inside/Outside Humidity" />
-                    #if $day.radiation.has_data
-                    <img src="dayradiation.png" alt="Radiation" />
-                    #end if
-                    #if $day.UV.has_data
-                    <img src="dayuv.png" alt="UV Index" />
-                    #end if
-                    #if $day.rxCheckPercent.has_data
-                    <img src="dayrx.png" alt="day rx percent"/>
-                    #end if
-                    #if $day.extraTemp1.has_data
-                    <img src="daypond.png" alt="Pond Temperatures" />
-                    #end if
-                </div>
-                
-            </div>
+  <head itemscope itemtype="http://schema.org/Website">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Refresh" content="180">
+    #if $Extras.has_key('cwop')
+    <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+    #else
+    <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+    #end if
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    #if $Extras.has_key('web_url')
+    <link rel="canonical" href="$Extras.web_url"/>
+    #end if
+    <title>$station.location Current Weather Conditions</title>
+    <!-- Open Graph -->
+    #if $Extras.has_key('cwop')
+    <meta property="og:site_name" content="$station.location Weather Station ($Extras.cwop)" />
+    <meta property="og:title" content="$station.location ($Extras.cwop) Current Weather Conditions"/>
+    #else
+    <meta property="og:site_name" content="$station.location Weather Station" />
+    <meta property="og:title" content="$station.location Current Weather Conditions"/>
+    #end if
+    <meta property="og:image" content="$Extras.web_url/daytempdew.png"/>
+    #if $Extras.has_key('web_url')
+    <meta property="og:url" content="$Extras.web_url"/>
+    #end if
+    #if $Extras.has_key('cwop')
+    <meta property="og:description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+    #else
+    <meta property="og:description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
+    #end if
+    <meta property="og:type" content="website" />
+    <!--SM Markups -->
+    #if $Extras.has_key('cwop')
+    <meta itemprop="name" content="$station.location ($Extras.cwop) Current Weather Conditions"/>
+    #else
+    <meta itemprop="name" content="$station.location Current Weather Conditions"/>
+    #end if
+    <meta itemprop="image" content="$Extras.web_url/daytempdew.png"/>
+    #if $Extras.has_key('web_url')
+    <meta itemprop="url" content="$Extras.web_url"/>
+    #end if
+    #if $Extras.has_key('cwop')
+    <meta itemprop="description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+    #else
+    <meta itemprop="description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
+    #end if
+    <!-- Icons -->
+    <link rel="icon" href="favicon.ico" type="image/png">
+    <link rel="apple-touch-icon" href="touch-icon.png"/>
+    <!-- Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Skripte -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="js/checkdiff.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container-fix" >
+        <div class="h-left" >
+          <h1><i class="fa fa-cloud" ></i> $station.location </h1>
+          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+          <h2>Current Weather Conditions</h2>
+          <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+          <p id="freshweather" class="m-orange"></p>
+          <script>
+            window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
+          </script>
         </div>
+        <div class="h-right" >
+          <table>
+            <tr>
+              <td><b>Station:</b></td>
+              <td>$station.hardware</td>
+            </tr>
+            <tr>
+              <td><b>Software:</b></td>
+              <td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td>
+            </tr>
+            <tr>
+              <td><b>Weewx uptime:</b></td>
+              <td>$station.uptime</td>
+            </tr>
+            <tr>
+              <td><b>Server uptime:</b></td>
+              <td>$station.os_uptime</td>
+            </tr>
+            #if $Extras.has_key('cwop') and $Extras.has_key('crahs')
+            <tr>
+              <td><b>Station IDs:</b></td>
+              <td><a href="$Extras.cwop_url" target="_blank">$Extras.cwop</a> | <a href="$Extras.crahs_url" target="_blank">$Extras.crahs</a></td>
+            </tr>
+            #end if
+          </table>
         </div>
-        
-	<footer>
-            <div class="container-fix">
-	      <div style="text-align:center">
-		#if $Extras.has_key('you')
-            	<i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
-            	#end if
-		&sdot;
-	    	Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
-	   	<br>
-	    	Sofaskin by <a href="http://blauesledersofa.de">Blaues Ledersofa</a>
-                &sdot;
-		CW9009 Version by <a href="http://cw9009.x10host.com">JDS</a>
- 		&sdot;
-            	Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
-	      </div>
-	    </div>
-        </footer>
-
-        #if $Extras.has_key('googleAnalyticsId')
-        <!-- Google Analytics -->
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
-            ga('create', '$Extras.googleAnalyticsId', 'auto');
-            ga('send', 'pageview');
-        </script>
-        #end if
-
-<!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
-<script>
-function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
-</script>
-
-    </body>
+        <nav>
+          <ul class="topnav" id="myTopnav">
+            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars" ></i></a></li>
+            <li class="active" ><a href="/" >Current</a></li>
+            <li><a href="week.html" >Week</a></li>
+            <li><a href="month.html" >Month</a></li>
+            <li><a href="year.html" >Year</a></li>
+            <li><a href="summary.html" >Summaries</a></li>
+            <li><a href="station.html" >Station</a></li>
+            <li><a href="RSS/weewx_rss.xml" ><i class="fa fa-rss" ></i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="main" >
+      <div class="container" >
+        <div class="left" >
+          <div class="card" >
+            #if $current.rainRate.raw == 0.0
+            <h1><i class="fa fa-sun-o m-orange" ></i> Current Conditions</h1>
+            #else if $current.rainRate.raw >= 0.01
+            <h1><i class="fa fa-umbrella m-blau" ></i> Current Conditions</h1>
+            #else
+            <h1><i class="fa fa-sun-o m-orange" ></i> Current Conditions</h1>
+            #end if
+            <table class="tablespacer">
+              <tr>
+                <td>Outside Temperature</td>
+                <td>$current.outTemp</td>
+              </tr>
+              <tr>
+                <td>Wind Chill</td>
+                <td>$current.windchill</td>
+              </tr>
+              <tr>
+                <td>Heat Index</td>
+                <td>$current.heatindex</td>
+              </tr>
+              <tr>
+                <td>Dewpoint</td>
+                <td>$current.dewpoint</td>
+              </tr>
+              <tr>
+                <td>Humidity</td>
+                <td>$current.outHumidity</td>
+              </tr>
+              <tr>
+                <td>Barometer</td>
+                <td>$current.barometer</td>
+              </tr>
+              <tr>
+                <td>Barometer Trend ($trend.time_delta.hour.format("%.0f"))</td>
+                <td>$trend.barometer</td>
+              </tr>
+              #if $current.windSpeed.raw == 0.0
+              <tr>
+                <td>Wind</td>
+                <td>$current.windSpeed </td>
+              </tr>
+              #else
+              <tr>
+                <td>Wind</td>
+                <td>$current.windSpeed $current.windDir.ordinal_compass ($current.windDir)</td>
+              </tr>
+              #end if
+              #if $current.windGust.raw == 0.0
+              <tr>
+                <td>Wind Gust</td>
+                <td>$current.windGust </td>
+              </tr>
+              #else
+              <tr>
+                <td>Wind Gust</td>
+                <td>$current.windGust $current.windGustDir.ordinal_compass ($current.windGustDir)</td>
+              </tr>
+              #end if
+              <tr>
+                <td>Rain Rate</td>
+                <td>$current.rainRate</td>
+              </tr>
+              <tr>
+                <td>Inside Temperature</td>
+                <td>$current.inTemp</td>
+              </tr>
+              <tr>
+                <td>Inside Humidity</td>
+                <td>$current.inHumidity</td>
+              </tr>
+              #if $day.extraTemp1.has_data
+              <tr>
+                <td>Pond Temperature</td>
+                <td>$current.extraTemp1</td>
+              </tr>
+              #end if
+              #if $day.UV.has_data
+              <tr>
+                <td>UV</td>
+                <td>$current.UV</td>
+              </tr>
+              #end if
+              #if $day.ET.has_data and $day.ET.sum.raw > 0.0
+              <tr>
+                <td>ET</td>
+                <td>$current.ET</td>
+              </tr>
+              #end if
+              #if $day.radiation.has_data
+              <tr>
+                <td>Solar Radiation</td>
+                <td>$current.radiation</td>
+              </tr>
+              #end if
+            </table>
+          </div>
+          <div class="card" >
+            <h1><i class="fa fa-moon-o m-grau" ></i> Since Midnight</h1>
+            <table class="tablespacer">
+              <tr>
+                <td>High Temperature</td>
+                <td>$day.outTemp.max</td>
+                <td>$day.outTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Temperature</td>
+                <td>$day.outTemp.min</td>
+                <td>$day.outTemp.mintime</td>
+              </tr>
+              <tr>
+                <td>High Heat Index</td>
+                <td>$day.heatindex.max</td>
+                <td>$day.heatindex.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Wind Chill</td>
+                <td>$day.windchill.min</td>
+                <td>$day.windchill.mintime</td>
+              </tr>
+              <tr>
+                <td>High Dewpoint</td>
+                <td>$day.dewpoint.max</td>
+                <td>$day.dewpoint.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Dewpoint</td>
+                <td>$day.dewpoint.min</td>
+                <td>$day.dewpoint.mintime</td>
+              </tr>
+              <tr>
+                <td>High Humidity</td>
+                <td>$day.outHumidity.max</td>
+                <td>$day.outHumidity.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Humidity</td>
+                <td>$day.outHumidity.min</td>
+                <td>$day.outHumidity.mintime</td>
+              </tr>
+              <tr>
+                <td>High Barometer</td>
+                <td>$day.barometer.max</td>
+                <td>$day.barometer.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Barometer</td>
+                <td>$day.barometer.min</td>
+                <td>$day.barometer.mintime</td>
+              </tr>
+              <tr>
+                <td>Today's Rain</td>
+                <td>$day.rain.sum</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>High Rain Rate</td>
+                <td>$day.rainRate.max</td>
+                <td>$day.rainRate.maxtime</td>
+              </tr>
+              <tr>
+                <td>High Wind</td>
+                <td>$day.wind.max $day.wind.gustdir</td>
+                <td>$day.wind.maxtime</td>
+              </tr>
+              <tr>
+                <td>Average Wind</td>
+                <td>$day.wind.avg</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>RMS Wind</td>
+                <td>$day.wind.rms</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vector Average Speed</td>
+                <td>$day.wind.vecavg</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vector Average Direction</td>
+                <td>$day.wind.vecdir</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>High Inside Temperature</td>
+                <td>$day.inTemp.max</td>
+                <td>$day.inTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Inside Temperature</td>
+                <td>$day.inTemp.min</td>
+                <td>$day.inTemp.mintime</td>
+              </tr>
+              <tr>
+                <td>High Inside Humidity</td>
+                <td>$day.inHumidity.max</td>
+                <td>$day.inHumidity.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Inside Humidity</td>
+                <td>$day.inHumidity.min</td>
+                <td>$day.inHumidity.mintime</td>
+              </tr>
+              #if $day.extraTemp1.has_data
+              <tr>
+                <td>High Pond Temp</td>
+                <td>$day.extraTemp1.max</td>
+                <td>$day.extraTemp1.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Pond Temp</td>
+                <td>$day.extraTemp1.min</td>
+                <td>$day.extraTemp1.mintime</td>
+              </tr>
+              #end if
+              #if $day.UV.has_data
+              <tr>
+                <td>High UV</td>
+                <td>$day.UV.max</td>
+                <td>$day.UV.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low UV</td>
+                <td>$day.UV.min</td>
+                <td>$day.UV.mintime</td>
+              </tr>
+              #end if
+              #if $day.ET.has_data and $day.ET.sum.raw >0.0
+              <tr>
+                <td>High ET</td>
+                <td>$day.ET.max</td>
+                <td>$day.ET.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low ET</td>
+                <td>$day.ET.min</td>
+                <td>$day.ET.mintime</td>
+              </tr>
+              #end if
+              #if $day.radiation.has_data
+              <tr>
+                <td>High Radiation</td>
+                <td>$day.radiation.max</td>
+                <td>$day.radiation.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Radiation</td>
+                <td>$day.radiation.min</td>
+                <td>$day.radiation.mintime</td>
+              </tr>
+              #end if
+            </table>
+          </div>
+          <div class="card" >
+            <!--Leap Year Code -->
+            #set $yr = int($day.dateTime.format("%Y"))%4
+            #if $yr == 0
+              #if $yr % 100 == 0
+                #if $yr % 400 == 0
+                  #if $day.dateTime.format("%d-%b") == '29-Feb'
+                    #set $n = 1461
+                  #else if $day.dateTime.format("%d-%b") >= '01-Mar'
+                    #set $n = 366
+                  #else
+                    #set $n = 365
+                  #end if
+                #else
+                  #set $n = 365
+                #end if
+              #else
+                #if $day.dateTime.format("%d-%b") == '29-Feb'
+                  #set $n = 1461
+                #else if $day.dateTime.format("%d-%b") >= '01-Mar'
+                  #set $n = 366
+                #else
+                  #set $n = 365
+                #end if
+              #end if
+            #else
+              #set $yrNew = ($yr - 1)
+            #if $yrNew % 100 == 0
+              #if $yrNew % 400 == 0
+                #if $day.dateTime.format("%d-%b") < '01-Mar'
+                  #set $n = 366
+                #else
+                  #set $n = 365
+                #end if
+              #end if
+              #else
+                #set $n = 365
+              #end if
+            #end if
+            <h1><i class="fa fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
+            <table class="tablespacer">
+              <tr>
+                <td>High Temperature</td>
+                <td>$days_ago($days_ago=$n).outTemp.max</td>
+                <td>$days_ago($days_ago=$n).outTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Temperature</td>
+                <td>$days_ago($days_ago=$n).outTemp.min</td>
+                <td>$days_ago($days_ago=$n).outTemp.mintime</td>
+              </tr>
+              <tr>
+                <td>High Dewpoint</td>
+                <td>$days_ago($days_ago=$n).dewpoint.max</td>
+                <td>$days_ago($days_ago=$n).dewpoint.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Dewpoint</td>
+                <td>$days_ago($days_ago=$n).dewpoint.min</td>
+                <td>$days_ago($days_ago=$n).dewpoint.mintime</td>
+              </tr>
+              <tr>
+                <td>High Humidity</td>
+                <td>$days_ago($days_ago=$n).outHumidity.max</td>
+                <td>$days_ago($days_ago=$n).outHumidity.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Humidity</td>
+                <td>$days_ago($days_ago=$n).outHumidity.min</td>
+                <td>$days_ago($days_ago=$n).outHumidity.mintime</td>
+              </tr>
+              <tr>
+                <td>High Barometer</td>
+                <td>$days_ago($days_ago=$n).barometer.max</td>
+                <td>$days_ago($days_ago=$n).barometer.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Barometer</td>
+                <td>$days_ago($days_ago=$n).barometer.min</td>
+                <td>$days_ago($days_ago=$n).barometer.mintime</td>
+              </tr>
+              <tr>
+                <td>Rain</td>
+                <td>$days_ago($days_ago=$n).rain.sum</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>High Rain Rate</td>
+                <td>$days_ago($days_ago=$n).rainRate.max</td>
+                <td>$days_ago($days_ago=$n).rainRate.maxtime</td>
+              </tr>
+              <tr>
+                <td>High Wind</td>
+                <td>$days_ago($days_ago=$n).wind.max $day.wind.gustdir</td>
+                <td>$days_ago($days_ago=$n).wind.maxtime</td>
+              </tr>
+              <tr>
+                <td>High Inside Temperature</td>
+                <td>$days_ago($days_ago=$n).inTemp.max</td>
+                <td>$days_ago($days_ago=$n).inTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Inside Temperature</td>
+                <td>$days_ago($days_ago=$n).inTemp.min</td>
+                <td>$days_ago($days_ago=$n).inTemp.mintime</td>
+              </tr>
+              <tr>
+                <td>High Inside Humidity</td>
+                <td>$days_ago($days_ago=$n).inHumidity.max</td>
+                <td>$days_ago($days_ago=$n).inHumidity.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Inside Humidity</td>
+                <td>$days_ago($days_ago=$n).inHumidity.min</td>
+                <td>$days_ago($days_ago=$n).inHumidity.mintime</td>
+              </tr>
+              #if $day.extraTemp1.has_data
+              <tr>
+                <td>High Pond Temp</td>
+                <td>$days_ago($days_ago=$n).extraTemp1.max</td>
+                <td>$days_ago($days_ago=$n).extraTemp1.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Pond Temp</td>
+                <td>$days_ago($days_ago=$n).extraTemp1.min</td>
+                <td>$days_ago($days_ago=$n).extraTemp1.mintime</td>
+              </tr>
+              #end if
+              #if $days_ago($days_ago=$n).UV.has_data
+              <tr>
+                <td>High UV</td>
+                <td>$days_ago($days_ago=$n).UV.max</td>
+                <td>$days_ago($days_ago=$n).UV.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low UV</td>
+                <td>$days_ago($days_ago=$n).UV.min</td>
+                <td>$days_ago($days_ago=$n).UV.mintime</td>
+              </tr>
+              #end if
+              #if $days_ago($days_ago=$n).ET.has_data and $days_ago($days_ago=$n).ET.sum.raw >0.0
+              <tr>
+                <td>High ET</td>
+                <td>$days_ago($days_ago=$n).ET.max</td>
+                <td>$days_ago($days_ago=$n).ET.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low ET</td>
+                <td>$days_ago($days_ago=$n).ET.min</td>
+                <td>$days_ago($days_ago=$n).ET.mintime</td>
+              </tr>
+              #end if
+              #if $days_ago($days_ago=$n).radiation.has_data
+              <tr>
+                <td>High Radiation</td>
+                <td>$days_ago($days_ago=$n).radiation.max</td>
+                <td>$days_ago($days_ago=$n).radiation.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Radiation</td>
+                <td>$days_ago($days_ago=$n).radiation.min</td>
+                <td>$days_ago($days_ago=$n).radiation.mintime</td>
+              </tr>
+              #end if
+            </table>
+          </div>
+          #if $Extras.has_key('radar_img')
+          <div class="card" >
+            #if $Extras.has_key('radar_url')
+            <a href="$Extras.radar_url" target="_blank">
+            #end if
+            <img src="$Extras.radar_img" alt="Radar" id="radar" class="space small" />
+            #if $Extras.has_key('radar_url')
+            </a>
+            #end if
+            <h3>
+              #if $Extras.has_key('radar_gif')
+              <a id="btn1" class="cpointer" >Image / Animation</a>
+              <script>    
+                function changeRadar() {
+                    if(document.getElementById("radar").src == "$Extras.radar_img") {
+                        document.getElementById("radar").src = "$Extras.radar_gif";
+                    } else {
+                        document.getElementById("radar").src = "$Extras.radar_img";
+                    }
+                }
+                
+                var el = document.getElementById('btn1');
+                el.onclick = changeRadar;
+              </script>
+              #end if
+              #if $Extras.has_key('radar_url_alt')
+                #if $Extras.has_key('radar_url_alt_text')
+                  | <a href="$Extras.radar_url_alt" target="_blank" >$Extras.radar_url_alt_text</a>
+                #else 
+                  | <a href="$Extras.radar_url_alt" target="_blank" >Second Radar</a>
+                #end if
+              #end if
+            </h3>
+          </div>
+          #end if
+          #if $Extras.has_key('lightning_map')
+          <div class="card" >
+            #if $Extras.has_key('lightning_url')
+            <a href="$Extras.lightning_url" target="_blank">
+            #end if
+            <img src="$Extras.lightning_map" alt="Lightning Map" class="space small" />
+            #if $Extras.has_key('lightning_url')
+            </a>
+            #end if
+          </div>
+          #end if
+          #if $Extras.has_key('camera')
+          <!--camera section-->
+          <div class="card" >
+            <h1><i class="fa fa-camera" style="color:#999"></i> Local Cameras</h1>
+            <div class="s-center s-content s-display-container" style="max-width:800px">
+              #set $b=0
+              #for $i in $Extras.camera
+              <div class="mySlides"><b>$Extras.cameratitle[$b]</b><br>
+                <img src="$i" alt="camera $b" style="width:100%">
+              </div>
+              #set $b=$b+1 
+              #end for
+              <div class="s-center s-container s-section s-large s-text-white s-display-bottommiddle" style="width:100%">
+                <div class="s-left" onclick="plusDivs(-1)">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-left s-hover-text-gray"></i></div>
+                <div class="s-right" onclick="plusDivs(1)"><i class="fa fa-chevron-right s-hover-text-gray"></i>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                #set $a=1
+                #for $j in $Extras.camera
+                <span class="s-badge demo s-border s-transparent s-hover-white" onclick="currentDiv($a)"></span>
+                #set $a=$a+1 
+                #end for
+              </div>
+            </div>
+            <script>
+              var slideIndex = 1;
+              showDivs(slideIndex);
+              
+              function plusDivs(n) {
+                showDivs(slideIndex += n);
+              }
+              
+              function currentDiv(n) {
+                showDivs(slideIndex = n);
+              }
+              
+              function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("demo");
+                if (n > x.length) {slideIndex = 1}    
+                if (n < 1) {slideIndex = x.length}
+                for (i = 0; i < x.length; i++) {
+                   x[i].style.display = "none";  
+                }
+                for (i = 0; i < dots.length; i++) {
+                   dots[i].className = dots[i].className.replace(" s-white", "");
+                }
+                x[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " s-white";
+              }
+            </script>
+          </div>
+          #end if
+        </div>
+        <div class="right" >
+          <div class="card" >
+            <h1><i class="fa fa-star-o m-rot" ></i> Almanac</h1>
+            #if $almanac.hasExtras
+            ## Extended almanac information is available. Do the full set of tables.
+            #set $sun_altitude = $almanac.sun.alt
+            #if $sun_altitude < 0
+            #set $sun_None="<i>(Always down)</i>"
+            #else
+            #set $sun_None="<i>(Always up)</i>"
+            #end if
+            <div class="haelfte" >
+              <h3>Sun</h3>
+              <table>
+                <tr>
+                  <td>Start civil twilight:</td>
+                  <td>$almanac(horizon=-6).sun(use_center=1).rise</td>
+                </tr>
+                <tr>
+                  <td>Sunrise</td>
+                  <td>$almanac.sun.rise.string($sun_None)</td>
+                </tr>
+                <tr>
+                  <td>Transit:</td>
+                  <td>$almanac.sun.transit</td>
+                </tr>
+                <tr>
+                  <td>Sunset:</td>
+                  <td>$almanac.sun.set.string($sun_None)</td>
+                </tr>
+                <tr>
+                  <td>End civil twilight:</td>
+                  <td>$almanac(horizon=-6).sun(use_center=1).set</td>
+                </tr>
+                <tr>
+                  <td>Azimuth:</td>
+                  <td>$("%.1f&deg;" % $almanac.sun.az)</td>
+                </tr>
+                <tr>
+                  <td>Altitude:</td>
+                  <td>$("%.1f&deg;" % $sun_altitude)</td>
+                </tr>
+                <tr>
+                  <td>Right ascension:</td>
+                  <td>$("%.1f&deg;" % $almanac.sun.ra)</td>
+                </tr>
+                <tr>
+                  <td>Declination:</td>
+                  <td>$("%.1f&deg;" % $almanac.sun.dec)</td>
+                </tr>
+                #if $almanac.next_equinox.raw < $almanac.next_solstice.raw
+                ## The equinox is before the solstice. Display them in order.
+                <tr>
+                  <td>Equinox:</td>
+                  <td>$almanac.next_equinox</td>
+                </tr>
+                <tr>
+                  <td>Solstice:</td>
+                  <td>$almanac.next_solstice</td>
+                </tr>
+                #else
+                ## The solstice is before the equinox. Display them in order.
+                <tr>
+                  <td>Solstice:</td>
+                  <td>$almanac.next_solstice</td>
+                </tr>
+                <tr>
+                  <td>Equinox:</td>
+                  <td>$almanac.next_equinox</td>
+                </tr>
+                #end if
+              </table>
+            </div>
+            <div class="haelfte" >
+              <h3>Moon</h3>
+              <table>
+                <tr>
+                  <td>Rise:</td>
+                  <td>$almanac.moon.rise</td>
+                </tr>
+                <tr>
+                  <td>Transit:</td>
+                  <td>$almanac.moon.transit</td>
+                </tr>
+                <tr>
+                  <td>Set:</td>
+                  <td>$almanac.moon.set</td>
+                </tr>
+                <tr>
+                  <td>Azimuth:</td>
+                  <td>$("%.1f&deg;" % $almanac.moon.az)</td>
+                </tr>
+                <tr>
+                  <td>Altitude:</td>
+                  <td>$("%.1f&deg;" % $almanac.moon.alt)</td>
+                </tr>
+                <tr>
+                  <td>Right ascension:</td>
+                  <td>$("%.1f&deg;" % $almanac.moon.ra)</td>
+                </tr>
+                <tr>
+                  <td>Declination:</td>
+                  <td>$("%.1f&deg;" % $almanac.moon.dec)</td>
+                </tr>
+                #if $almanac.next_full_moon.raw < $almanac.next_new_moon.raw
+                <tr>
+                  <td>Full moon:</td>
+                  <td>$almanac.next_full_moon</td>
+                </tr>
+                <tr>
+                  <td>New moon:</td>
+                  <td>$almanac.next_new_moon</td>
+                </tr>
+                #else
+                <tr>
+                  <td>New moon:</td>
+                  <td>$almanac.next_new_moon</td>
+                </tr>
+                <tr>
+                  <td>Full moon:</td>
+                  <td>$almanac.next_full_moon</td>
+                </tr>
+                #end if
+                <tr>
+                  <td>Phase:</td>
+                  <td>$almanac.moon_phase<br />($almanac.moon_fullness% full)</td>
+                </tr>
+              </table>
+            </div>
+            #else
+            ## No extended almanac information available. Fall back to a simple table.
+            <table>
+              <tr>
+                <td>Sunrise:</td>
+                <td>$almanac.sunrise</td>
+              </tr>
+              <tr>
+                <td>Sunset:</td>
+                <td>$almanac.sunset</td>
+              </tr>
+              <tr>
+                <td>Moon Phase:</td>
+                <td>$almanac.moon_phase<br/>($almanac.moon_fullness% full)</td>
+              </tr>
+            </table>
+            #end if
+          </div>
+          <div class="card cc graphs" >
+            <h1><i class="fa fa-line-chart m-gruen" ></i> Graphs</h1>
+            <img src="daytempdew.png" alt="temperatures" />
+            <img src="dayrain.png" alt="rain" />
+            <img src="daywind.png" alt="wind" />
+            <img src="daywinddir.png" alt="Hi Wind" />
+            <img src="daywindvec.png" alt="Wind Vector" />
+            <img src="daytempchill.png" alt="heatchill" />
+            <img src="daybarometer.png" alt="barometer"/>
+            <img src="dayinside.png" alt="Inside" />
+            <img src="dayinhumid.png" alt="Inside/Outside Humidity" />
+            #if $day.radiation.has_data
+            <img src="dayradiation.png" alt="Radiation" />
+            #end if
+            #if $day.UV.has_data
+            <img src="dayuv.png" alt="UV Index" />
+            #end if
+            #if $day.rxCheckPercent.has_data
+            <img src="dayrx.png" alt="day rx percent"/>
+            #end if
+            #if $day.extraTemp1.has_data
+            <img src="daypond.png" alt="Pond Temperatures" />
+            #end if
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container-fix">
+        <div style="text-align:center">
+          #if $Extras.has_key('you')
+          <i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+          #end if
+          &sdot;
+          Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+          <br>
+          Sofaskin by <a href="http://blauesledersofa.de">Blaues Ledersofa</a>
+          &sdot;
+          CW9009 Version by <a href="http://cw9009.x10host.com">JDS</a>
+          &sdot;
+          Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
+        </div>
+      </div>
+    </footer>
+    #if $Extras.has_key('googleAnalyticsId')
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', '$Extras.googleAnalyticsId', 'auto');
+      ga('send', 'pageview');
+    </script>
+    #end if
+    <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
+    <script>
+      function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+              x.className += " responsive";
+          } else {
+              x.className = "topnav";
+          }
+      }
+    </script>
+  </body>
 </html>
+
