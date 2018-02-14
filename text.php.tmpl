@@ -37,9 +37,15 @@
     #if $Extras.has_key('web_url')
     <link rel="canonical" href="$Extras.web_url/summary.html"/>
     #end if
+    #if $Extras.has_key('cwop')
     <?php
       echo"<title>$station.location ($Extras.cwop) Climate Summary for \$title </title>";
-      ?>
+    ?>
+    #else
+    <?php
+      echo"<title>$station.location Climate Summary for \$title </title>";
+    ?>
+    #end if
     <!-- Open Graph -->
     <meta property="og:site_name" content="$station.location Summaries and Records" />
     <meta property="og:title" content="Climate Summaries"/>
@@ -55,7 +61,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <!-- Skript -->
+    <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/checkdiff.js"></script>
   </head>
