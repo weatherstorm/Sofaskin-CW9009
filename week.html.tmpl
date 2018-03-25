@@ -307,7 +307,7 @@
               </tr>
               <tr>
                 <td>High Wind</td>
-                <td>$yesterday.wind.max $day.wind.gustdir</td>
+                <td>$yesterday.wind.max $yesterday.wind.gustdir</td>
                 <td>$yesterday.wind.maxtime</td>
               </tr>
               <tr>
@@ -330,7 +330,7 @@
                 <td>$yesterday.inTemp.min</td>
                 <td>$yesterday.inTemp.mintime</td>
               </tr>
-              #if $day.extraTemp1.has_data
+              #if $yesterday.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
                 <td>$yesterday.extraTemp1.max</td>
@@ -366,7 +366,7 @@
                 <td>$yesterday.ET.mintime</td>
               </tr>
               #end if
-              #if $day.radiation.has_data
+              #if $yesterday.radiation.has_data
               <tr>
                 <td>High Radiation</td>
                 <td>$yesterday.radiation.max</td>
@@ -547,9 +547,6 @@
             #if $week.radiation.has_data
             <img src="weekradiation.png" alt="Radiation" />
             #end if
-            #if $week.UV.has_data
-            <img src="weekuv.png" alt="UV Index" />
-            #end if
             #if $week.rxCheckPercent.has_data
             <img src="weekrx.png" alt="week rx percent"/>
             #end if
@@ -602,4 +599,3 @@
     </script>
   </body>
 </html>
-
