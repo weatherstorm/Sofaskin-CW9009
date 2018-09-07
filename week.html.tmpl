@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en" class="no-js">
   <head itemscope itemtype="http://schema.org/Website">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,25 +23,33 @@
     #end if
     <meta property="og:description" content="Weekly Weather Summary for $station.location - weather web site powered by WeeWX" />
     <meta property="og:type" content="website" />
-    <!-- Icons -->
+    <!-- FavIcons -->
     <link rel="icon" href="favicon.ico" type="image/png">
     <link rel="apple-touch-icon" href="touch-icon.png"/>
+        
     <!-- Styles -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <!-- Skripte -->
+
+    <!-- Font Awesome CDN links for 5.3-->
+    <!-- If you have a pro license -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+    <!-- Free license -->
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
+
+    <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/checkdiff.js"></script>
+
   </head>
   <body>
     <header>
       <div class="container-fix" >
         <div class="h-left" >
-          <h1><i class="fa fa-cloud" ></i> $station.location </h1>
-          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa fa-map-marker" ></i> Show on map</a></p>
+          <h1><i class="fas fa-cloud" ></i> $station.location </h1>
+          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fas fa-map-marker-alt" ></i> Show on map</a></p>
           <h2>Weekly Weather Summary</h2>
-          <p><i class="fa fa-clock-o" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+          <p><i class="far fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
           <p id="freshweather" class="m-orange"></p>
           <script>
             window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
@@ -65,24 +73,18 @@
               <td><b>Server uptime:</b></td>
               <td>$station.os_uptime</td>
             </tr>
-            #if $Extras.has_key('cwop') and $Extras.has_key('crahs')
-            <tr>
-              <td><b>Station IDs:</b></td>
-              <td><a href="$Extras.cwop_url" target="_blank">$Extras.cwop</a> | <a href="$Extras.crahs_url" target="_blank">$Extras.crahs</a></td>
-            </tr>
-            #end if
           </table>
         </div>
         <nav>
           <ul class="topnav" id="myTopnav">
-            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa fa-bars" ></i></a></li>
+            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars" ></i></a></li>
             <li><a href="/" >Current</a></li>
             <li class="active" ><a href="week.html" >Week</a></li>
             <li><a href="month.html" >Month</a></li>
             <li><a href="year.html" >Year</a></li>
             <li><a href="summary.html" >Summaries</a></li>
-            <li><a href="station.html" >Station</a></li>
-            <li><a href="RSS/weewx_rss.xml" ><i class="fa fa-rss" ></i></a></li>
+            <li><a href="about.html" >About</a></li>
+            <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
           </ul>
         </nav>
       </div>
@@ -91,7 +93,7 @@
       <div class="container" >
         <div class="left" >
           <div class="card" >
-            <h1><i class="fa fa-cloud m-grau" ></i> This Week</h1>
+            <h1><i class="fas fa-cloud m-grau" ></i> This Week</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -155,7 +157,7 @@
               </tr>
               <tr>
                 <td>High Wind Speed</td>
-                <td>$week.wind.max $week.wind.gustdir</td>
+                <td>$week.wind.max <br> $week.wind.gustdir</td>
                 <td>$week.wind.maxtime</td>
               </tr>
               <tr>
@@ -178,6 +180,7 @@
                 <td>$week.wind.vecdir</td>
                 <td></td>
               </tr>
+	      #if $week.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$week.inTemp.max</td>
@@ -188,6 +191,7 @@
                 <td>$week.inTemp.min</td>
                 <td>$week.inTemp.mintime</td>
               </tr>
+	      #end if
               #if $week.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -202,17 +206,12 @@
               #end if
               #if $week.UV.has_data
               <tr>
-                <td>High UV</td>
+                <td>High UV Index</td>
                 <td>$week.UV.max</td>
                 <td>$week.UV.maxtime</td>
               </tr>
-              <tr>
-                <td>Low UV</td>
-                <td>$week.UV.min</td>
-                <td>$week.UV.mintime</td>
-              </tr>
               #end if
-              #if $week.ET.has_data and $week.ET.sum.raw >0.0
+              #if $week.ET.has_data and $week.ET.sum.raw >1
               <tr>
                 <td>High ET</td>
                 <td>$week.ET.max</td>
@@ -230,16 +229,35 @@
                 <td>$week.radiation.max</td>
                 <td>$week.radiation.maxtime</td>
               </tr>
+              #end if
+	      #if $week.lux.has_data
               <tr>
-                <td>Low Radiation</td>
-                <td>$week.radiation.min</td>
-                <td>$week.radiation.mintime</td>
+                <td>High Brightness</td>
+                <td>$week.lux.max</td>
+                <td>$week.lux.maxtime</td>
+              </tr>
+              #end if
+	      #if $week.lightningStrikes.has_data
+              <tr>
+                <td>Most Lightning Strikes</td>
+                <td>$week.lightningStrikes.max</td>
+                <td>$week.lightningStrikes.maxtime</td>
+              </tr>
+	      <tr>
+                <td>Total Lightning Strikes</td>
+                <td>$week.lightningStrikes.sum</td>
+                <td></td>
+              </tr>
+	      <tr>
+                <td>Average Strike Distance</td>
+                <td>$week.lightningAvgDistance.avg</td>
+                <td></td>
               </tr>
               #end if
             </table>
           </div>
           <div class="card" >
-            <h1><i class="fa fa-calendar m-orange" ></i> Yesterday ($yesterday.dateTime.format("%d-%b")) </h1>
+            <h1><i class="far fa-calendar-alt m-orange" ></i> Yesterday ($yesterday.dateTime.format("%d-%b")) </h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -307,7 +325,7 @@
               </tr>
               <tr>
                 <td>High Wind</td>
-                <td>$yesterday.wind.max $yesterday.wind.gustdir</td>
+                <td>$yesterday.wind.max <br> $yesterday.wind.gustdir</td>
                 <td>$yesterday.wind.maxtime</td>
               </tr>
               <tr>
@@ -320,6 +338,7 @@
                 <td>$yesterday.wind.vecdir</td>
                 <td></td>
               </tr>
+	      #if $yesterday.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$yesterday.inTemp.max</td>
@@ -330,6 +349,7 @@
                 <td>$yesterday.inTemp.min</td>
                 <td>$yesterday.inTemp.mintime</td>
               </tr>
+	      #end if
               #if $yesterday.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -344,17 +364,12 @@
               #end if
               #if $yesterday.UV.has_data
               <tr>
-                <td>High UV</td>
+                <td>High UV Index</td>
                 <td>$yesterday.UV.max</td>
                 <td>$yesterday.UV.maxtime</td>
               </tr>
-              <tr>
-                <td>Low UV</td>
-                <td>$yesterday.UV.min</td>
-                <td>$yesterday.UV.mintime</td>
-              </tr>
               #end if
-              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw >0.0
+              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw >1
               <tr>
                 <td>High ET</td>
                 <td>$yesterday.ET.max</td>
@@ -372,16 +387,30 @@
                 <td>$yesterday.radiation.max</td>
                 <td>$yesterday.radiation.maxtime</td>
               </tr>
+              #end if
+	      #if $yesterday.lux.has_data
               <tr>
-                <td>Low Radiation</td>
-                <td>$yesterday.radiation.min</td>
-                <td>$yesterday.radiation.mintime</td>
+                <td>Brightness</td>
+                <td>$yesterday.lux.max</td>
+		<td>$yesterday.lux.maxtime</td> 
+              </tr>
+              #end if
+	      #if $yesterday.lightningStrikes.has_data
+              <tr>
+                <td>Lightning Strikes</td>
+                <td>$yesterday.lightningStrikes.sum</td>
+		<td></td>
+              </tr>
+	      <tr>
+                <td>Average Strike Distance</td>
+                <td>$yesterday.lightningAvgDistance.avg</td>
+		<td></td>
               </tr>
               #end if
             </table>
           </div>
           <div class="card" >
-            <h1><i class="fa fa-calendar m-orange" ></i> This Month</h1>
+            <h1><i class="far fa-calendar-alt m-orange" ></i> This Month</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -468,6 +497,7 @@
                 <td>$month.wind.vecdir</td>
                 <td></td>
               </tr>
+	      #if $month.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$month.inTemp.max</td>
@@ -478,6 +508,7 @@
                 <td>$month.inTemp.min</td>
                 <td>$month.inTemp.mintime</td>
               </tr>
+	      #end if
               #if $month.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -492,17 +523,12 @@
               #end if
               #if $month.UV.has_data
               <tr>
-                <td>High UV</td>
+                <td>High UV Index</td>
                 <td>$month.UV.max</td>
                 <td>$month.UV.maxtime</td>
               </tr>
-              <tr>
-                <td>Low UV</td>
-                <td>$month.UV.min</td>
-                <td>$month.UV.mintime</td>
-              </tr>
               #end if
-              #if $month.ET.has_data and $month.ET.sum.raw >0.0
+              #if $month.ET.has_data and $month.ET.sum.raw >1
               <tr>
                 <td>High ET</td>
                 <td>$month.ET.max</td>
@@ -520,10 +546,24 @@
                 <td>$month.radiation.max</td>
                 <td>$month.radiation.maxtime</td>
               </tr>
+	      #end if
+	      #if $month.lux.has_data
               <tr>
-                <td>Low Radiation</td>
-                <td>$month.radiation.min</td>
-                <td>$month.radiation.mintime</td>
+                <td>High Brightness</td>
+                <td>$month.lux.max</td>
+		<td>$month.lux.maxtime</td>
+              </tr>
+              #end if
+	      #if $month.lightningStrikes.has_data
+	      <tr>
+                <td>Max Lightning Day</td>
+                <td>$month.lightningStrikes.max</td>
+		<td>$month.lightningStrikes.maxtime</td>
+              </tr>
+              <tr>
+                <td>Lightning Total</td>
+                <td>$month.lightningStrikes.sum</td>
+		<td></td>
               </tr>
               #end if
             </table>
@@ -531,21 +571,28 @@
         </div>
         <div class="right" >
           <div class="card cc graphs" >
-            <h1><i class="fa fa-line-chart m-gruen" ></i> Weekly Statistics and Plots</h1>
+            <h1><i class="far fa-chart-line m-gruen" ></i> Weekly Statistics and Plots</h1>
             <img src="weektempdew.png" alt="temperatures" />
             <img src="weekrain.png" alt="rain" />
             <img src="weekwind.png" alt="wind" />
             <img src="weekwinddir.png" alt="Hi Wind" />
             <img src="weekwindvec.png" alt="Wind Vector" />
-            <img src="weektempchill.png" alt="heatchill" />
             <img src="weekbarometer.png" alt="barometer"/>
+	    #if $week.inTemp.has_data
             <img src="weekinside.png" alt="Inside" />
+	    #end if
             <img src="weekinhumid.png" alt="Inside/Outside Humidity" />
             #if $week.UV.has_data
             <img src="weekuv.png" alt="UV index" />
             #end if
             #if $week.radiation.has_data
             <img src="weekradiation.png" alt="Radiation" />
+            #end if
+	    #if $week.lightningStrikes.has_data
+            <img src="weeklightning.png" alt="Lightning" />
+	    #end if
+	    #if $week.windBatteryStatus.has_data and $week.outTempBatteryStatus.has_data
+            <img src="weekbattery.png" alt="week battery"/>
             #end if
             #if $week.rxCheckPercent.has_data
             <img src="weekrx.png" alt="week rx percent"/>
@@ -561,16 +608,16 @@
       <div class="container-fix">
         <div style="text-align:center">
           #if $Extras.has_key('you')
-          <i class="fa fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+          <i class="fab fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
           #end if
           &sdot;
-          Copyright <i class="fa fa-copyright"></i> $latest.dateTime.format("%Y") 
+          Copyright <i class="far fa-copyright"></i> $latest.dateTime.format("%Y") 
           <br>
           Sofaskin by <a href="http://blauesledersofa.de">Blaues Ledersofa</a>
           &sdot;
           CW9009 Version by <a href="http://cw9009.x10host.com">JDS</a>
           &sdot;
-          Powered by<i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
+          Powered by<i class="far fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
         </div>
       </div>
     </footer>
