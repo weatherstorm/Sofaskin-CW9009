@@ -44,6 +44,7 @@ https://github.com/brewster76/fuzzy-archer/blob/master/INSTALL
 <b>IMPORTANT:</b>
 You should update the variables in the EXTRA section of the skin.conf file to match your station information. Example section below:
 
+```
 [Extras]
     # Template Extras
  
@@ -73,5 +74,5 @@ You should update the variables in the EXTRA section of the skin.conf file to ma
     #CWOP
     #cwop = 
     #cwop_url = 
-
+```
 If you have problems, you can email me at josh@cw9009.x10host.com  
