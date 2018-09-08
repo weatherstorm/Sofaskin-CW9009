@@ -48,32 +48,24 @@ You should update the variables in the EXTRA section of the skin.conf file to ma
     # Template Extras
  
     # Website URL
-    # web_url = 
+    #web_url = 
 
-    # Current radar image
-    #radar_img = 
-    # Current radar animation (starts on radar_img hover)
-    #radar_gif = 
-    # Hyperlink for radar
-    #radar_url = 
+    # radar
+    #radar = '<iframe class="iframe" src="https://embed.windy.com/embed2.html?lat=43.555&lon=-116.348&zoom=9&level=surface&overlay=radar&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=43.555&detailLon=-116.348&metricWind=default&metricTemp=default&radarRange=-1"></iframe>'
 
     # Lightning map and hyperlink
     #lightning_map = http://images.lightningmaps.org/blitzortung/america/index.php?map=usa&period=0.25
     #lightning_url = http://www.lightningmaps.org/realtime 
 
-    # URL for another radar (for example full Europe, Frankfurt center)
-    #radar_url_alt = 
-    #radar_url_alt_text = 
-
     # You. Only shows up in footer
-    #you = "Your Name"
-    #emailname = "Email"
-    #email = ""
-    
+    #you = 
+    #emailname = 
+    #email =  
+   
     # Camera link
     # camera and cameratitle are arrays of the camera links and camera names. 
-    #cameratitle = "Linder - McMillan", "Ten Mile - McMillan"
-    #camera = http://www.achdidaho.org/ATIS/CCTV/CCTV_677.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_664.jpg
+    #cameratitle = "Hwy 69 - Amity", "Victory - Five Mile", "Reflection Ridge", "Bridgeview South"
+    #camera = http://www.achdidaho.org/ATIS/CCTV/CCTV_588.jpg, http://www.achdidaho.org/ATIS/CCTV/CCTV_649.jpg, https://icons.wunderground.com/webcamramdisk/l/a/lakearrowheadnw/3/current.jpg?1535944393, https://icons.wunderground.com/webcamramdisk/m/i/miralem77/4/current.jpg?1536106630  
     
     # Google Analytics ID
     #googleAnalyticsId = 
@@ -81,17 +73,5 @@ You should update the variables in the EXTRA section of the skin.conf file to ma
     #CWOP
     #cwop = 
     #cwop_url = 
-
-    #mesowest
-    #mwest = 
-    #mwest_url = 
-
-    #weather underground
-    #wunderground = 
-    #wu_url = 
-
-    #CoCoRaHS
-    #crahs = 
-    #crahs_url = 
 
 If you have problems, you can email me at josh@cw9009.x10host.com  
