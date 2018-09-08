@@ -739,6 +739,14 @@ table.tablespacer td {
 table.tablespacer tr:not(:last-child) {
   border-bottom: 1px solid #ebebeb; }
 
+/*For about pages data table*/
+td.about {
+  width: 70px;}
+
+.iframe {
+  width: 100%;
+  height: 300px; }
+
 /*Gray*/
 .m-grau {
   color: #8a8a8a; }
