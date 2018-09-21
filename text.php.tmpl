@@ -30,9 +30,9 @@ if (\$count == 4){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Refresh" content="180">
 	#if $Extras.has_key('cwop')
-        <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+        <meta name="description" content="$station.location Weather Station ($Extras.cwop) Climate Summary. This web site is powered by WeeWX">
         #else
-        <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+        <meta name="description" content="$station.location Weather Station Climate Summary. This web site is powered by WeeWX">
 	#end if
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -51,13 +51,13 @@ if (\$count == 4){
 	#end if
 
         <!-- Open Graph -->
-        <meta property="og:site_name" content="$station.location Summaries and Records" />
-	<meta property="og:title" content="Climate Summaries"/>
+        <meta property="og:site_name" content="$station.location Weather Station Climate Summary. This web site is powered by WeeWX." />
+	<meta property="og:title" content="$station.location Weather Station Climate Summary"/>
 	#if $Extras.has_key('web_url')
 	<meta property="og:url" content="$Extras.web_url/summary.html"/>
 	#end if
-        <meta property="og:description" content="Climate Summaries for $station.location - weather web site powered by WeeWX" />
-	<meta property="og:type" content="website" />
+        <meta property="og:description" content="$station.location Weather Station Climate Summary. This web site is powered by WeeWX." />
+	<meta property="og:type" content="$station.location Weather Station Climate Summary" />
 
         <!-- FavIcons -->
         <link rel="icon" href="favicon.ico" type="image/png">
@@ -69,9 +69,9 @@ if (\$count == 4){
 
 	<!-- Font Awesome CDN links for 5.3-->
 	<!-- If you have a pro license --!>
-	<!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
 	<!-- Free license --!>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> --!>
    
         <!-- Skripte -->
         <script src="js/modernizr-2.6.2.min.js"></script>
@@ -87,7 +87,7 @@ if (\$count == 4){
                 <h1><i class="fas fa-cloud" ></i> $station.location </h1>
                 <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fas fa-map-marker-alt" ></i> Show on map</a></p>
 <?php
-          echo "<h2>Climate Summary \$title</h2>";
+          echo "<h2>Climate Summary for \$title</h2>";
 ?>
                 <p><i class="far fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
 		<p id="freshweather" class="m-orange"></p>

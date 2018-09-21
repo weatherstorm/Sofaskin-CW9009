@@ -4,17 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Refresh" content="180">
+    <!-- Google verification tag -->
+    <meta name="google-site-verification" content="skDuSC68YDlkfq2GfylRvmzM4WE5RgCKZIV275lKZ1A" />
     #if $Extras.has_key('cwop')
-    <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
     #else
-    <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. ">
     #end if
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     #if $Extras.has_key('web_url')
     <link rel="canonical" href="$Extras.web_url"/>
     #end if
-    <title>$station.location Current Weather Conditions</title>
+    <title>Current Weather Conditions for $station.location</title>
     <!-- Open Graph -->
     #if $Extras.has_key('cwop')
     <meta property="og:site_name" content="$station.location Weather Station ($Extras.cwop)" />
@@ -28,25 +30,25 @@
     <meta property="og:url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta property="og:description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta property="og:description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #end if
     <meta property="og:type" content="website" />
     <!--SM Markups -->
     #if $Extras.has_key('cwop')
-    <meta itemprop="name" content="$station.location ($Extras.cwop) Current Weather Conditions"/>
+    <meta itemprop="name" content="Current Weather Conditions for station.location ($Extras.cwop) "/>
     #else
-    <meta itemprop="name" content="$station.location Current Weather Conditions"/>
+    <meta itemprop="name" content="Current Weather Conditions for $station.location"/>
     #end if
     <meta itemprop="image" content="$Extras.web_url/daytempdew.png"/>
     #if $Extras.has_key('web_url')
     <meta itemprop="url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta itemprop="description" content="Current Weather Conditions in $station.location ($Extras.cwop) - weather web site powered by WeeWX" />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta itemprop="description" content="Current Weather Conditions in $station.location - weather web site powered by WeeWX" />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #end if
 
     <!-- FavIcons -->
@@ -59,9 +61,9 @@
 
     <!-- Font Awesome CDN links for 5.3-->
     <!-- If you have a pro license -->
-    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
     <!-- Free license -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
     
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -314,12 +316,12 @@
                 <td></td>
               </tr>
               <tr>
-                <td>Vector Average Speed</td>
+                <td>Vector Avg Speed</td>
                 <td>$day.wind.vecavg</td>
                 <td></td>
               </tr>
               <tr>
-                <td>Vector Average Direction</td>
+                <td>Vector Avg Direction</td>
                 <td>$day.wind.vecdir</td>
                 <td></td>
               </tr>

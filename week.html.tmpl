@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Refresh" content="180">
     #if $Extras.has_key('cwop')
-    <meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+    <meta name="description" content="Weekly weather summary for $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
     #else
-    <meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+    <meta name="description" content="Weekly weather summary for $station.location. This web site is powered by WeeWx. >
     #end if
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -17,11 +17,11 @@
     <title itemprop="name">$station.location Weekly Weather Summary</title>
     <!-- Open Graph -->
     <meta property="og:site_name" content="$station.location Weekly Weather Summary" />
-    <meta property="og:title" content="Weekly Weather Summary"/>
+    <meta property="og:title" content="Weekly Weather Summary for $station.location"/>
     #if $Extras.has_key('web_url')
     <meta property="og:url" content="$Extras.web_url/week.html"/>
     #end if
-    <meta property="og:description" content="Weekly Weather Summary for $station.location - weather web site powered by WeeWX" />
+    <meta property="og:description" content="Weekly weather summary for $station.location. This web site is powered by WeeWX" />
     <meta property="og:type" content="website" />
     <!-- FavIcons -->
     <link rel="icon" href="favicon.ico" type="image/png">
@@ -33,9 +33,9 @@
 
     <!-- Font Awesome CDN links for 5.3-->
     <!-- If you have a pro license -->
-    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
     <!-- Free license -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -334,7 +334,7 @@
                 <td></td>
               </tr>
               <tr>
-                <td>Vector Average Direction</td>
+                <td>Vector Avg Direction</td>
                 <td>$yesterday.wind.vecdir</td>
                 <td></td>
               </tr>
