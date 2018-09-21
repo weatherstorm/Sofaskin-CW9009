@@ -5,9 +5,9 @@
      	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta http-equiv="Refresh" content="180">
 	#if $Extras.has_key('cwop')
-     	<meta name="description" content="$station.location Weather Station ($Extras.cwop) - weather web site powered by WeeWX">
+     	<meta name="description" content="About the $station.hardware $station.location Weather Station ($Extras.cwop). This web site is powered by WeeWX">
      	#else
-     	<meta name="description" content="$station.location Weather Station - weather web site powered by WeeWX">
+     	<meta name="description" content="About the $station.hardware $station.location Weather Station. This web site is powered by WeeWX">
 	#end if
 	<meta name="viewport" content="width=device-width, initial-scale=1">
      	<link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -15,15 +15,15 @@
 	<link href="$Extras.web_url/about.html" itemprop="url"/>
 	#end if
         
-	<title itemprop="name">About $station.location Weather Station</title>
+	<title itemprop="name">About the $station.location Weather Station</title>
         
         <!-- Open Graph -->
-	<meta property="og:site_name" content="$station.location Station Information" />
+	<meta property="og:site_name" content="About the $station.location Weather Station" />
 	<meta property="og:title" content="About the Station"/>
 	#if $Extras.has_key('web_url')
 	<meta property="og:url" content="$Extras.web_url/about.html"/>
 	#end if
-	<meta property="og:description" content="About $station.location - weather web site powered by WeeWX" />
+	<meta property="og:description" content="About the $station.hardware $station.location Weather Station. This web site is powered by WeeWX" />
 	<meta property="og:type" content="website" />
 	
 	<!-- FavIcons -->
@@ -98,114 +98,8 @@
      <div class="main" >
         <div class="container" >
 		<div class="card">
-        		<h1><i class="fal fa-info-circle"></i> About the Station</h1>
-        		Weather data from a <a href="http://weatherflow.com/smart-home-weather-stations">WeatherFlow Smart Weather Station</a> which is located about 5 miles south-southeast of Meridian, Idaho, is sent to this website every 2.5 minutes. This is a personal
-        		weather station which has been running since August 30, 2018. The station provides the following weather data:
-        		<br>
-        		<br> Temperature
-        		<br> Dewpoint
-        		<br> Humidity
-        		<br> Wind Speed and Direction
-        		<br> Rain and rain intensity
-        		<br> Barometric Pressure
-        		<br> UV
-        		<br> Solar Radiation
-        		<br> Lightning Strikes and distance
-        		<br>
-        		<br> Data is also sent to:
-        		<br>
-        		<table>
-		          <tr>
-		            <td class="about">
-		              <img src="http://cw9009.x10host.com/icons/cwop.png" title="CWOP" alt="cwop" height="60" width="60" />
-		            </td>
-		            <td>
-		              <a href="http://www.findu.com/cgi-bin/wxpage.cgi?call=CW9009&last=24" target="_blank"> CW9009</a> on CWOP (every 10 minutes)
-		            </td>
-		          </tr>
-		          <tr>
-		            <td class="about">
-		              <img src="http://cw9009.x10host.com/icons/mesowest.png" height="60" width="60" title="Mesowest" alt="C9009" />
-		            </td>
-		            <td>
-		              <a href="https://mesowest.utah.edu/cgi-bin/droman/meso_base_dyn.cgi?stn=C9009&unit=0&timetype=LOCAL" target="_blank"> C9009</a> on Mesowest (every 10 minutes)
-		            </td>
-		          </tr>
-		          <tr>
-		            <td class="about">
-		              <img src="http://cw9009.x10host.com/icons/wu.png" title="Weather Underground" alt="KIDMERID85" height="40" width="60" />
-		            </td>
-		            <td>
-		              <a href="https://www.wunderground.com/personal-weather-station/dashboard?ID=KIDMERID85" target="_blank"> KIDMERID85</a> on Weather Underground (every 60 seconds)
-		            </td>
-		          </tr>
-		          <tr>
-		            <td class="about">
-		              <img src="http://cw9009.x10host.com/icons/weatherflow.png" title="WeatherFlow" alt="4952" height="60" width="60" />
-		            </td>
-		            <td>
-		              <a href="https://smartweather.weatherflow.com/share/4952/grid" target="_blank"> 4952</a> on WeatherFlow (every 60 seconds)
-		            </td>
-		          </tr>
-		     	</table>
-        		<br>
-        		Daily rain and snowfall observations is taken near the WeatherFlow Station. This data is available here:
-        		<br>
-			<table>
-		          <tr>
-		            <td class="about">
-			      <img src="http://cw9009.x10host.com/icons/CoCoRaHS.png" height="60" width="60" title="CoCoRaHS" alt="CoCoRaHS" />
-		            </td>
-		            <td>
-			      <a href="https://www.cocorahs.org/ViewData/CountyDailyPrecipReports.aspx?state=ID&county=AD" target="_blank"> ID-AD-45</a> on CoCoRaHS (daily around 700 AM LT)
-		            </td>
-		          </tr>
-			</table>
-        		<br>
-        		<br> Software:
-        		<br>
-        		<a href="http://weewx.com/" target="_blank">WeeWX v3.8.2</a> using the <a href="https://github.com/captain-coredump/weatherflow-udp" target="_blank">weatherflowUDP driver</a> <i class="fab fa-github"></i>
-        		<br>
-        		<a href="http://fontawesome.com/" target="_blank">Font Awesome</a> icons <i class="fab fa-fort-awesome-alt"></i> used in the template.
-        		<br>
-        		<br> Hardware:
-        		<br>
-        		<a href="https://www.raspberrypi.org/" target="_blank">Raspberry Pi 2 Model B</a>
-        		<br>
-        		<br>
-      		</div>
-
-      		<div class="card">
-        		<h1><i class="far fa-code"></i> Site Code</h1>
-        		<p>
-          		This web site uses the Sofaskin template for <a href="http://www.weewx.com">WeeWX</a>, designed by Sven at <a href="http://neoground.com/projects/weewx/">Neoground</a>. Sofaskin is a custom skin modelled from Google's Material Design that uses
-          		<a href="http://getbootstrap.com">Bootstrap</a> to display the weather data. I made a variety of functional changes to the original Sofaskin code which is available on GitHub. My Sofaskin-CW9009 skin needs an additional python script, historygenerator.py,
-          		which was adapted from another skin, <a href="http://www.dajda.net/about.html">Dajda.net</a>, to generate the history tables. I have also incorporated some changes in this template by <a href="http://www.torkel.se/weather/index.html">Bjorn Torkelsson</a>.
-          		The code for the web page skins and python script is available from the web sites below.
-          		<br><br> Original Sofaskin template from Neoground:
-          		<br>
-          		<i class="far fa-external-link-square-alt fa-lg"> </i><a href="http://neoground.com/projects/weewx/" target="_blank"> Neoground</a>
-          		<br><br> My Sofaskin-CW9009 template:
-          		<br><i class="fab fa-github-square fa-lg"> </i> <a href="http://github.com/weatherstorm/Sofaskin-CW9009" target="_blank"> Github Repository</a>
-          		<br><br> Dajda template for historygenerator.py code:
-          		<br>
-          		<i class="far fa-external-link-square-alt fa-lg"></i> <a href="http://www.dajda.net/about.html" target="_blank"> Dajda</a>
-          		<br>
-          		<i class="fab fa-github-square fa-lg"></i> <a href="http://github.com/brewster76/fuzzy-archer" target="_blank"> Dajda Github Repository</a>
-          		<br>
-          		<br>
-        		</p>
-      		</div>
-
-      		<div class="card">
-        		<h1><i class="fas fa-envelope m-rot"></i> Contact</h1>
-        		<div class="contact">
-          		Josh Smith
-          		<br>
-          		<a href=mailto:Josh@cw9009.x10host.com>Josh@cw9009.x10host.com</a>
-        		</div>
-      		</div>
-
+			<p> Put whatever station information you would like. </p>	        		
+        	</div>		      	
     </div>
   </div>
    
