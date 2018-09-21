@@ -6,7 +6,7 @@ Sofaskin V1.1 is developed by Sven at Neoground: http://projects.neoground.com/s
 - Added more variables in the skin.conf files to help customize the pages. 
 - Removed monthly and yearly summary drop down list and added a separate summaries page. 
 - Used all-time records weewx variables to create records table.
-- Added a station page for station history and information along with links to weather networks where data is sent.  
+- Added a station page for station information along with links to weather networks where data is sent.  
 - Added Menu button for smaller screens.
 - Auto page refresh every ten minutes.
 - Added code from the dajda.net to produce history tables.The historygenerator.py script must be added to WeeWx in order for the - tables to work.
