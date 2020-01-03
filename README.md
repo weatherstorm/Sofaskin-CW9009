@@ -1,7 +1,7 @@
 # Sofaskin-CW9009
 CW9009 Meridian code modifications to Sofaskin web page for Weewx originally developed by Sven at http://neoground.com/projects/weewx. Please see the readme for dependency requirements to use this skin. An Italian version of these directions are available at http://micae.it/2017/12/28/sofaskin-italiano/. 
 
-Sofaskin V1.1 is developed by Sven at Neoground: http://projects.neoground.com/sofaskin. ***Sven no longer supports the original skin.*** This is a great template but I made some modifications to suit my needs. I also added some code from another template by <a href="http://www.dajda.net">dajda.net</a> to make the history and NOAA Tables. There is also code additions from <a href=http://www.torkel.se/weather/index.html> Björn Torkelsson</a>. A list of the changes are listed below along with instructions to setup the history tables. 
+Sofaskin V1.1 is developed by Sven at Neoground: https://neoground.com/portfolio/neowx/. ***Sven no longer supports the original skin.*** This is a great template but I made some modifications to suit my needs. I also added some code from another template by <a href="http://www.dajda.net">dajda.net</a> to make the history and NOAA Tables. There is also code additions from <a href=http://www.torkel.se/weather/index.html> Björn Torkelsson</a>. A list of the changes are listed below along with instructions to setup the history tables. 
 
 - Added more variables in the skin.conf files to help customize the pages. 
 - Removed monthly and yearly summary drop down list and added a separate summaries page. 
