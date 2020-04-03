@@ -5,7 +5,7 @@
 #
 """Extends the Cheetah generator search list to add html historic data tables in a nice colour scheme.
 
-Tested on Weewx release 3.0.1.
+Tested on Weewx release 3.8.2.
 Works with all databases.
 Observes the units of measure and display formats specified in skin.conf.
 
@@ -41,11 +41,15 @@ Adding the section below to your skins.conf file will create these new tags:
     # For example,  the [min_temp] example below, if the minimum temperature measured in
     # a month is between -50 and -10 (degC) then the cell will be shaded in html colour code #0029E5.
     #
+    # colours = background colour
+    # fontColours = foreground colour [optional, defaults to black if omitted]
+
 
     # Default is temperature scale
     minvalues = -50, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35
     maxvalues =  -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 60
     colours =   "#0029E5", "#0186E7", "#02E3EA", "#04EC97", "#05EF3D2, "#2BF207", "#8AF408", "#E9F70A", "#F9A90B", "#FC4D0D", "#FF0F2D"
+    fontColours =   "#FFFFFF", "#FFFFFF", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#FFFFFF"
     monthnames = Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
 
     # The Raspberry Pi typically takes 15+ seconds to calculate all the summaries with a few years of weather date.
@@ -67,11 +71,13 @@ Adding the section below to your skins.conf file will create these new tags:
     [[rain]]
         obs_type = rain
         aggregate_type = sum
+        data_binding = alternative_binding
 
         # Override default temperature colour scheme with rain specific scale
         minvalues = 0, 25, 50, 75, 100, 150
         maxvalues = 25, 50, 75, 100, 150, 1000
         colours = "#E0F8E0", "#A9F5A9", "#58FA58", "#2EFE2E", "#01DF01", "#01DF01"
+        fontColours = "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"
 """
 
 from datetime import datetime
@@ -92,7 +98,7 @@ class MyXSearch(SearchList):
         # Calculate the tables once every refresh_interval mins
         self.refresh_interval = int(self.table_dict.get('refresh_interval', 5))
         self.cache_time = 0
-
+        
         self.search_list_extension = {}
 
         # Make bootstrap specific labels in config file available to
@@ -122,29 +128,11 @@ class MyXSearch(SearchList):
         # Time to recalculate?
         if (time.time() - (self.refresh_interval * 60)) > self.cache_time:
             self.cache_time = time.time()
-
-            #
-            # The all time statistics
-            #
-
-            # If this generator has been called in the [SummaryByMonth] or [SummaryByYear]
-            # section in skin.conf then valid_timespan won't contain enough history data for
-            # the colourful summary tables.
-            alltime_timespan = weeutil.weeutil.TimeSpan(db_lookup().first_timestamp, db_lookup().last_timestamp)
-
-
-            # First, get a TimeSpanStats object for all time. This one is easy
-            # because the object valid_timespan already holds all valid times to be
-            # used in the report.
-            all_stats = TimespanBinder(alltime_timespan, db_lookup, formatter=self.generator.formatter,
-                                      converter=self.generator.converter)
-
-            # Now create a small dictionary with keys 'alltime' and 'seven_day':
-            self.search_list_extension['alltime'] = all_stats
-
+            
             #
             #  The html history tables
             #
+            
             t1 = time.time()
             ngen = 0
 
@@ -153,18 +141,40 @@ class MyXSearch(SearchList):
 
                 table_options = weeutil.weeutil.accumulateLeaves(self.table_dict[table])
 
+                
+                # Get the binding where the data is allocated
+                binding = table_options.get('data_binding', 'wx_binding')
+
+                #
+                # The all time statistics
+                #
+
+                # If this generator has been called in the [SummaryByMonth] or [SummaryByYear]
+                # section in skin.conf then valid_timespan won't contain enough history data for
+                # the colourful summary tables. Use the data binding provided as table option.
+                alltime_timespan = weeutil.weeutil.TimeSpan(db_lookup(data_binding=binding).first_timestamp, db_lookup(data_binding=binding).last_timestamp)
+
+
+                # First, get a TimeSpanStats object for all time. This one is easy
+                # because the object valid_timespan already holds all valid times to be
+                # used in the report. se the data binding provided as table option.
+                all_stats = TimespanBinder(alltime_timespan, db_lookup, data_binding=binding, formatter=self.generator.formatter,
+                                          converter=self.generator.converter)
+
+                # Now create a small dictionary with keys 'alltime' and 'seven_day':
+                self.search_list_extension['alltime'] = all_stats
+                          
                 # Show all time unless starting date specified
                 startdate = table_options.get('startdate', None)
                 if startdate is not None:
-                    table_timespan = weeutil.weeutil.TimeSpan(int(startdate), db_lookup().last_timestamp)
-                    table_stats = TimespanBinder(table_timespan, db_lookup, formatter=self.generator.formatter,
+                    table_timespan = weeutil.weeutil.TimeSpan(int(startdate), db_lookup(binding).last_timestamp)
+                    table_stats = TimespanBinder(table_timespan, db_lookup, data_binding=binding, formatter=self.generator.formatter,
                                       converter=self.generator.converter)
                 else:
                     table_stats = all_stats
-
+                
                 table_name = table + '_table'
-                self.search_list_extension[table_name] = self._statsHTMLTable(table_options, table_stats, table_name,
-                                                                              NOAA=noaa)
+                self.search_list_extension[table_name] = self._statsHTMLTable(table_options, table_stats, table_name, binding, NOAA=noaa)
                 ngen += 1
 
             t2 = time.time()
@@ -174,24 +184,48 @@ class MyXSearch(SearchList):
 
         return [self.search_list_extension]
 
-    def _statsHTMLTable(self, table_options, table_stats, table_name, NOAA=False):
+    def _parseTableOptions(self, table_options, table_name):
+        """Create an orderly list containing lower and upper thresholds, cell background and foreground colors
+        """
+
+        # Check everything's the same length
+        l = len(table_options['minvalues'])
+
+        for i in [table_options['maxvalues'], table_options['colours']]:
+            if len(i) != l:
+                syslog.syslog(syslog.LOG_INFO, "%s: minvalues, maxvalues and colours must have the same number of elements in table: %s"
+                              % (os.path.basename(__file__), table_name))
+                return None
+
+        font_color_list = table_options['fontColours'] if 'fontColours' in table_options else ['#000000'] * l
+
+        return zip(table_options['minvalues'], table_options['maxvalues'], table_options['colours'], font_color_list)
+
+
+    def _statsHTMLTable(self, table_options, table_stats, table_name, binding, NOAA=False):
         """
         table_options: Dictionary containing skin.conf options for particluar table
         all_stats: Link to all_stats TimespanBinder
         """
 
-        bgColours = zip(table_options['minvalues'], table_options['maxvalues'], table_options['colours'])
+        cellColours = self._parseTableOptions(table_options, table_name)
+
+        summary_column = weeutil.weeutil.to_bool(table_options.get("summary_column", False))
+
+        if None is cellColours:
+            # Give up
+            return None
 
         if NOAA is True:
             unit_formatted = ""
         else:
-            obs_type = table_options['obs_type']
-            aggregate_type = table_options['aggregate_type']
-            converter = table_stats.converter
-
+            obs_type = table_options['obs_type']                                  
+            aggregate_type = table_options['aggregate_type']                      
+            converter = table_stats.converter      
+             
             # obs_type
-            readingBinder = getattr(table_stats, obs_type)
-
+            readingBinder = getattr(table_stats, obs_type) 
+            
             # Some aggregate come with an argument
             if aggregate_type in ['max_ge', 'max_le', 'min_le', 'sum_ge']:
 
@@ -217,9 +251,12 @@ class MyXSearch(SearchList):
                     syslog.syslog(syslog.LOG_INFO, "%s: aggregate_type %s not found" % (os.path.basename(__file__),
                                                                                         aggregate_type))
                     return "Could not generate table %s" % table_name
-
-            unit_type = reading.converter.group_unit_dict[reading.value_t[2]]
-
+            
+            try:        
+                unit_type = reading.converter.group_unit_dict[reading.value_t[2]]
+            except KeyError:
+                syslog.syslog(syslog.LOG_INFO, "%s: obs_type %s no unit found" % (os.path.basename(__file__),
+                                                                                        obs_type))
             unit_formatted = ''
 
             # 'units' option in skin.conf?
@@ -248,6 +285,11 @@ class MyXSearch(SearchList):
         for mon in table_options.get('monthnames', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']):
             htmlText += "        <th>%s</th>" % mon
 
+        if summary_column:
+            if 'summary_heading' in table_options:
+                htmlText += "        <th></th>"
+                htmlText += "        <th align=\"center\">%s</th>\n" % table_options['summary_heading']
+
         htmlText += "    </tr>"
         htmlText += "    </thead>"
         htmlText += "    <tbody>"
@@ -274,52 +316,70 @@ class MyXSearch(SearchList):
                     else:
                         htmlLine += self._NoaaCell(datetime.fromtimestamp(month.timespan[0]), table_options)
                 else:
+                    # update the binding to access the right DB
+                    obsMonth = getattr(month, obs_type)
+                    obsMonth.data_binding = binding;
                     if unit_type == 'count':
                         try:
-                            value = getattr(getattr(month, obs_type), aggregate_type)((threshold_value, threshold_units)).value_t
+                            value = getattr(obsMonth, aggregate_type)((threshold_value, threshold_units)).value_t
                         except:
                             value = [0, 'count']
-                    else:
-                        value = converter.convert(getattr(getattr(month, obs_type), aggregate_type).value_t)
+                    else:      
+                        value = converter.convert(getattr(obsMonth, aggregate_type).value_t)
 
-                    htmlLine += (' ' * 12) + self._colorCell(value[0], format_string, bgColours)
+                    htmlLine += (' ' * 12) + self._colorCell(value[0], format_string, cellColours)
+
+            if summary_column:
+                obsYear = getattr(year, obs_type)
+                obsYear.data_binding = binding;
+
+                if unit_type == 'count':
+                    try:
+                        value = getattr(obsYear, aggregate_type)((threshold_value, threshold_units)).value_t
+                    except:
+                        value = [0, 'count']
+                else:
+                    value = converter.convert(getattr(obsYear, aggregate_type).value_t)
+
+
+                htmlLine += (' ' * 12) + "<td></td>\n"
+                htmlLine += (' ' * 12) + self._colorCell(value[0], format_string, cellColours, center=True)
 
             htmlLine += (' ' * 8) + "</tr>\n"
 
             htmlText += htmlLine
 
-	#extra </tr> that's not needed
-        #htmlText += (' ' * 8) + "</tr>\n"
+        htmlText += (' ' * 8) + "</tr>\n"
         htmlText += (' ' * 4) + "</tbody>\n"
         htmlText += "</table>\n"
 
         return htmlText
 
-    def _colorCell(self, value, format_string, bgColours):
-        """Returns a '<td> bgcolor = xxx y.yy </td>' html table entry string.
+    def _colorCell(self, value, format_string, cellColours, center=False):
+        """Returns a '<td style= background-color: XX; color: YY"> z.zz </td>' html table entry string.
 
         value: Numeric value for the observation
         format_string: How the numberic value should be represented in the table cell.
-        bgColours: An array containing 3 lists. [minvalues], [maxvalues], [html colour code]
+        cellColours: An array containing 4 lists. [minvalues], [maxvalues], [background color], [foreground color]
         """
 
+        cellText = "<td"
+
+        if center:
+            cellText += " align=\"center\""
+
         if value is not None:
-            cellText = "<td"
 
-	    #changed background color code to HTML5
-            for c in bgColours:
-                if (value >= int(c[0])) and (value <= int(c[1])):
-                    cellText += " style=\"background-color: %s\"" % c[2]
 
-            #for c in bgColours:
-            #    if (value >= int(c[0])) and (value <= int(c[1])):
-            #        cellText += " bgcolor = \"%s\"" % c[2]
+            for c in cellColours:
+                if (value >= float(c[0])) and (value <= float(c[1])):
+                    cellText += " style=\"background-color:%s; color:%s\"" % (c[2], c[3])
 
             formatted_value = format_string % value
-            cellText += "> %s </td>" % formatted_value
+            cellText += "> %s </td>\n" % formatted_value
 
         else:
-            cellText = "<td>-</td>\n"
+            cellText += ">-</td>\n"
 
         return cellText
 
@@ -334,3 +394,4 @@ class MyXSearch(SearchList):
                    (dt.strftime(table_options['year_filename']), dt.strftime("%Y"))
 
         return cellText
+
