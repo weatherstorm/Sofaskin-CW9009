@@ -239,6 +239,7 @@
 		<td>$month.lux.maxtime</td>
               </tr>
               #end if
+	      <!-- Lightning data not needed for most stations
 	      #if $month.lightningStrikes.has_data
 	      <tr>
                 <td>Max Lightning Day</td>
@@ -251,6 +252,7 @@
 		<td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
 	 #if $month($months_ago=12).outTemp.max.string != "   N/A"
@@ -394,6 +396,7 @@
 		<td>$month($months_ago=12).lux.maxtime</td>
               </tr>
               #end if
+	      <!-- Most stations don't use lightning data
 	      #if $month($months_ago=12).lightningStrikes.has_data
 	      <tr>
                 <td>Max Lightning Day</td>
@@ -406,6 +409,7 @@
 		<td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
 	  #end if
