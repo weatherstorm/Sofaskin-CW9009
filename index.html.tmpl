@@ -227,6 +227,7 @@
                 <td>$current.lux</td>
               </tr>
               #end if
+	      <!--
 	      #if $day.lightningStrikes.has_data
               <tr>
                 <td>Lightning Strikes</td>
@@ -237,6 +238,7 @@
                 <td>$current.lightningAvgDistance</td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
           <div class="card" >
@@ -396,6 +398,7 @@
                 <td>$day.lux.maxtime</td>
               </tr>
               #end if
+	      <!--
 	      #if $day.lightningStrikes.has_data
               <tr>
                 <td>Lightning Strikes</td>
@@ -408,6 +411,7 @@
 		<td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
           
@@ -821,9 +825,11 @@
             #if $day.rxCheckPercent.has_data
             <img src="dayrx.png" alt="day rx percent"/>
             #end if
+	    <!--
 	    #if $day.lightningStrikes.has_data
             <img src="daylightning.png" alt="Lightning" />
 	    #end if
+	    -->
 	    #if $day.windBatteryStatus.has_data and $day.outTempBatteryStatus.has_data
             <img src="daybattery.png" alt="day battery"/>
             #end if
