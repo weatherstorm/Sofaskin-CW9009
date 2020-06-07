@@ -239,6 +239,7 @@
                 <td>$week.lux.maxtime</td>
               </tr>
               #end if
+	      <!-- Most stations don't collect lightning data
 	      #if $week.lightningStrikes.has_data
               <tr>
                 <td>Most Lightning Strikes</td>
@@ -256,6 +257,7 @@
                 <td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
           <div class="card" >
@@ -397,6 +399,7 @@
 		<td>$yesterday.lux.maxtime</td> 
               </tr>
               #end if
+	      <!-- Most stations don't collect lightning data
 	      #if $yesterday.lightningStrikes.has_data
               <tr>
                 <td>Lightning Strikes</td>
@@ -409,6 +412,7 @@
 		<td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
           <div class="card" >
@@ -556,6 +560,7 @@
 		<td>$month.lux.maxtime</td>
               </tr>
               #end if
+	      <!-- Most stations don't collect lightning data
 	      #if $month.lightningStrikes.has_data
 	      <tr>
                 <td>Max Lightning Day</td>
@@ -568,6 +573,7 @@
 		<td></td>
               </tr>
               #end if
+	      -->
             </table>
           </div>
         </div>
@@ -590,9 +596,11 @@
             #if $week.radiation.has_data
             <img src="weekradiation.png" alt="Radiation" />
             #end if
+	    <!-- Most stations don't collect lightning data
 	    #if $week.lightningStrikes.has_data
             <img src="weeklightning.png" alt="Lightning" />
 	    #end if
+	    -->
 	    #if $week.windBatteryStatus.has_data and $week.outTempBatteryStatus.has_data
             <img src="weekbattery.png" alt="week battery"/>
             #end if
