@@ -123,10 +123,12 @@
 			<tr><td colspan="3"><br><b>Brightness</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.lux.max</td><td>$alltime.lux.maxtime</td></tr>
 			#end if
+			<!--
 			#if $alltime.lightningStrikes.has_data
 			<tr><td colspan="3"><br><b>Lightning</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.lightningStrikes.max</td><td>$alltime.lightningStrikes.maxtime</td></tr>
 			#end if
+			-->
 			#if $alltime.inTemp.has_data
 			<tr><td colspan="3"><br><b>House Temperatures</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.inTemp.max</td><td>$alltime.inTemp.maxtime</td></tr>
@@ -179,7 +181,8 @@
 			</div>
                 </div>
 		#end if
-
+		
+		<!--
 		#if $month.lightningStrikes.has_data
 		<div class="card">
                     <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes </h1>
@@ -188,6 +191,7 @@
 			</div>
                 </div>
 		#end if
+		-->
 
 		<div class="card">
                     <h1><i class="fas fa-table m-grau" ></i> Number of Days with Observations</h1>
