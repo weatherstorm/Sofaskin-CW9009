@@ -257,6 +257,7 @@
 	      #end if
             </table>
           </div>
+	  <!-- Only needed if your stations has lightning detection
 	  <div class="card" >
             <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes</h1>
             <table class="tablespacer">
@@ -272,6 +273,7 @@
 	      #end if
             </table>
           </div>
+	  -->
 	  #if $year($years_ago=1).outTemp.max.string != "   N/A"
           <div class="card" >
             <h1><i class="far fa-calendar-alt m-rot" ></i> Last Calendar Year ($year($years_ago=1).dateTime.format("%Y"))</h1>
@@ -432,9 +434,11 @@
             #if $year.radiation.has_data
             <img src="yearradiation.png" alt="Radiation" />
             #end if
+	    <!-- 
             #if $year.lightningStrikes.has_data
             <img src="yearlightning.png" alt="lightning" />
             #end if
+	    -->
             #if $year.rxCheckPercent.has_data
             <img src="yearrx.png" alt="year rx percent"/>
             #end if
