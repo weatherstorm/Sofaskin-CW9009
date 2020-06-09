@@ -258,6 +258,7 @@
             </table>
           </div>
 	  <!-- Only needed if your stations has lightning detection
+	  #if $year.lightningStrikes.has_data
 	  <div class="card" >
             <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes</h1>
             <table class="tablespacer">
@@ -273,6 +274,7 @@
 	      #end if
             </table>
           </div>
+	  #end if
 	  -->
 	  #if $year($years_ago=1).outTemp.max.string != "   N/A"
           <div class="card" >
