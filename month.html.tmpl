@@ -30,11 +30,12 @@
     <!-- Styles -->
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
-    
+
     <!-- Font Awesome Icon links -->
+   
     <!-- Free license -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-     
+    
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/checkdiff.js"></script>
@@ -83,6 +84,9 @@
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            #if $Extras.has_key('twitter_url')
+            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+            #end if
           </ul>
         </nav>
       </div>
@@ -189,7 +193,7 @@
                 <td>$month.inTemp.min</td>
                 <td>$month.inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $month.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -228,30 +232,28 @@
                 <td>$month.radiation.maxtime</td>
               </tr>
               #end if
-	      #if $month.lux.has_data
+              #if $month.illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$month.lux.max</td>
-		<td>$month.lux.maxtime</td>
+                <td>$month.illuminance.max</td>
+                <td>$month.illuminance.maxtime</td>
               </tr>
               #end if
-	      <!-- Lightning data not needed for most stations
-	      #if $month.lightningStrikes.has_data
-	      <tr>
+              #if $month.lightning_strike_count.has_data
+              <tr>
                 <td>Max Lightning Day</td>
-                <td>$month.lightningStrikes.max</td>
-		<td>$month.lightningStrikes.maxtime</td>
+                <td>$month.lightning_strike_count.max</td>
+                <td>$month.lightning_strike_count.maxtime</td>
               </tr>
               <tr>
                 <td>Lightning Total</td>
-                <td>$month.lightningStrikes.sum</td>
-		<td></td>
+                <td>$month.lightning_strike_count.sum</td>
+                <td></td>
               </tr>
               #end if
-	      -->
             </table>
           </div>
-	 #if $month($months_ago=12).outTemp.max.string != "   N/A"
+          #if $month($months_ago=12).outTemp.max.string != "   N/A"
           <div class="card" >
             <h1><i class="far fa-calendar-alt m-orange" ></i> Last $month($months_ago=12).dateTime.format("%B %Y")</h1>
             <table class="tablespacer">
@@ -340,7 +342,7 @@
                 <td>$month($months_ago=12).wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $month($months_ago=12).inTemp.has_data
+              #if $month($months_ago=12).inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$month($months_ago=12).inTemp.max</td>
@@ -351,7 +353,7 @@
                 <td>$month($months_ago=12).inTemp.min</td>
                 <td>$month($months_ago=12).inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $month($months_ago=12).extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -385,30 +387,28 @@
                 <td>$month($months_ago=12).radiation.maxtime</td>
               </tr>
               #end if
-	      #if $month($months_ago=12).lux.has_data
+              #if $month($months_ago=12).illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$month($months_ago=12).lux.max</td>
-		<td>$month($months_ago=12).lux.maxtime</td>
+                <td>$month($months_ago=12).illuminance.max</td>
+                <td>$month($months_ago=12).illuminance.maxtime</td>
               </tr>
               #end if
-	      <!-- Most stations don't use lightning data
-	      #if $month($months_ago=12).lightningStrikes.has_data
-	      <tr>
+              #if $month($months_ago=12).lightning_strike_count.has_data
+              <tr>
                 <td>Max Lightning Day</td>
-                <td>$month($months_ago=12).lightningStrikes.max</td>
-		<td>$month($months_ago=12).lightningStrikes.maxtime</td>
+                <td>$month($months_ago=12).lightning_strike_count.max</td>
+                <td>$month($months_ago=12).lightning_strike_count.maxtime</td>
               </tr>
               <tr>
                 <td>Lightning Total</td>
-                <td>$month($months_ago=12).lightningStrikes.sum</td>
-		<td></td>
+                <td>$month($months_ago=12).lightning_strike_count.sum</td>
+                <td></td>
               </tr>
               #end if
-	      -->
             </table>
           </div>
-	  #end if
+        #end if
         </div>
         <div class="right" >
           <div class="card cc graphs" >
@@ -419,9 +419,9 @@
             <img src="monthwinddir.png" alt="Hi Wind" />
             <img src="monthwindvec.png" alt="Wind Vector" />
             <img src="monthbarometer.png" alt="barometer"/>
-	    #if $month.inTemp.has_data
+            #if $month.inTemp.has_data
             <img src="monthinside.png" alt="Inside" />
-	    #end if
+            #end if
             <img src="monthinhumid.png" alt="Inside/Outside Humidity" />
             #if $month.UV.has_data
             <img src="monthuv.png" alt="UV Index" />
@@ -429,10 +429,10 @@
             #if $month.radiation.has_data
             <img src="monthradiation.png" alt="Radiation" />
             #end if
-	    #if $month.lightningStrikes.has_data
+	          #if $month.lightning_strike_count.has_data
             <img src="monthlightning.png" alt="Lightning" />
             #end if
-	    #if $month.windBatteryStatus.has_data and $month.outTempBatteryStatus.has_data
+	          #if $month.windBatteryStatus.has_data and $month.outTempBatteryStatus.has_data
             <img src="monthbattery.png" alt="battery"/>
             #end if
             #if $month.rxCheckPercent.has_data
@@ -463,15 +463,13 @@
       </div>
     </footer>
     #if $Extras.has_key('googleAnalyticsId')
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$Extras.googleAnalyticsId"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', '$Extras.googleAnalyticsId', 'auto');
-      ga('send', 'pageview');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '$Extras.googleAnalyticsId');
     </script>
     #end if
     <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->

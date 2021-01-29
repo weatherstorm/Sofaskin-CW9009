@@ -36,9 +36,9 @@
 	
 	<!-- Font Awesome Icon links -->
    
-        <!-- Free license -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    
+	<!-- Free license -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
         <!-- Script -->
         <script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/checkdiff.js"></script>
@@ -79,6 +79,9 @@
 			<li class="active" ><a href="summary.html" >Summaries</a></li>
 			<li><a href="about.html" >About</a></li>
                         <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+	    		#if $Extras.has_key('twitter_url')
+	    		<li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+	    		#end if
                     </ul>
                 </nav>
             </div>
@@ -116,16 +119,14 @@
 			<tr><td colspan="3"><br><b>Solar Radiation</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.radiation.max</td><td>$alltime.radiation.maxtime</td></tr>
 			#end if
-			#if $alltime.lux.has_data
+			#if $alltime.illuminance.has_data
 			<tr><td colspan="3"><br><b>Brightness</b></td></tr>
-			<tr><td>Highest</td><td>$alltime.lux.max</td><td>$alltime.lux.maxtime</td></tr>
+			<tr><td>Highest</td><td>$alltime.illuminance.max</td><td>$alltime.illuminance.maxtime</td></tr>
 			#end if
-			<!--
-			#if $alltime.lightningStrikes.has_data
+			#if $alltime.lightning_strike_count.has_data
 			<tr><td colspan="3"><br><b>Lightning</b></td></tr>
-			<tr><td>Highest</td><td>$alltime.lightningStrikes.max</td><td>$alltime.lightningStrikes.maxtime</td></tr>
+			<tr><td>Highest</td><td>$alltime.lightning_strike_count.max</td><td>$alltime.lightning_strike_count.maxtime</td></tr>
 			#end if
-			-->
 			#if $alltime.inTemp.has_data
 			<tr><td colspan="3"><br><b>House Temperatures</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.inTemp.max</td><td>$alltime.inTemp.maxtime</td></tr>
@@ -178,9 +179,8 @@
 			</div>
                 </div>
 		#end if
-		
-		<!--
-		#if $month.lightningStrikes.has_data
+
+		#if $month.lightning_strike_counts.has_data
 		<div class="card">
                     <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes </h1>
 			<div class="tablefix">
@@ -188,7 +188,6 @@
 			</div>
                 </div>
 		#end if
-		-->
 
 		<div class="card">
                     <h1><i class="fas fa-table m-grau" ></i> Number of Days with Observations</h1>
@@ -220,16 +219,14 @@
         </footer>
 
         #if $Extras.has_key('googleAnalyticsId')
-        <!-- Google Analytics -->
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
-            ga('create', '$Extras.googleAnalyticsId', 'auto');
-            ga('send', 'pageview');
-        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=$Extras.googleAnalyticsId"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', '$Extras.googleAnalyticsId');
+	</script>
         #end if
 
 	<!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->

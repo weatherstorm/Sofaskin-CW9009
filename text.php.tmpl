@@ -66,11 +66,12 @@ if (\$count == 4){
         <!-- Styles -->
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/main.css">
-	
-	<!-- Font Awesome Icon links -->  
-        <!-- Free license -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
- 
+
+	<!-- Font Awesome Icon links -->
+   
+	<!-- Free license -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
         <!-- Script -->
         <script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/checkdiff.js"></script>
@@ -113,6 +114,9 @@ if (\$count == 4){
 			<li class="active" ><a href="summary.html" >Summaries</a></li>
 			<li><a href="about.html" >About</a></li>
                         <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+	    		#if $Extras.has_key('twitter_url')
+	    		<li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+	    		#end if
                     </ul>
                 </nav>
             </div>
@@ -153,16 +157,14 @@ if (\$count == 4){
         </footer>
 
         #if $Extras.has_key('googleAnalyticsId')
-        <!-- Google Analytics -->
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            
-            ga('create', '$Extras.googleAnalyticsId', 'auto');
-            ga('send', 'pageview');
-        </script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	    <script async src="https://www.googletagmanager.com/gtag/js?id=$Extras.googleAnalyticsId"></script>
+	    <script>
+	      window.dataLayer = window.dataLayer || [];
+	      function gtag(){dataLayer.push(arguments);}
+	      gtag('js', new Date());
+	      gtag('config', '$Extras.googleAnalyticsId');
+	    </script>
         #end if
 
 <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->

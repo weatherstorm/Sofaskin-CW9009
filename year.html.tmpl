@@ -35,7 +35,7 @@
    
     <!-- Free license -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    
+   
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/checkdiff.js"></script>
@@ -83,6 +83,10 @@
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            #if $Extras.has_key('twitter_url')
+            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+            #end if
+            
           </ul>
         </nav>
       </div>
@@ -168,7 +172,7 @@
                 <td>$year.wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $year.inTemp.has_data
+              #if $year.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$year.inTemp.max</td>
@@ -179,7 +183,7 @@
                 <td>$year.inTemp.min</td>
                 <td>$year.inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $year.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -199,7 +203,7 @@
                 <td>$year.UV.maxtime</td>
               </tr>
               #end if
-              #if $year.ET.has_data and $year.ET.sum.raw >1
+              #if $year.ET.has_data and $year.ET.sum.raw == 0.00
               <tr>
                 <td>High ET</td>
                 <td>$year.ET.max</td>
@@ -218,11 +222,11 @@
                 <td>$year.radiation.maxtime</td>
               </tr>
               #end if
-	      #if $year.lux.has_data
+              #if $year.illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$year.lux.max</td>
-                <td>$year.lux.maxtime</td>
+                <td>$year.illuminance.max</td>
+                <td>$year.illuminance.maxtime</td>
               </tr>
               #end if
             </table>
@@ -254,25 +258,23 @@
 	      #end if
             </table>
           </div>
-	  <!-- Only needed if your stations has lightning detection
-	  #if $year.lightningStrikes.has_data
-	  <div class="card" >
+      #if $year.lightning_strike_count.has_data
+          <div class="card" >
             <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes</h1>
             <table class="tablespacer">
               <tr>
                 <td>Lightning Strikes for $year.dateTime.format("%Y")</td>
-                <td>$year.lightningStrikes.sum</td>
+                <td>$year.lightning_strike_count.sum</td>
               </tr>
-	      #if $year($years_ago=1).lightningStrikes.sum.string != "   N/A"
+	      #if $year($years_ago=1).lightning_strike_count.sum.string != "   N/A"
               <tr>
                 <td>Lightning Strikes for $year($years_ago=1).dateTime.format("%Y")</td>
-                <td>$year($years_ago=1).lightningStrikes.sum</td>
+                <td>$year($years_ago=1).lightning_strike_count.sum</td>
               </tr>
 	      #end if
             </table>
           </div>
-	  #end if
-	  -->
+      #end if
 	  #if $year($years_ago=1).outTemp.max.string != "   N/A"
           <div class="card" >
             <h1><i class="far fa-calendar-alt m-rot" ></i> Last Calendar Year ($year($years_ago=1).dateTime.format("%Y"))</h1>
@@ -383,7 +385,7 @@
                 <td>$year($years_ago=1).UV.maxtime</td>
               </tr>
               #end if
-              #if $year($years_ago=1).ET.has_data and $year($years_ago=1).ET.sum.raw >0.0
+              #if $year($years_ago=1).ET.has_data and $year($years_ago=1).ET.sum.raw == 0.00
               <tr>
                 <td>High ET</td>
                 <td>$year($years_ago=1).ET.max</td>
@@ -402,11 +404,11 @@
                 <td>$year($years_ago=1).radiation.maxtime</td>
               </tr>
               #end if
-	      #if $year($years_ago=1).lux.has_data
+              #if $year($years_ago=1).illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$year($years_ago=1).lux.max</td>
-                <td>$year($years_ago=1).lux.maxtime</td>
+                <td>$year($years_ago=1).illuminance.max</td>
+                <td>$year($years_ago=1).illuminance.maxtime</td>
               </tr>
               #end if
             </table>
@@ -423,9 +425,9 @@
             <img src="yearwinddir.png" alt="Hi Wind" /> 
             <img src="yearwindvec.png" alt="Wind Vector" />
             <img src="yearbarometer.png" alt="barometer"/>
-	    #if $year.inTemp.has_data
+            #if $year.inTemp.has_data
             <img src="yearinside.png" alt="Inside" />
-	    #end if
+	          #end if
             <img src="yearinhumid.png" alt="Inside/Outside Humidity" />
             #if $year.UV.has_data
             <img src="yearuv.png" alt="UV Index" />
@@ -433,11 +435,12 @@
             #if $year.radiation.has_data
             <img src="yearradiation.png" alt="Radiation" />
             #end if
-	    <!-- 
-            #if $year.lightningStrikes.has_data
+            #if $year.lightning_strike_count.has_data
             <img src="yearlightning.png" alt="lightning" />
             #end if
-	    -->
+            #if $year.windBatteryStatus.has_data and $year.outTempBatteryStatus.has_data
+            <img src="yearbattery.png" alt="battery"/>
+            #end if
             #if $year.rxCheckPercent.has_data
             <img src="yearrx.png" alt="year rx percent"/>
             #end if
@@ -466,15 +469,13 @@
       </div>
     </footer>
     #if $Extras.has_key('googleAnalyticsId')
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$Extras.googleAnalyticsId"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', '$Extras.googleAnalyticsId', 'auto');
-      ga('send', 'pageview');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '$Extras.googleAnalyticsId');
     </script>
     #end if
     <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
