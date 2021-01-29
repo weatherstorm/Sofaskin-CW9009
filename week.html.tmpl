@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/main.css">
     
     <!-- Font Awesome Icon links -->
+   
     <!-- Free license -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
     
@@ -83,6 +84,8 @@
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            #if $Extras.has_key('twitter_url')
+            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>            #end if
           </ul>
         </nav>
       </div>
@@ -178,7 +181,7 @@
                 <td>$week.wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $week.inTemp.has_data
+              #if $week.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$week.inTemp.max</td>
@@ -189,7 +192,7 @@
                 <td>$week.inTemp.min</td>
                 <td>$week.inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $week.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -209,7 +212,7 @@
                 <td>$week.UV.maxtime</td>
               </tr>
               #end if
-              #if $week.ET.has_data and $week.ET.sum.raw >1
+              #if $week.ET.has_data and $week.ET.sum.raw > 1
               <tr>
                 <td>High ET</td>
                 <td>$week.ET.max</td>
@@ -228,34 +231,33 @@
                 <td>$week.radiation.maxtime</td>
               </tr>
               #end if
-	      #if $week.lux.has_data
+              #if $week.illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$week.lux.max</td>
-                <td>$week.lux.maxtime</td>
+                <td>$week.illuminance.max</td>
+                <td>$week.illuminance.maxtime</td>
               </tr>
               #end if
-	      <!-- Most stations don't collect lightning data
-	      #if $week.lightningStrikes.has_data
+              #if $week.lightning_strike_count.has_data
               <tr>
                 <td>Most Lightning Strikes</td>
-                <td>$week.lightningStrikes.max</td>
-                <td>$week.lightningStrikes.maxtime</td>
+                <td>$week.lightning_strike_count.max</td>
+                <td>$week.lightning_strike_count.maxtime</td>
               </tr>
-	      <tr>
+              <tr>
                 <td>Total Lightning Strikes</td>
-                <td>$week.lightningStrikes.sum</td>
+                <td>$week.lightning_strike_count.sum</td>
                 <td></td>
               </tr>
-	      <tr>
+              <tr>
                 <td>Average Strike Distance</td>
-                <td>$week.lightningAvgDistance.avg</td>
+                <td>$week.lightning_avg_distance.avg</td>
                 <td></td>
               </tr>
               #end if
-	      -->
             </table>
           </div>
+          #if $yesterday.outTemp.max.has_data
           <div class="card" >
             <h1><i class="far fa-calendar-alt m-orange" ></i> Yesterday ($yesterday.dateTime.format("%d-%b")) </h1>
             <table class="tablespacer">
@@ -269,20 +271,18 @@
                 <td>$yesterday.outTemp.min</td>
                 <td>$yesterday.outTemp.mintime</td>
               </tr>
-              #if $yesterday.heatindex.max.raw >79.0
+              #if $yesterday.heatindex.max.raw > 79
               <tr>
                 <td>High Heat Index</td>
                 <td>$yesterday.heatindex.max</td>
                 <td>$yesterday.heatindex.maxtime</td>
               </tr>
               #end if
-              #if $yesterday.windchill.min <10
               <tr>
                 <td>Low Wind Chill</td>
                 <td>$yesterday.windchill.min</td>
                 <td>$yesterday.windchill.mintime</td>
               </tr>
-              #end if
               <tr>
                 <td>High Dewpoint</td>
                 <td>$yesterday.dewpoint.max</td>
@@ -338,7 +338,7 @@
                 <td>$yesterday.wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $yesterday.inTemp.has_data
+              #if $yesterday.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$yesterday.inTemp.max</td>
@@ -349,7 +349,7 @@
                 <td>$yesterday.inTemp.min</td>
                 <td>$yesterday.inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $yesterday.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -369,7 +369,7 @@
                 <td>$yesterday.UV.maxtime</td>
               </tr>
               #end if
-              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw >1
+              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw > 1
               <tr>
                 <td>High ET</td>
                 <td>$yesterday.ET.max</td>
@@ -388,29 +388,28 @@
                 <td>$yesterday.radiation.maxtime</td>
               </tr>
               #end if
-	      #if $yesterday.lux.has_data
+              #if $yesterday.illuminance.has_data
               <tr>
                 <td>Brightness</td>
-                <td>$yesterday.lux.max</td>
-		<td>$yesterday.lux.maxtime</td> 
+                <td>$yesterday.illuminance.max</td>
+                <td>$yesterday.illuminance.maxtime</td> 
               </tr>
               #end if
-	      <!-- Most stations don't collect lightning data
-	      #if $yesterday.lightningStrikes.has_data
+              #if $yesterday.lightning_strike_count.has_data
               <tr>
                 <td>Lightning Strikes</td>
-                <td>$yesterday.lightningStrikes.sum</td>
-		<td></td>
+                <td>$yesterday.lightning_strike_count.sum</td>
+                <td></td>
               </tr>
-	      <tr>
+              <tr>
                 <td>Average Strike Distance</td>
-                <td>$yesterday.lightningAvgDistance.avg</td>
-		<td></td>
+                <td>$yesterday.lightning_avg_distance.avg</td>
+                <td></td>
               </tr>
               #end if
-	      -->
             </table>
           </div>
+          #end if
           <div class="card" >
             <h1><i class="far fa-calendar-alt m-orange" ></i> This Month</h1>
             <table class="tablespacer">
@@ -499,7 +498,7 @@
                 <td>$month.wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $month.inTemp.has_data
+              #if $month.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$month.inTemp.max</td>
@@ -510,7 +509,7 @@
                 <td>$month.inTemp.min</td>
                 <td>$month.inTemp.mintime</td>
               </tr>
-	      #end if
+              #end if
               #if $month.extraTemp1.has_data
               <tr>
                 <td>High Pond Temp</td>
@@ -548,28 +547,26 @@
                 <td>$month.radiation.max</td>
                 <td>$month.radiation.maxtime</td>
               </tr>
-	      #end if
-	      #if $month.lux.has_data
+              #end if
+              #if $month.illuminance.has_data
               <tr>
                 <td>High Brightness</td>
-                <td>$month.lux.max</td>
-		<td>$month.lux.maxtime</td>
+                <td>$month.illuminance.max</td>
+                <td>$month.illuminance.maxtime</td>
               </tr>
               #end if
-	      <!-- Most stations don't collect lightning data
-	      #if $month.lightningStrikes.has_data
-	      <tr>
+              #if $month.lightning_strike_count.has_data
+              <tr>
                 <td>Max Lightning Day</td>
-                <td>$month.lightningStrikes.max</td>
-		<td>$month.lightningStrikes.maxtime</td>
+                <td>$month.lightning_strike_count.max</td>
+                <td>$month.lightning_strike_count.maxtime</td>
               </tr>
               <tr>
                 <td>Lightning Total</td>
-                <td>$month.lightningStrikes.sum</td>
-		<td></td>
+                <td>$month.lightning_strike_count.sum</td>
+                <td></td>
               </tr>
               #end if
-	      -->
             </table>
           </div>
         </div>
@@ -582,9 +579,9 @@
             <img src="weekwinddir.png" alt="Hi Wind" />
             <img src="weekwindvec.png" alt="Wind Vector" />
             <img src="weekbarometer.png" alt="barometer"/>
-	    #if $week.inTemp.has_data
+            #if $week.inTemp.has_data
             <img src="weekinside.png" alt="Inside" />
-	    #end if
+            #end if
             <img src="weekinhumid.png" alt="Inside/Outside Humidity" />
             #if $week.UV.has_data
             <img src="weekuv.png" alt="UV index" />
@@ -592,12 +589,10 @@
             #if $week.radiation.has_data
             <img src="weekradiation.png" alt="Radiation" />
             #end if
-	    <!-- Most stations don't collect lightning data
-	    #if $week.lightningStrikes.has_data
+            #if $week.lightning_strike_count.has_data
             <img src="weeklightning.png" alt="Lightning" />
-	    #end if
-	    -->
-	    #if $week.windBatteryStatus.has_data and $week.outTempBatteryStatus.has_data
+            #end if
+            #if $week.windBatteryStatus.has_data and $week.outTempBatteryStatus.has_data
             <img src="weekbattery.png" alt="week battery"/>
             #end if
             #if $week.rxCheckPercent.has_data
@@ -628,15 +623,13 @@
       </div>
     </footer>
     #if $Extras.has_key('googleAnalyticsId')
-    <!-- Google Analytics -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=$Extras.googleAnalyticsId"></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', '$Extras.googleAnalyticsId', 'auto');
-      ga('send', 'pageview');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '$Extras.googleAnalyticsId');
     </script>
     #end if
     <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
