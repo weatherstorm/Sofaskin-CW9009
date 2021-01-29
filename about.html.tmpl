@@ -86,6 +86,9 @@
             <li><a href="summary.html" >Summaries</a></li>
             <li class="active"><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+	    #if $Extras.has_key('twitter_url')
+	    <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+	    #end if
           </ul>
         </nav>
       </div>
