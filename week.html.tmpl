@@ -85,7 +85,8 @@
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
             #if $Extras.has_key('twitter_url')
-            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>            #end if
+            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+            #end if
           </ul>
         </nav>
       </div>
@@ -212,14 +213,14 @@
                 <td>$week.UV.maxtime</td>
               </tr>
               #end if
-              #if $week.ET.has_data and $week.ET.sum.raw > 1
+              #if $week.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$week.ET.max</td>
                 <td>$week.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$week.ET.min</td>
                 <td>$week.ET.mintime</td>
               </tr>
@@ -369,14 +370,14 @@
                 <td>$yesterday.UV.maxtime</td>
               </tr>
               #end if
-              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw > 1
+              #if $yesterday.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$yesterday.ET.max</td>
                 <td>$yesterday.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$yesterday.ET.min</td>
                 <td>$yesterday.ET.mintime</td>
               </tr>
@@ -529,14 +530,14 @@
                 <td>$month.UV.maxtime</td>
               </tr>
               #end if
-              #if $month.ET.has_data and $month.ET.sum.raw >1
+              #if $month.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$month.ET.max</td>
                 <td>$month.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$month.ET.min</td>
                 <td>$month.ET.mintime</td>
               </tr>
