@@ -213,14 +213,14 @@
                 <td>$month.UV.maxtime</td>
               </tr>
               #end if
-              #if $month.ET.has_data and $month.ET.sum.raw >1
+              #if $month.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$month.ET.max</td>
                 <td>$month.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$month.ET.min</td>
                 <td>$month.ET.mintime</td>
               </tr>
@@ -373,9 +373,9 @@
                 <td>$month($months_ago=12).UV.maxtime</td>
               </tr>
               #end if
-              #if $month($months_ago=12).ET.has_data and $month($months_ago=12).ET.sum.raw >1
+              #if $month($months_ago=12).ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$month($months_ago=12).ET.max</td>
                 <td>$month($months_ago=12).ET.maxtime</td>
               </tr>
