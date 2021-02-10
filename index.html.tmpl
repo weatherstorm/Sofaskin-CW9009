@@ -212,9 +212,9 @@
                 <td>$current.UV</td>
               </tr>
               #end if
-              #if $day.ET.has_data and $day.ET.sum.raw > 1
+              #if $day.ET.has_data
               <tr>
-                <td>ET</td>
+                <td>Evapotranspiration</td>
                 <td>$current.ET</td>
               </tr>
               #end if
@@ -230,12 +230,12 @@
                 <td>$current.illuminance</td>
               </tr>
               #end if
-	            #if $day.lightning_strike_count.has_data
+	      #if $day.lightning_strike_count.has_data
               <tr>
                 <td>Lightning Strikes</td>
                 <td>$current.lightning_strike_count</td>
               </tr>
-	            <tr>
+	      <tr>
                 <td>Average Strike Distance</td>
                 <td>$current.lightning_avg_distance</td>
               </tr>
@@ -373,14 +373,14 @@
                 <td>$day.UV.maxtime</td>
               </tr>
               #end if
-              #if $day.ET.has_data and $day.ET.sum.raw > 1
+              #if $day.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$day.ET.max</td>
                 <td>$day.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$day.ET.min</td>
                 <td>$day.ET.mintime</td>
               </tr>
@@ -554,14 +554,14 @@
                 <td>$days_ago($days_ago=$n).UV.maxtime</td>
               </tr>
               #end if
-              #if $days_ago($days_ago=$n).ET.has_data and $days_ago($days_ago=$n).ET.sum.raw >1
+              #if $days_ago($days_ago=$n).ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$days_ago($days_ago=$n).ET.max</td>
                 <td>$days_ago($days_ago=$n).ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$days_ago($days_ago=$n).ET.min</td>
                 <td>$days_ago($days_ago=$n).ET.mintime</td>
               </tr>
