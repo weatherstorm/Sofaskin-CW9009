@@ -203,14 +203,14 @@
                 <td>$year.UV.maxtime</td>
               </tr>
               #end if
-              #if $year.ET.has_data and $year.ET.sum.raw == 0.00
+              #if $year.ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$year.ET.max</td>
                 <td>$year.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$year.ET.min</td>
                 <td>$year.ET.mintime</td>
               </tr>
@@ -385,14 +385,14 @@
                 <td>$year($years_ago=1).UV.maxtime</td>
               </tr>
               #end if
-              #if $year($years_ago=1).ET.has_data and $year($years_ago=1).ET.sum.raw == 0.00
+              #if $year($years_ago=1).ET.has_data
               <tr>
-                <td>High ET</td>
+                <td>High Evapotranspiration</td>
                 <td>$year($years_ago=1).ET.max</td>
                 <td>$year($years_ago=1).ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low ET</td>
+                <td>Low Evapotranspiration</td>
                 <td>$year($years_ago=1).ET.min</td>
                 <td>$year($years_ago=1).ET.mintime</td>
               </tr>
