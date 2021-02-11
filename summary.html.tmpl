@@ -115,6 +115,10 @@
 			<tr><td>Highest Gust</td><td>$alltime.windGust.max</td><td>$alltime.windGust.maxtime</td></tr>
 			<tr><td colspan="3"><br><b>Wind Chill</b></td></tr>
 			<tr><td>Lowest</td><td>$alltime.windchill.min</td><td>$alltime.windchill.mintime</td></tr>
+			#if $alltime.ET.has_data
+			<tr><td colspan="3"><br><b>Evapotranspiration</b></td></tr>
+			<tr><td>Highest</td><td>$alltime.ET.max.format(format_string="%.5f")</td><td>$alltime.ET.maxtime</td></tr>
+			#end if
 			#if $alltime.radiation.has_data
 			<tr><td colspan="3"><br><b>Solar Radiation</b></td></tr>
 			<tr><td>Highest</td><td>$alltime.radiation.max</td><td>$alltime.radiation.maxtime</td></tr>
@@ -180,7 +184,7 @@
                 </div>
 		#end if
 
-		#if $month.lightning_strike_counts.has_data
+		#if $month.lightning_strike_count.has_data
 		<div class="card">
                     <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes </h1>
 			<div class="tablefix">

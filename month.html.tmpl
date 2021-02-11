@@ -182,7 +182,7 @@
                 <td>$month.wind.vecdir</td>
                 <td></td>
               </tr>
-	      #if $month.inTemp.has_data
+              #if $month.inTemp.has_data
               <tr>
                 <td>High Inside Temperature</td>
                 <td>$month.inTemp.max</td>
@@ -213,16 +213,16 @@
                 <td>$month.UV.maxtime</td>
               </tr>
               #end if
-              #if $month.ET.has_data
+              #if $month.ET.has_data and $month.ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$month.ET.max</td>
+                <td>$month.ET.max.format(format_string="%.5f")</td>
                 <td>$month.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$month.ET.min</td>
-                <td>$month.ET.mintime</td>
+                <td>Evapotranspiration Total</td>
+                <td>$month.ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $month.radiation.has_data
@@ -373,11 +373,16 @@
                 <td>$month($months_ago=12).UV.maxtime</td>
               </tr>
               #end if
-              #if $month($months_ago=12).ET.has_data
+              #if $month($months_ago=12).ET.has_data and $month($months_ago=12).ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$month($months_ago=12).ET.max</td>
+                <td>$month($months_ago=12).ET.max.format(format_string="%.5f")</td>
                 <td>$month($months_ago=12).ET.maxtime</td>
+              </tr>
+              <tr>
+                <td>Evapotranspiration Total</td>
+                <td>$month($months_ago=12).ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $month($months_ago=12).radiation.has_data

@@ -85,8 +85,7 @@
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
             #if $Extras.has_key('twitter_url')
-            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
-            #end if
+            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>            #end if
           </ul>
         </nav>
       </div>
@@ -213,16 +212,16 @@
                 <td>$week.UV.maxtime</td>
               </tr>
               #end if
-              #if $week.ET.has_data
+              #if $week.ET.has_data and $week.ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$week.ET.max</td>
+                <td>$week.ET.max.format(format_string="%.5f")</td>
                 <td>$week.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$week.ET.min</td>
-                <td>$week.ET.mintime</td>
+                <td>Evapotranspiration Total</td>
+                <td>$week.ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $week.radiation.has_data
@@ -370,16 +369,16 @@
                 <td>$yesterday.UV.maxtime</td>
               </tr>
               #end if
-              #if $yesterday.ET.has_data
+              #if $yesterday.ET.has_data and $yesterday.ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$yesterday.ET.max</td>
+                <td>$yesterday.ET.max.format(format_string="%.5f")</td>
                 <td>$yesterday.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$yesterday.ET.min</td>
-                <td>$yesterday.ET.mintime</td>
+                <td>Evapotranspiration Total</td>
+                <td>$yesterday.ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $yesterday.radiation.has_data
@@ -530,16 +529,16 @@
                 <td>$month.UV.maxtime</td>
               </tr>
               #end if
-              #if $month.ET.has_data
+              #if $month.ET.has_data and $month.ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$month.ET.max</td>
+                <td>$month.ET.max.format(format_string="%.5f")</td>
                 <td>$month.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$month.ET.min</td>
-                <td>$month.ET.mintime</td>
+                <td>Evapotranspiration Total</td>
+                <td>$month.ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $month.radiation.has_data

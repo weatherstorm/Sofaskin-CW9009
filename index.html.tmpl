@@ -7,16 +7,16 @@
     <!-- Google verification tag -->
     <meta name="google-site-verification" content="skDuSC68YDlkfq2GfylRvmzM4WE5RgCKZIV275lKZ1A" />
     #if $Extras.has_key('cwop')
-    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
     #else
-    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. ">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location. This web site is powered by WeeWx. ">
     #end if
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11" />
     #if $Extras.has_key('web_url')
     <link rel="canonical" href="$Extras.web_url"/>
     #end if
-    <title>Current Weather Conditions for $station.location</title>
+    <title>$station.location Current Weather Conditions</title>
     <!-- Open Graph -->
     #if $Extras.has_key('cwop')
     <meta property="og:site_name" content="$station.location Weather Station ($Extras.cwop)" />
@@ -188,18 +188,18 @@
                 <td>Rain Rate</td>
                 <td>$current.rainRate</td>
               </tr>
-	      #if $day.inTemp.has_data
+              #if $day.inTemp.has_data
               <tr>
                 <td>Inside Temperature</td>
                 <td>$current.inTemp</td>
               </tr>
-	      #end if
-	      #if $day.inHumidity.has_data
+              #end if
+              #if $day.inHumidity.has_data
               <tr>
                 <td>Inside Humidity</td>
                 <td>$current.inHumidity</td>
               </tr>
-	      #end if
+              #end if
               #if $day.extraTemp1.has_data
               <tr>
                 <td>Pond Temperature</td>
@@ -212,10 +212,10 @@
                 <td>$current.UV</td>
               </tr>
               #end if
-              #if $day.ET.has_data
+              #if $day.ET.has_data and $day.ET.sum.raw is not None and $day.ET.sum.raw > 0.0
               <tr>
                 <td>Evapotranspiration</td>
-                <td>$current.ET</td>
+                <td>$current.ET.format(format_string="%.5f")</td>
               </tr>
               #end if
               #if $day.radiation.has_data
@@ -230,12 +230,12 @@
                 <td>$current.illuminance</td>
               </tr>
               #end if
-	      #if $day.lightning_strike_count.has_data
+	            #if $day.lightning_strike_count.has_data
               <tr>
                 <td>Lightning Strikes</td>
                 <td>$current.lightning_strike_count</td>
               </tr>
-	      <tr>
+	            <tr>
                 <td>Average Strike Distance</td>
                 <td>$current.lightning_avg_distance</td>
               </tr>
@@ -373,16 +373,16 @@
                 <td>$day.UV.maxtime</td>
               </tr>
               #end if
-              #if $day.ET.has_data
+              #if $day.ET.has_data and $day.ET.sum.raw is not None and $day.ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$day.ET.max</td>
+                <td>$day.ET.max.format(format_string="%.5f")</td>
                 <td>$day.ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$day.ET.min</td>
-                <td>$day.ET.mintime</td>
+                <td>Today's Evapotranspiration</td>
+                <td>$day.ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $day.radiation.has_data
@@ -554,16 +554,16 @@
                 <td>$days_ago($days_ago=$n).UV.maxtime</td>
               </tr>
               #end if
-              #if $days_ago($days_ago=$n).ET.has_data
+              #if $days_ago($days_ago=$n).ET.has_data and $days_ago($days_ago=$n).ET.sum.raw is not None and $days_ago($days_ago=$n).ET.sum.raw > 0.0
               <tr>
                 <td>High Evapotranspiration</td>
-                <td>$days_ago($days_ago=$n).ET.max</td>
+                <td>$days_ago($days_ago=$n).ET.max.format(format_string="%.5f")</td>
                 <td>$days_ago($days_ago=$n).ET.maxtime</td>
               </tr>
               <tr>
-                <td>Low Evapotranspiration</td>
-                <td>$days_ago($days_ago=$n).ET.min</td>
-                <td>$days_ago($days_ago=$n).ET.mintime</td>
+                <td>Total Evapotranspiration</td>
+                <td>$days_ago($days_ago=$n).ET.sum</td>
+                <td></td>
               </tr>
               #end if
               #if $days_ago($days_ago=$n).radiation.has_data
