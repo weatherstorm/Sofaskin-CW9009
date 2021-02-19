@@ -43,8 +43,8 @@ https://github.com/brewster76/fuzzy-archer/blob/master/INSTALL
 
 Lastly, you will need to install PHP on your web server. Most web hosting services offer PHP though it might not be available by default. If your using your own web server like the raspberry pi you will need to install the module for your web server software. 
 
-For Nginx: https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md
-For Apache: https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md
+For Nginx: https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md <br>
+For Apache: https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md <br>
 
 <b>IMPORTANT:</b>
 You should update the variables in the EXTRA section of the skin.conf file to match your station information. Example section below:
