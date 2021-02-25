@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Refresh" content="180">
-    <!-- Google verification tag -->
-    <meta name="google-site-verification" content="skDuSC68YDlkfq2GfylRvmzM4WE5RgCKZIV275lKZ1A" />
     #if $Extras.has_key('cwop')
     <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
     #else
@@ -30,9 +28,9 @@
     <meta property="og:url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. " />
     #end if
     <meta property="og:type" content="website" />
     <!--SM Markups -->
@@ -46,9 +44,9 @@
     <meta itemprop="url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. " />
     #end if
     #if $Extras.has_key('keywords_meta')
     <meta name="keywords" content="$Extras.keywords_meta" />
@@ -856,7 +854,7 @@
           <br>
           Sofaskin by <a href="http://neoground.com">Neoground</a>
           &sdot;
-          CW9009 Version by <a href="http://cw9009.x10host.com">JDS</a>
+          CW9009 Version by <a href="http://www.centuryfarmweather.com">Century Farm Weather</a>
           &sdot;
           Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
         </div>
