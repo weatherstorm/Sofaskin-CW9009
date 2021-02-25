@@ -80,4 +80,4 @@ You should update the variables in the EXTRA section of the skin.conf file to ma
     #cwop = 
     #cwop_url = 
 ```
-If you have problems, you can email me at josh@cw9009.x10host.com  
+If you have problems, you can email me at josh@centuryfarmweather.com  
