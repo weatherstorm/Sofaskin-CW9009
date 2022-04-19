@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-  <head itemscope itemtype="http://schema.org/Website">
+  <head itemscope itemtype="https://schema.org/Website">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Refresh" content="180">
@@ -10,7 +10,8 @@
     <meta name="description" content="Monthly Weather Summary for $station.location Weather Station. This web site is powered by WeeWX">
     #end if
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+    <link rel="profile" href="https://gmpg.org/xfn/11" />
     #if $Extras.has_key('web_url')
     <link href="$Extras.web_url/month.html" itemprop="url"/>
     #end if
@@ -28,7 +29,7 @@
     <link rel="apple-touch-icon" href="touch-icon.png"/>
         
     <!-- Styles -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
 
     <!-- Font Awesome Icon links -->
@@ -62,7 +63,7 @@
             </tr>
             <tr>
               <td><b>Software:</b></td>
-              <td><a href="http://weewx.com/" target="_blank" >WeeWX v$station.version</a></td>
+              <td><a href="https://weewx.com/" target="_blank" >WeeWX v$station.version</a></td>
             </tr>
             <tr>
               <td><b>Weewx uptime:</b></td>
@@ -77,7 +78,7 @@
         <nav>
           <ul class="topnav" id="myTopnav">
             <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars" ></i></a></li>
-            <li><a href="/" >Current</a></li>
+            <li><a href="index.html" >Current</a></li>
             <li><a href="week.html" >Week</a></li>
             <li class="active"><a href="month.html" >Month</a></li>
             <li><a href="year.html" >Year</a></li>
@@ -459,11 +460,11 @@
           &sdot;
           Copyright <i class="far fa-copyright"></i> $latest.dateTime.format("%Y") 
           <br>
-          Sofaskin by <a href="http://neoground.com">Neoground</a>
+          Sofaskin by <a href="https://neoground.com">Neoground</a>
           &sdot;
-          CW9009 Version by <a href="http://www.centuryfarmweather.com">Century Farm Weather</a>
+          CW9009 Version by <a href="https://www.centuryfarmweather.com">Century Farm Weather</a>
           &sdot;
-          Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="http://weewx.com/" target="_blank">WeeWX</a> 
+          Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
         </div>
       </div>
     </footer>
