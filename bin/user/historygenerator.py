@@ -262,6 +262,8 @@ class MyXSearch(SearchList):
             # 'units' option in skin.conf?
             if 'units' in table_options:
                 unit_formatted = table_options['units']
+                if (unit_formatted == 'Strikes'):
+                    unit_type = table_options['unit_type']
             else:
                 if (unit_type == 'count'):
                     unit_formatted = "Days"
