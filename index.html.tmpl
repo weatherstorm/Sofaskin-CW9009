@@ -75,10 +75,10 @@
     <header>
       <div class="container-fix" >
         <div class="h-left" >
-          <h1><i class="fas fa-cloud" ></i> $station.location </h1>
-          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fas fa-map-marker-alt" ></i> Show on map</a></p>
+          <h1><i class="fa-solid fa-cloud" ></i> $station.location </h1>
+          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa-solid fa-location-dot" ></i> Show on map</a></p>
           <h2>Current Weather Conditions</h2>
-          <p><i class="far fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+          <p><i class="fa-solid fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
           <p id="freshweather" class="m-orange"></p>
           <script>
             window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
@@ -106,16 +106,16 @@
         </div>
         <nav>
           <ul class="topnav" id="myTopnav">
-            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars" ></i></a></li>
+            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa-solid fa-bars" ></i></a></li>
             <li class="active" ><a href="index.html" >Current</a></li>
             <li><a href="week.html" >Week</a></li>
             <li><a href="month.html" >Month</a></li>
             <li><a href="year.html" >Year</a></li>
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
-            <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            <li><a href="RSS/weewx_rss.xml" ><i class="fa-solid fa-rss" ></i></a></li>
 	    #if $Extras.has_key('twitter_url')
-	    <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+	    <li><a href=$Extras.twitter_url><i class="fa-brands fa-twitter" ></i></a></li>
 	    #end if
           </ul>
         </nav>
@@ -126,11 +126,11 @@
         <div class="left" >
           <div class="card" >
             #if $current.rainRate.raw == 0.0
-            <h1><i class="fas fa-sun m-orange" ></i> Current Conditions</h1>
+            <h1><i class="fa-solid fa-sun m-orange" ></i> Current Conditions</h1>
             #else if $current.rainRate.raw >= 0.01
-            <h1><i class="fas fa-cloud-rain m-blau" ></i> Current Conditions</h1>
+            <h1><i class="fa-solid fa-cloud-showers-heavy m-blau" ></i> Current Conditions</h1>
             #else
-            <h1><i class="fas fa-sun m-orange" ></i> Current Conditions</h1>
+            <h1><i class="fa-solid fa-sun m-orange" ></i> Current Conditions</h1>
             #end if
             <table class="tablespacer">
               <tr>
@@ -242,7 +242,7 @@
             </table>
           </div>
           <div class="card" >
-            <h1><i class="far fa-moon m-grau" ></i> Since Midnight</h1>
+            <h1><i class="fa-solid fa-moon m-grau" ></i> Since Midnight</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -456,7 +456,7 @@
             #end if
 	  #if $days_ago($days_ago=$n).outTemp.max.string != "   N/A"
 	  <div class="card" >
-            <h1><i class="fas fa-history" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
+            <h1><i class="fa-regular fa-clock-rotate-left" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -594,7 +594,7 @@
           #end if
           #if $Extras.has_key('radar')
           <div class="card" >
-	    <h1><i class="fab fa-react m-rot"></i> Radar</h1>
+	    <h1><i class="fa-solid fa-satellite-dish m-rot"></i> Radar</h1>
             $Extras.radar
 	    <br>
           </div>
@@ -615,7 +615,7 @@
           #if $Extras.has_key('camera')
           <!--camera section-->
           <div class="card" >
-            <h1><i class="fas fa-camera" style="color:#999"></i> Local Cameras</h1>
+            <h1><i class="fa-solid fa-camera" style="color:#999"></i> Local Cameras</h1>
             <div class="s-center s-content s-display-container" style="max-width:800px">
               #set $b=0
               #for $i in $Extras.camera
@@ -665,10 +665,21 @@
             </script>
           </div>
           #end if
+	  
+	  #if $Extras.has_key('camloop')
+          <!--camera loop section-->
+          <div class="card" >
+            <h1><i class="fa-solid fa-camera" style="color:#999"></i> Camera loop</h1>
+            <div class="s-center s-content s-display-container" style="max-width:768px">
+              $Extras.camloop
+            </div>
+          </div>
+          #end if  
         </div>
+
         <div class="right" >
           <div class="card" >
-            <h1><i class="far fa-star m-rot" ></i> Almanac</h1>
+            <h1><i class="fa-regular fa-star m-rot" ></i> Almanac</h1>
             #if $almanac.hasExtras
             ## Extended almanac information is available. Do the full set of tables.
             #set $sun_altitude = $almanac.sun.alt
@@ -814,7 +825,7 @@
             #end if
           </div>
           <div class="card cc graphs" >
-            <h1><i class="fas fa-chart-line m-gruen" ></i> Graphs</h1>
+            <h1><i class="fa-solid fa-chart-line m-gruen" ></i> Graphs</h1>
             <img src="daytempdew.png" alt="temperatures" />
             <img src="dayrain.png" alt="rain" />
             <img src="daywind.png" alt="wind" />
@@ -854,13 +865,13 @@
           <i class="fa-solid fa-dragon"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
           #end if
           &sdot;
-          Copyright <i class="far fa-copyright"></i> $latest.dateTime.format("%Y") 
+          Copyright <i class="fa-regular fa-copyright"></i> $latest.dateTime.format("%Y") 
           <br>
           Sofaskin by <a href="https://neoground.com">Neoground</a>
           &sdot;
           CW9009 Version by <a href="https://www.centuryfarmweather.com">Century Farm Weather</a>
           &sdot;
-          Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
+          Powered by<i class="fa-solid fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
         </div>
       </div>
     </footer>
