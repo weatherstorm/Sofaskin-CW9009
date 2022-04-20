@@ -35,7 +35,7 @@
     <!-- Font Awesome Icon links -->
    
     <!-- Free license -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" crossorigin="anonymous">
    
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -45,10 +45,10 @@
     <header>
       <div class="container-fix" >
         <div class="h-left" >
-          <h1><i class="fas fa-cloud" ></i> $station.location </h1>
-          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fas fa-map-marker-alt" ></i> Show on map</a></p>
+          <h1><i class="fa-solid fa-cloud" ></i> $station.location </h1>
+          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa-solid fa-location-dot" ></i> Show on map</a></p>
           <h2>Yearly Weather Summary</h2>
-          <p><i class="far fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+          <p><i class="fa-solid fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
           <p id="freshweather" class="m-orange"></p>
           <script>
             window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
@@ -76,16 +76,16 @@
         </div>
         <nav>
           <ul class="topnav" id="myTopnav">
-            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars" ></i></a></li>
+            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa-solid fa-bars" ></i></a></li>
             <li><a href="index.html" >Current</a></li>
             <li><a href="week.html" >Week</a></li>
             <li><a href="month.html" >Month</a></li>
             <li class="active" ><a href="year.html" >Year</a></li>
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
-            <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            <li><a href="RSS/weewx_rss.xml" ><i class="fa-solid fa-rss" ></i></a></li>
             #if $Extras.has_key('twitter_url')
-            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+            <li><a href=$Extras.twitter_url><i class="fa-brands fa-twitter" ></i></a></li>
             #end if
             
           </ul>
@@ -96,7 +96,7 @@
       <div class="container" >
         <div class="left" >
           <div class="card" >
-            <h1><i class="far fa-calendar-alt m-rot" ></i> Calendar Year</h1>
+            <h1><i class="fa-regular fa-calendar-days m-rot" ></i> Calendar Year</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -233,7 +233,7 @@
             </table>
           </div>
           <div class="card" >
-            <h1><i class="fas fa-tint m-blau" ></i> Rain Year (1-$station.rain_year_str start)</h1>
+            <h1><i class="fa-solid fa-droplet m-blau" ></i> Rain Year (1-$station.rain_year_str start)</h1>
             <table class="tablespacer">
               <tr>
                 <td>Rain Year Total</td>
@@ -261,7 +261,7 @@
           </div>
           #if $year.lightning_strike_count.has_data
           <div class="card" >
-            <h1><i class="fas fa-bolt m-orange" ></i> Total Lightning Strikes</h1>
+            <h1><i class="fa-solid fa-bolt-lightning m-orange" ></i> Total Lightning Strikes</h1>
             <table class="tablespacer">
               <tr>
                 <td>Lightning Strikes for $year.dateTime.format("%Y")</td>
@@ -278,7 +278,7 @@
       #end if
       #if $year($years_ago=1).outTemp.max.string != "   N/A"
           <div class="card" >
-            <h1><i class="far fa-calendar-alt m-rot" ></i> Last Calendar Year ($year($years_ago=1).dateTime.format("%Y"))</h1>
+            <h1><i class="fa-regular fa-calendar-days m-rot" ></i> Last Calendar Year ($year($years_ago=1).dateTime.format("%Y"))</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -418,7 +418,7 @@
         </div>
         <div class="right" >
           <div class="card cc graphs" >
-            <h1><i class="fas fa-chart-line m-gruen" ></i> Yearly Statistics and Plots</h1>
+            <h1><i class="fa-solid fa-chart-line m-gruen" ></i> Yearly Statistics and Plots</h1>
             <img src="yeartempdew.png" alt="temperatures" />
             <img src="yearhilow.png" alt="Daily highs and lows for the year" title="Daily highs and lows for the year"/>
             <img src="yearrain.png" alt="rain" />
@@ -456,16 +456,16 @@
       <div class="container-fix">
         <div style="text-align:center">
           #if $Extras.has_key('you')
-          <i class="fab fa-pied-piper-pp"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
+          <i class="fa-solid fa-dragon"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
           #end if
           &sdot;
-          Copyright <i class="far fa-copyright"></i> $latest.dateTime.format("%Y") 
+          Copyright <i class="fa-regular fa-copyright"></i> $latest.dateTime.format("%Y") 
           <br>
           Sofaskin by <a href="https://neoground.com">Neoground</a>
           &sdot;
           CW9009 Version by <a href="https://www.centuryfarmweather.com/">Century Farm Weather</a>
           &sdot;
-          Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
+          Powered by<i class="fa-solid fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
         </div>
       </div>
     </footer>
