@@ -29,13 +29,12 @@
     <link rel="apple-touch-icon" href="touch-icon.png"/>
         
     <!-- Styles -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/main.css">
 
     <!-- Font Awesome Icon links -->
    
-    <!-- Free license -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" crossorigin="anonymous">
+    <!-- Free license -->    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" crossorigin="anonymous">
 
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -46,10 +45,10 @@
     <header>
       <div class="container-fix" >
         <div class="h-left" >
-          <h1><i class="fas fa-cloud" ></i> $station.location </h1>
-          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fas fa-map-marker-alt" ></i> Show on map</a></p>
+          <h1><i class="fa-solid fa-cloud" ></i> $station.location </h1>
+          <p>$station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] | $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2] | $station.altitude | <a href="https://www.google.com/maps/?q=$station.latitude[0]&deg;%20$station.latitude[1]%20$station.latitude[2],$station.longitude[0]&deg;%20$station.longitude[1]%20$station.longitude[2]" target="_blank" ><i class="fa-solid fa-location-dot" ></i> Show on map</a></p>
           <h2>Monthly Weather Summary</h2>
-          <p><i class="far fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
+          <p><i class="fa-solid fa-clock" ></i> $current.dateTime $current.dateTime.format("%Z")</p>
           <p id="freshweather" class="m-orange"></p>
           <script>
             window.onload = checkDiff("$current.dateTime ($current.dateTime.format('%Z'))");
@@ -77,16 +76,16 @@
         </div>
         <nav>
           <ul class="topnav" id="myTopnav">
-            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars" ></i></a></li>
-            <li><a href="index.html" >Current</a></li>
+            <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa-solid fa-bars" ></i></a></li>
+            <li><a href="/" >Current</a></li>
             <li><a href="week.html" >Week</a></li>
             <li class="active"><a href="month.html" >Month</a></li>
             <li><a href="year.html" >Year</a></li>
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
-            <li><a href="RSS/weewx_rss.xml" ><i class="fas fa-rss" ></i></a></li>
+            <li><a href="RSS/weewx_rss.xml" ><i class="fa-solid fa-rss" ></i></a></li>
             #if $Extras.has_key('twitter_url')
-            <li><a href=$Extras.twitter_url><i class="fab fa-twitter" ></i></a></li>
+            <li><a href=$Extras.twitter_url><i class="fa-brands fa-twitter" ></i></a></li>
             #end if
           </ul>
         </nav>
@@ -96,7 +95,7 @@
       <div class="container" >
         <div class="left" >
           <div class="card" >
-            <h1><i class="far fa-calendar-alt m-orange" ></i> This Month</h1>
+            <h1><i class="fa-regular fa-calendar-days m-orange" ></i> This Month</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -256,7 +255,7 @@
           </div>
           #if $month($months_ago=12).outTemp.max.string != "   N/A"
           <div class="card" >
-            <h1><i class="far fa-calendar-alt m-orange" ></i> Last $month($months_ago=12).dateTime.format("%B %Y")</h1>
+            <h1><i class="fa-regular fa-calendar-days m-orange" ></i> Last $month($months_ago=12).dateTime.format("%B %Y")</h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -415,10 +414,171 @@
             </table>
           </div>
         #end if
+        #if $month($months_ago=1).outTemp.max.string != "   N/A"
+          <div class="card" >
+            <h1><i class="fa-regular fa-calendar-days m-orange" ></i> Last Month ($month($months_ago=1).dateTime.format("%B %Y"))</h1>
+            <table class="tablespacer">
+              <tr>
+                <td>High Temperature</td>
+                <td>$month($months_ago=1).outTemp.max</td>
+                <td>$month($months_ago=1).outTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Temperature</td>
+                <td>$month($months_ago=1).outTemp.min</td>
+                <td>$month($months_ago=1).outTemp.mintime</td>
+              </tr>
+              <tr>
+                <td>High Heat Index</td>
+                <td>$month($months_ago=1).heatindex.max</td>
+                <td>$month($months_ago=1).heatindex.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Wind Chill</td>
+                <td>$month($months_ago=1).windchill.min</td>
+                <td>$month($months_ago=1).windchill.mintime</td>
+              </tr>
+              <tr>
+                <td>High Dewpoint</td>
+                <td>$month($months_ago=1).dewpoint.max</td>
+                <td>$month($months_ago=1).dewpoint.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Dewpoint</td>
+                <td>$month($months_ago=1).dewpoint.min</td>
+                <td>$month($months_ago=1).dewpoint.mintime</td>
+              </tr>
+              <tr>
+                <td>High Humidity</td>
+                <td>$month($months_ago=1).outHumidity.max</td>
+                <td>$month($months_ago=1).outHumidity.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Humidity</td>
+                <td>$month($months_ago=1).outHumidity.min</td>
+                <td>$month($months_ago=1).outHumidity.mintime</td>
+              </tr>
+              <tr>
+                <td>High Barometer</td>
+                <td>$month($months_ago=1).barometer.max</td>
+                <td>$month($months_ago=1).barometer.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Barometer</td>
+                <td>$month($months_ago=1).barometer.min</td>
+                <td>$month($months_ago=1).barometer.mintime</td>
+              </tr>
+              <tr>
+                <td>Rain Total</td>
+                <td>$month($months_ago=1).rain.sum</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>High Rain Rate</td>
+                <td>$month($months_ago=1).rainRate.max</td>
+                <td>$month($months_ago=1).rainRate.maxtime</td>
+              </tr>
+              <tr>
+                <td>High Wind Speed</td>
+                <td>$month($months_ago=1).wind.max <br>$month($months_ago=1).wind.gustdir</td>
+                <td>$month($months_ago=1).wind.maxtime</td>
+              </tr>
+              <tr>
+                <td>Average Wind</td>
+                <td>$month($months_ago=1).wind.avg</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>RMS Wind</td>
+                <td>$month($months_ago=1).wind.rms</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vector Average Speed</td>
+                <td>$month($months_ago=1).wind.vecavg</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Vector Average Direction</td>
+                <td>$month($months_ago=1).wind.vecdir</td>
+                <td></td>
+              </tr>
+              #if $month($months_ago=1).inTemp.has_data
+              <tr>
+                <td>High Inside Temperature</td>
+                <td>$month($months_ago=1).inTemp.max</td>
+                <td>$month($months_ago=1).inTemp.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Inside Temperature</td>
+                <td>$month($months_ago=1).inTemp.min</td>
+                <td>$month($months_ago=1).inTemp.mintime</td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).extraTemp1.has_data
+              <tr>
+                <td>High Pond Temp</td>
+                <td>$month($months_ago=1).extraTemp1.max</td>
+                <td>$month($months_ago=1).extraTemp1.maxtime</td>
+              </tr>
+              <tr>
+                <td>Low Pond Temp</td>
+                <td>$month($months_ago=1).extraTemp1.min</td>
+                <td>$month($months_ago=1).extraTemp1.mintime</td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).UV.has_data
+              <tr>
+                <td>High UV Index</td>
+                <td>$month($months_ago=1).UV.max</td>
+                <td>$month($months_ago=1).UV.maxtime</td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).ET.has_data and $month($months_ago=12).ET.sum.raw > 0.0
+              <tr>
+                <td>High Evapotranspiration</td>
+                <td>$month($months_ago=1).ET.max.format(format_string="%.5f")</td>
+                <td>$month($months_ago=1).ET.maxtime</td>
+              </tr>
+              <tr>
+                <td>Evapotranspiration Total</td>
+                <td>$month($months_ago=1).ET.sum</td>
+                <td></td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).radiation.has_data
+              <tr>
+                <td>High Radiation</td>
+                <td>$month($months_ago=1).radiation.max</td>
+                <td>$month($months_ago=1).radiation.maxtime</td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).illuminance.has_data
+              <tr>
+                <td>High Brightness</td>
+                <td>$month($months_ago=1).illuminance.max</td>
+                <td>$month($months_ago=1).illuminance.maxtime</td>
+              </tr>
+              #end if
+              #if $month($months_ago=1).lightning_strike_count.has_data
+              <tr>
+                <td>Max Lightning Day</td>
+                <td>$month($months_ago=1).lightning_strike_count.max</td>
+                <td>$month($months_ago=1).lightning_strike_count.maxtime</td>
+              </tr>
+              <tr>
+                <td>Lightning Total</td>
+                <td>$month($months_ago=1).lightning_strike_count.sum</td>
+                <td></td>
+              </tr>
+              #end if
+            </table>
+          </div>
+          #end if
         </div>
         <div class="right" >
           <div class="card cc graphs" >
-            <h1><i class="fas fa-chart-line m-gruen" ></i> Monthly Statistics and Plots</h1>
+            <h1><i class="fa-solid fa-chart-line m-gruen" ></i> Monthly Statistics and Plots</h1>
             <img src="monthtempdew.png" alt="temperatures" />
             <img src="monthrain.png" alt="rain" />
             <img src="monthwind.png" alt="wind" />
@@ -458,13 +618,13 @@
           <i class="fa-solid fa-dragon"> </i><a href=mailto:$Extras.email> $Extras.you</a> 
           #end if
           &sdot;
-          Copyright <i class="far fa-copyright"></i> $latest.dateTime.format("%Y") 
+          Copyright <i class="fa-regular fa-copyright"></i> $latest.dateTime.format("%Y") 
           <br>
           Sofaskin by <a href="https://neoground.com">Neoground</a>
           &sdot;
           CW9009 Version by <a href="https://www.centuryfarmweather.com">Century Farm Weather</a>
           &sdot;
-          Powered by<i class="fas fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
+          Powered by<i class="fa-solid fa-cog fa-spin fa-fw" aria-hidden="true"></i><a href="https://weewx.com/" target="_blank">WeeWX</a> 
         </div>
       </div>
     </footer>
