@@ -32,19 +32,23 @@ Displays an alert message in the header when weather data is X minutes old. The 
 ![olddata](https://cloud.githubusercontent.com/assets/22601363/21075763/496c385c-bed7-11e6-82e8-789ffa300601.jpg)
 <br><br>
 <b>Installation instructions:</b><br>
-Installing the template is just like installing most other skins. You need to place the skin files in it’s own folder in the /etc/weewx/skins directory. You also need to change the skin variable to the new skin directory name in the weewx.conf file under Standard Reports. 
+To install the Sofaskin V1.1 template on your Weewx weather station, please follow the instructions below:
 
-Example:<br>
+1. Download the skin files from the GitHub repository.
+
+2. Extract the downloaded files and copy the "Sofaskin" folder to the /etc/weewx/skins directory on your Weewx weather station.
+
+3. Open the "weewx.conf" file located in the /etc/weewx/ directory, find the "[[StandardReport]]" section, and change the "skin" variable to "Sofaskin".
+
+Example:
 [[StandardReport]]
-skin = Sofaskin 
+skin = Sofaskin
 
-You also need to put the historygenerator.py python script, in the /usr/share/weewx/user directory. The skin.conf already has the code to use the tables so you don’t need to mess with that unless you want to change the colors. More information on historygenerator.py and how to use the tables is available through the links below.
-https://github.com/brewster76/fuzzy-archer/blob/master/INSTALL
+4. Download the "historygenerator.py" script from the following GitHub repository: https://github.com/brewster76/fuzzy-archer/blob/master/user/historygenerator.py
 
-Lastly, you will need to install PHP on your web server. Most web hosting services offer PHP though it might not be available by default. If your using your own web server like the raspberry pi you will need to install the module for your web server software. 
+5. Copy the "historygenerator.py" script to the /usr/share/weewx/user directory on your Weewx weather station.
 
-For Nginx: https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md <br>
-For Apache: https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md <br>
+6. Open the "skin.conf" file located in the /etc/weewx/skins/Sofaskin directory and update the variables in the [Extras] section to match your station information.
 
 <b>IMPORTANT:</b>
 You should update the variables in the EXTRA section of the skin.conf file to match your station information. Example section below:
