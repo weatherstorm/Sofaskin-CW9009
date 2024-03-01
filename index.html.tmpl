@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Refresh" content="180">
+    <!-- Google verification tag -->
+    <meta name="google-site-verification" content="skDuSC68YDlkfq2GfylRvmzM4WE5RgCKZIV275lKZ1A" />
     #if $Extras.has_key('cwop')
-    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. ">
     #else
-    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. ">
+    <meta name="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location. This web site is powered by WeeWx. ">
     #end if
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
@@ -29,9 +31,9 @@
     <meta property="og:url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. " />
+    <meta property="og:description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #end if
     <meta property="og:type" content="website" />
     <!--SM Markups -->
@@ -45,9 +47,9 @@
     <meta itemprop="url" content="$Extras.web_url"/>
     #end if
     #if $Extras.has_key('cwop')
-    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #else
-    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from $station.location. This web site is powered by WeeWx. " />
+    <meta itemprop="description" content="A $station.hardware weather station reporting current weather conditions from the Century Farm Subdivision in $station.location ($Extras.cwop). This web site is powered by WeeWx. " />
     #end if
     #if $Extras.has_key('keywords_meta')
     <meta name="keywords" content="$Extras.keywords_meta" />
@@ -58,14 +60,15 @@
     <link rel="apple-touch-icon" href="touch-icon.png"/>
         
     <!-- Styles -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/main.css">
 
     <!-- Font Awesome Icon links -->
    
     <!-- Free license -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" crossorigin="anonymous">
+
+
     <!-- Script -->
     <script src="js/modernizr-2.6.2.min.js"></script>
     <script src="js/checkdiff.js"></script>
@@ -107,16 +110,19 @@
         <nav>
           <ul class="topnav" id="myTopnav">
             <li class="icon"><a href="javascript:void(0);" onclick="myFunction()"><i class="fa-solid fa-bars" ></i></a></li>
-            <li class="active" ><a href="index.html" >Current</a></li>
+            <li class="active" ><a href="/" >Current</a></li>
             <li><a href="week.html" >Week</a></li>
             <li><a href="month.html" >Month</a></li>
             <li><a href="year.html" >Year</a></li>
             <li><a href="summary.html" >Summaries</a></li>
             <li><a href="about.html" >About</a></li>
             <li><a href="RSS/weewx_rss.xml" ><i class="fa-solid fa-rss" ></i></a></li>
-	    #if $Extras.has_key('twitter_url')
-	    <li><a href=$Extras.twitter_url><i class="fa-brands fa-twitter" ></i></a></li>
-	    #end if
+            #if $Extras.has_key('twitter_url')
+            <li><a href=$Extras.twitter_url><i class="fa-brands fa-twitter" ></i></a></li>
+            #end if
+            #if $Extras.has_key('youtube_url')
+            <li><a href=$Extras.youtube_url><i class="fa-brands fa-youtube" ></i></a></li>
+            #end if
           </ul>
         </nav>
       </div>
@@ -128,7 +134,7 @@
             #if $current.rainRate.raw == 0.0
             <h1><i class="fa-solid fa-sun m-orange" ></i> Current Conditions</h1>
             #else if $current.rainRate.raw >= 0.01
-            <h1><i class="fa-solid fa-cloud-showers-heavy m-blau" ></i> Current Conditions</h1>
+            <h1><i class="fa-solid fa-cloud-rain m-blau" ></i> Current Conditions</h1>
             #else
             <h1><i class="fa-solid fa-sun m-orange" ></i> Current Conditions</h1>
             #end if
@@ -236,7 +242,7 @@
               </tr>
 	            <tr>
                 <td>Average Strike Distance</td>
-                <td>$current.lightning_avg_distance</td>
+                <td>$current.lightning_avg_distance.format(format_string="%.1f")</td>
               </tr>
               #end if
             </table>
@@ -406,13 +412,14 @@
               </tr>
               <tr>
                 <td>Average Strike Distance</td>
-                <td>$day.lightning_avg_distance.avg</td>
+                <td>$day.lightning_avg_distance.avg.format(format_string="%.1f")</td>
                 <td></td>
               </tr>
               #end if
             </table>
           </div>
-          <!--Leap Year Code -->
+          
+            <!--Leap Year Code -->
             <!--If this year was a leap year -->
             #set $yr = int($day.dateTime.format("%Y"))%4
             #if $yr == 0
@@ -420,26 +427,28 @@
                 #if $yr % 400 == 0
                   #if $day.dateTime.format("%d-%b") == '29-Feb'
                     #set $n = 1461
-                  #else if $day.dateTime.format("%d-%b") >= '01-Mar'
-                    #set $n = 367
-                  #else
+                  #else if int($day.dateTime.format("%m")) >= 3
                     #set $n = 366
+                  #else
+                    #set $n = 365
                   #end if
                 #else
-                  #set $n = 366
+                  #set $n = 365
                 #end if
               #else
                 #if $day.dateTime.format("%d-%b") == '29-Feb'
                   #set $n = 1461
-                #else if $day.dateTime.format("%d-%b") >= '01-Mar'
-                  #set $n = 367
-                #else
+                #else if int($day.dateTime.format("%m")) >= 3
                   #set $n = 366
+                #else
+                  #set $n = 365
                 #end if
               #end if
             #else
+
             <!--If last year was a leap year -->
-            #set $yrNew = ($yr - 1)
+
+              #set $yrNew = ($yr - 1)
               #if $yrNew % 100 == 0
                 #if $yrNew % 400 == 0
                   #if $day.dateTime.format("%d-%b") < '01-Mar'
@@ -454,9 +463,10 @@
                 #set $n = 365
               #end if
             #end if
-	  #if $days_ago($days_ago=$n).outTemp.max.string != "   N/A"
-	  <div class="card" >
-            <h1><i class="fa-regular fa-clock-rotate-left" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
+         
+          #if $days_ago($days_ago=$n).dateTime.raw is not None
+          <div class="card" >
+            <h1><i class="fa-solid fa-clock-rotate-left" ></i> Last $days_ago($days_ago=$n).dateTime.format("%d-%b (%Y)") </h1>
             <table class="tablespacer">
               <tr>
                 <td>High Temperature</td>
@@ -592,6 +602,7 @@
             </table>
           </div>
           #end if
+          
           #if $Extras.has_key('radar')
           <div class="card" >
 	    <h1><i class="fa-solid fa-satellite-dish m-rot"></i> Radar</h1>
@@ -616,12 +627,13 @@
           <!--camera section-->
           <div class="card" >
             <h1><i class="fa-solid fa-camera" style="color:#999"></i> Local Cameras</h1>
-            <div class="s-center s-content s-display-container" style="max-width:800px">
+            <div class="s-center s-content s-display-container" style="max-width:768px">
+              
               #set $b=0
               #for $i in $Extras.camera
               <div class="mySlides"><b>$Extras.cameratitle[$b]</b><br>
                 <img src="$i?$current.dateTime.raw" alt="camera $b" style="width:100%">
-		<meta name="description" content="A webcam located at $Extras.cameratitle[$b]">
+                <meta name="description" content="A webcam located at $Extras.cameratitle[$b]">
               </div>
               #set $b=$b+1 
               #end for
@@ -665,8 +677,8 @@
             </script>
           </div>
           #end if
-	  
-	  #if $Extras.has_key('camloop')
+        
+        #if $Extras.has_key('camloop')
           <!--camera loop section-->
           <div class="card" >
             <h1><i class="fa-solid fa-camera" style="color:#999"></i> Camera loop</h1>
@@ -674,9 +686,10 @@
               $Extras.camloop
             </div>
           </div>
-          #end if  
+          #end if    
         </div>
-
+        
+        
         <div class="right" >
           <div class="card" >
             <h1><i class="fa-regular fa-star m-rot" ></i> Almanac</h1>
