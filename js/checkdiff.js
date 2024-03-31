@@ -1,4 +1,5 @@
-/* checkDiff */
+/* checkdiff.js
+Update version to work with Weewx 5 */
 
 function checkDiff(datestr) {
     // Parse the input date string
@@ -42,6 +43,7 @@ function checkDiff(datestr) {
         text.innerHTML = "<i class='fa-solid fa-triangle-exclamation m-orange'></i><b> Old Weather Data </b>";
     }
 
+    //Inset alery in the freshwater element
     var freshWeatherElement = document.getElementById('freshweather');
     if (freshWeatherElement) {
         freshWeatherElement.appendChild(text);
